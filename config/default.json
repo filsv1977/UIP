@@ -1,0 +1,13 @@
+{
+    "debug": true,
+    "areImagesLocal": true,
+    "server": {
+        "listenHostname": "localhost",
+        "port": 4000
+    },
+    "client": {
+        "hostname": "localhost",
+        "port": 3000,
+        "axiosRetry": 3
+    }
+}
