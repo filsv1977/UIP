@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from "react-bootstrap/Button";
-import EditModal from "../Modal/EditModal";
-import {tasksAPI} from "../../services/TaskService";
+import EditModal from "../../Modals/EditModal";
+import {useTasks} from "../../../Context/reducer";
 
-function TasksList() {
-    const {data, error, isLoading}=tasksAPI.useFetchAllTasksQuery("")
+function AdminTasksTable() {
+    const {state} = useTasks()
     const [isSelect, setIsSelect] = useState(null);
     const [editData, setData] = useState({})
     const [show, setShow] = useState(false);
@@ -13,7 +13,7 @@ function TasksList() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const generateTable = (data?.data || []).map(task => (
+    const generateTable = (state?.tasks || []).map(task => (
             <tr
                 key={task.id}
                 className={task.id == isSelect ? 'row-select' : ''}
@@ -37,8 +37,8 @@ function TasksList() {
 
     return (
         <div className={'table-responsive'}>
-            {isLoading && <h1>Идет загрузка</h1>}
-            {error && <h1>{error}</h1>}
+            {state.isLoading && <h1>Идет загрузка</h1>}
+            {state.error && <h1>{state.error}</h1>}
             <Table className="table" hover data-click-to-select="true">
                 <thead>
                     <tr>
@@ -63,4 +63,4 @@ function TasksList() {
     );
 }
 
-export default TasksList;
+export default AdminTasksTable;

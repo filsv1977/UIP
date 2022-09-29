@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import {Form} from 'react-bootstrap';
-import {tasksAPI} from "../../services/TaskService";
-
+import {useTasks} from "../../Context/reducer";
+import {editTask} from "../../api/editTask";
 
 function EditModal({show, handleClose , editData }) {
-  const {name, url, estimationHours, cost: taskCost } = editData
-  const [cost, setCost] = useState(taskCost)
+  const {dispatch} = useTasks()
+  const {name='', url='', estimationHours, cost } = editData
+  const [costTask, setCost] = useState(cost)
   const [estimation, setEstimationHours] = useState(estimationHours)
-  const [editTask, {}] = tasksAPI.useEditTaskMutation()
 
   const onPaymentChange = ({ target: { value } }) => {
     setCost(value);
@@ -22,8 +22,12 @@ function EditModal({show, handleClose , editData }) {
   const handleSubmit = async(e) => {
     e.preventDefault()
 
-    let newData = {...editData, cost: +cost ,estimationHours: +estimation}
-    await editTask({id: newData.id, body: newData})
+    let newData = {
+      ...editData,
+      cost: +costTask || +cost,
+      estimationHours: +estimation || estimationHours
+    }
+    await editTask( newData, dispatch)
     handleClose()
   }
 
@@ -51,7 +55,7 @@ function EditModal({show, handleClose , editData }) {
 
             <Form.Group className="mb-3" controlId="formBasicCost">
               <Form.Label>Стоимость</Form.Label>
-              <Form.Control type="number"  defaultValue={cost} onChange={onPaymentChange}/>
+              <Form.Control type="number" defaultValue={+cost} onChange={onPaymentChange}/>
             </Form.Group>
           </Form>
         </Modal.Body>

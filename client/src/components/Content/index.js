@@ -1,7 +1,10 @@
 import React from 'react';
-import TasksList from '../TasksList';
+import AdminTasksTable from "../Tables/AdminTaskTable";
+import TasksTable from "../Tables/TaskTable";
 
-function Content() {
+
+function Content({isAdmin}) {
+
     return (
         <main role="main" className="pb-3">
             <div className="text-center">
@@ -19,7 +22,7 @@ function Content() {
                 </p>
             </div>
             <div className="text-center">
-                <TasksList />
+              {isAdmin? <AdminTasksTable/> : <TasksTable />}
             </div>
         </main>
     );
