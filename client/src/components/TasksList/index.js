@@ -1,22 +1,19 @@
 import React, {useState} from 'react';
 import Table from 'react-bootstrap/Table';
-import {useSelector} from "react-redux";
-import {tasksSelector} from "../../selectors/tasks";
 import Button from "react-bootstrap/Button";
 import EditModal from "../Modal/EditModal";
 import {tasksAPI} from "../../services/TaskService";
 
 function TasksList() {
-    const {data}=tasksAPI.useFetchAllTasksQuery("")
-    const {error, isLoading, tasks} = useSelector(tasksSelector)
+    const {data, error, isLoading}=tasksAPI.useFetchAllTasksQuery("")
     const [isSelect, setIsSelect] = useState(null);
     const [editData, setData] = useState({})
     const [show, setShow] = useState(false);
-        console.log(111, data, isLoading, error)
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const generateTable = (tasks || []).map(task => (
+    const generateTable = (data?.data || []).map(task => (
             <tr
                 key={task.id}
                 className={task.id == isSelect ? 'row-select' : ''}

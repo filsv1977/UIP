@@ -1,9 +1,8 @@
-import {DB} from '../../../../index.js';
-import {TABLES} from '../../../../db/consts.js';
+import {DB} from '../../../index.js';
 
 const listTask = async (req, res) => {
     let {closed} = req.query;
-    let tasks = DB.select(TABLES.TASKS);
+    let tasks = DB.select();
 
     let result = tasks.filter(item => (+closed ? item.performer.nickname !== '' : item.performer.nickname === ''));
 

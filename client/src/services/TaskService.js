@@ -6,7 +6,7 @@ export const tasksAPI = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:4000/'
   }),
-  tagTypes: ['Edit'],
+  tagTypes: ['tasks'],
   mode: "no-cors",
   prepareHeaders: (headers) => {
     headers.set('Access-Control-Allow-Origin', '*')
@@ -19,15 +19,15 @@ export const tasksAPI = createApi({
       query: (arg) => ({
         url: "/tasks"
       }),
-      providesTags: result => ['Edit']
+      providesTags: ['tasks']
     }),
     editTask: build.mutation({
-      query: (post) => ({
-        url: `/tasks/${post.newData.id}`,
-        method: "PUT",
-        body: post
+      query: (put) => ({
+        url: `/admin/tasks/${put.id}`,
+        method: "PATCH",
+        body: put.body
       }),
-      invalidatesTags: result=> ['Edit']
+      invalidatesTags: ['tasks']
     }),
   })
 })

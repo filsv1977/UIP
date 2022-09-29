@@ -6,7 +6,6 @@ import {Link} from 'react-router-dom';
 
 function NavBar() {
     const [show, setShow] = useState(false);
-    const [name, setName] = useState();
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);

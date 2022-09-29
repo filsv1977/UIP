@@ -6,8 +6,8 @@ import {tasksAPI} from "../../services/TaskService";
 
 
 function EditModal({show, handleClose , editData }) {
-  const {name, url, estimationHours } = editData
-  const [cost, setCost] = useState(null)
+  const {name, url, estimationHours, cost: taskCost } = editData
+  const [cost, setCost] = useState(taskCost)
   const [estimation, setEstimationHours] = useState(estimationHours)
   const [editTask, {}] = tasksAPI.useEditTaskMutation()
 
@@ -21,10 +21,9 @@ function EditModal({show, handleClose , editData }) {
 
   const handleSubmit = async(e) => {
     e.preventDefault()
-    console.log(editData, cost, estimation)
+
     let newData = {...editData, cost: +cost ,estimationHours: +estimation}
-    console.log(newData)
-    await editTask({newData, body: newData})
+    await editTask({id: newData.id, body: newData})
     handleClose()
   }
 
@@ -52,16 +51,16 @@ function EditModal({show, handleClose , editData }) {
 
             <Form.Group className="mb-3" controlId="formBasicCost">
               <Form.Label>Стоимость</Form.Label>
-              <Form.Control type="number"  onChange={onPaymentChange}/>
+              <Form.Control type="number"  defaultValue={cost} onChange={onPaymentChange}/>
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Закрыть
+            Отменить
           </Button>
           <Button variant="primary" type="submit" form="myForm">
-            Войти
+            Применить
           </Button>
         </Modal.Footer>
       </Modal>

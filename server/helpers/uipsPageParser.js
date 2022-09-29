@@ -12,12 +12,7 @@ export const getTaskListFromWeb = () => {
             let urlAndName = e.split('">');
             return {
                 url: urlAndName[0],
-                name: urlAndName[1],
-                estimationHours: 0,
-                performer: {
-                    nickname: '',
-                    walletAddress: ''
-                }
+                name: urlAndName[1]
             };
         });
 
