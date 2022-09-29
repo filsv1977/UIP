@@ -1,8 +1,8 @@
 import {Router} from 'express';
-import patchTask from './patch.js';
-import logon from './authLogin.js';
+import patchTask from './tasks/update.js';
+import logon from './auth/logon.js';
 import passport from 'passport';
-import logoff from './authLogoff.js';
+import logoff from './auth/logoff.js';
 import exportTasks from './export.js';
 
 const router = Router();
