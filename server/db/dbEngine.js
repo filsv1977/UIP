@@ -1,95 +1,78 @@
-import {saveFile} from '../utils/saveFile.js';
-import {TABLES} from './consts.js';
+import {TASK_TEMPLATE} from './consts.js';
+import {saveDB} from '../helpers/db.js';
 
 class DbEngine {
-    #db;
+    _db;
 
     constructor() {
-        this.#db = {};
+        this._db = [];
     }
 
-    addWebTaskInDb = tasks => {
-        const table = this.#db.tasks;
+    initDbFromDile(data) {
+        this._db = data;
+    }
 
+    addWebTaskInDb(tasks) {
         tasks.forEach(elem => {
-            if (!table.some(item => item.name === elem.name)) {
-                this.insert(TABLES.TASKS, elem);
+            if (!this._db.some(item => item.name === elem.name)) {
+                this.insert({...TASK_TEMPLATE, ...elem});
             }
         });
-    };
+    }
 
-    addTable = (name, data) => {
-        this.#db[name] = data;
-    };
+    getNewId() {
+        return this._db.length ? this._db.at(-1).id + 1 : 0;
+    }
 
-    getNewId = tableName => {
-        return this.#db[tableName].length;
-    };
+    getIndex(id) {
+        return this._db.findIndex(item => +item.id === +id);
+    }
 
-    getIndex = (table, id) => table.findIndex(item => +item.id === +id);
-
-    insert = (tableName, data) => {
+    insert(data) {
         try {
-            const table = this.#db[tableName];
-            data.id = this.getNewId(tableName);
-            table.push(data);
-            saveFile('db', tableName, table);
+            data.id = this.getNewId();
+            this._db.push(data);
+            saveDB(this._db);
             return true;
         } catch (e) {
             return false;
         }
-    };
+    }
 
-    select = tableName => {
+    select() {
         try {
-            return this.#db[tableName];
+            return this._db;
         } catch (e) {
             return false;
         }
+    }
+
+    selectById = id => {
+        let index = this.getIndex(id);
+        if (index > -1) {
+            return this._db[index];
+        }
+        return false;
     };
 
-    selectById = (tableName, id) => {
-        try {
-            const table = this.#db[tableName];
-            let index = this.getIndex(table, id);
-
-            if (index > -1) {
-                return table[index];
-            }
-            return false;
-        } catch (e) {
-            return false;
+    update = (id, data) => {
+        let index = this.getIndex(id);
+        if (index > -1) {
+            this._db[index] = {id, ...data};
+            saveDB(this._db);
+            return true;
         }
+        return false;
     };
 
-    update = (tableName, id, data) => {
-        try {
-            const table = this.#db[tableName];
-            let index = this.getIndex(table, id);
-            if (index > -1) {
-                table[index] = {id: +id, ...data};
-                saveFile('db', tableName, table);
-                return true;
-            }
-            return false;
-        } catch (e) {
-            return false;
+    delete = id => {
+        let index = this.getIndex(id);
+        if (index > -1) {
+            this._db.splice(index, 1);
+            saveDB(this._db);
+            return true;
         }
-    };
-
-    delete = (tableName, id) => {
-        try {
-            const table = this.#db[tableName];
-            let index = this.getIndex(table, id);
-            if (index > -1) {
-                table.splice(index, 1);
-                saveFile('db', tableName, table);
-                return true;
-            }
-            return false;
-        } catch (e) {
-            return false;
-        }
+        return false;
     };
 }
 
