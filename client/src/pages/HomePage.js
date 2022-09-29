@@ -11,11 +11,9 @@ import {fetchData} from '../redux/tasks/fetchData';
 function HomePage() {
     const dispatch = useDispatch();
     useEffect(() => {
-        console.log('here');
         dispatch(fetchData());
     }, []);
-    const count = useSelector(state => state.tasks.count);
-    const tasks = useSelector(state => state.tasks.tasks);
+
     return <Content />;
 }
 

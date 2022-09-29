@@ -5,13 +5,14 @@ import DbEngine from './db/dbEngine.js';
 import restRoutes from './rest/index.js';
 import {readDB} from './utils/readDB.js';
 import {getTaskListFromWeb} from './utils/scraping.js';
-
+import cors from 'cors';
 export const DB = new DbEngine();
 
 readDB('db');
 getTaskListFromWeb();
 
 const app = express();
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));

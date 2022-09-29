@@ -14,23 +14,22 @@ function NavBar() {
     const handleSubmit = e => {
         e.preventDefault();
 
-        console.log(e.target);
         handleClose();
     };
     return (
         <header>
             <nav className="navbar navbar-expand-lg bg-light">
                 <Button variant="light" onClick={handleShow}>
-                    Login
+                    Войти
                 </Button>
                 <Button variant="light" onClick={handleShow}>
-                    Logout
+                    Выйти
                 </Button>
             </nav>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Login</Modal.Title>
+                    <Modal.Title>Авторизация</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit} id={'myForm'}>
