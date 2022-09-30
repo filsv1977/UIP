@@ -1,5 +1,5 @@
 const logoff = async (req, res) => {
-    const result = false;
+    const result = true;
     return res.json({success: result});
 };
 
