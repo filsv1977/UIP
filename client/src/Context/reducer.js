@@ -7,7 +7,8 @@ export const initialState = {
     tasks: [],
     isAdmin: false,
     isLoading: false,
-    error: ''
+    error: '',
+    activeFilterBtn:0
 };
 
 export const ContextApp = React.createContext();
@@ -16,7 +17,7 @@ export const TasksContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(taskReducer, initialState);
 
     useEffect(() => {
-        fetchData(dispatch);
+        fetchData(dispatch,  0, '?closed=0');
     }, []);
 
     return <ContextApp.Provider value={{state, dispatch}}>{children}</ContextApp.Provider>;
@@ -32,7 +33,8 @@ export const taskReducer = (state, action) => {
         case actionTypes.GET_TASKS_SUCCESS: {
             return {
                 ...state,
-                tasks: action.payload,
+                tasks: action.payload.data,
+                activeFilterBtn: action.payload.activeFilterBtn,
                 isLoading: false
             };
         }

@@ -61,10 +61,10 @@ function EditModal({show, handleClose, editData}) {
                 {state.error && <h6>{state.error}</h6>}
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="outline-secondary" onClick={handleClose}>
                     Отменить
                 </Button>
-                <Button variant="primary" type="submit" form="myForm">
+                <Button variant="outline-primary" type="submit" form="myForm">
                     Применить
                 </Button>
             </Modal.Footer>

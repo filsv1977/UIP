@@ -49,10 +49,10 @@ function LoginModal({show, handleClose}) {
                 {state.error && <h6>{state.error}</h6>}
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="outline-secondary" onClick={handleClose}>
                     Закрыть
                 </Button>
-                <Button variant="primary" type="submit" form="myForm">
+                <Button variant="outline-primary" type="submit" form="myForm">
                     Войти
                 </Button>
             </Modal.Footer>

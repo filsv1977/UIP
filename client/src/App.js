@@ -10,7 +10,7 @@ import './App.css';
 function App() {
     return (
         <TasksContextProvider>
-            <div className="d-flex flex-column min-vh-100">
+            <div className="d-flex flex-column min-vh-100 p-10">
                 <NavBar />
                 <Routes>
                     <Route path="/" exact element={<HomePage />} />

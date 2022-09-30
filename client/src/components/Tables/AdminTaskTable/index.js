@@ -28,7 +28,12 @@ function AdminTasksTable() {
             <td>{task.performer.nickname + ' ' + task.performer.walletAddress || ''}</td>
             <td>
                 {
-                    <Button onClick={handleShow} type="button" className="btn btn-primary btn-sm">
+                    <Button
+                      onClick={handleShow}
+                      variant={'outline-primary'}
+                      type="button"
+                      className="btn btn-sm"
+                    >
                         Редактировать
                     </Button>
                 }
@@ -55,7 +60,12 @@ function AdminTasksTable() {
                     <tr>
                         <th scope="col">
                             {
-                                <Button type="button" className="btn btn-primary btn-sm" onClick={onExportDB}>
+                                <Button
+                                  type="button"
+                                  className="btn btn-sm"
+                                  onClick={onExportDB}
+                                  variant={'outline-primary'}
+                                >
                                     Экспорт
                                 </Button>
                             }
