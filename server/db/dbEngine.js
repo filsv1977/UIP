@@ -8,7 +8,7 @@ class DbEngine {
         this._db = [];
     }
 
-    initDbFromDile(data) {
+    initDbFromFile(data) {
         this._db = data;
     }
 

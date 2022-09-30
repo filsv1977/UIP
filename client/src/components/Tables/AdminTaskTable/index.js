@@ -3,9 +3,10 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import EditModal from '../../Modals/EditModal';
 import {useTasks} from '../../../Context/reducer';
+import {exportDB} from '../../../api/getDB';
 
 function AdminTasksTable() {
-    const {state} = useTasks();
+    const {state, dispatch} = useTasks();
     const [isSelect, setIsSelect] = useState(null);
     const [editData, setData] = useState({});
     const [show, setShow] = useState(false);
@@ -19,7 +20,7 @@ function AdminTasksTable() {
             className={+task.id === +isSelect ? 'row-select' : ''}
             onClick={e => selectRowProp(e, task, task.id)}
         >
-            <th scope="row">{task.id + 1}</th>
+            <th scope="row">{task.id}</th>
             <td>{task.name}</td>
             <td>{<a href={task.url}>{task.url}</a>}</td>
             <td>{task.estimationHours}</td>
@@ -41,6 +42,10 @@ function AdminTasksTable() {
         setData(row);
     };
 
+    const onExportDB = () => {
+        exportDB(dispatch);
+    };
+
     return (
         <div className={'table-responsive'}>
             {state.isLoading && <h1>Идет загрузка</h1>}
@@ -50,8 +55,8 @@ function AdminTasksTable() {
                     <tr>
                         <th scope="col">
                             {
-                                <Button type="button" className="btn btn-primary btn-sm">
-                                    Добавить
+                                <Button type="button" className="btn btn-primary btn-sm" onClick={onExportDB}>
+                                    Экспорт
                                 </Button>
                             }
                         </th>

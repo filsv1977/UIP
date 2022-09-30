@@ -9,7 +9,7 @@ export const loadDB = () => {
             return;
         }
 
-        DB.initDbFromDile(JSON.parse(data));
+        DB.initDbFromFile(JSON.parse(data));
     });
 };
 

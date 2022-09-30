@@ -1,8 +1,5 @@
-import {DB} from '../../../index.js';
-
 const exportTasks = async (req, res) => {
-    let result = DB.select();
-    return res.json({success: result});
+    res.download('./db/db.json');
 };
 
 export default exportTasks;
