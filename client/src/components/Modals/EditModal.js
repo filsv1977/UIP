@@ -6,7 +6,7 @@ import {useTasks} from '../../Context/reducer';
 import {editTask} from '../../api/editTask';
 
 function EditModal({show, handleClose, editData}) {
-    const {dispatch} = useTasks();
+    const {state, dispatch} = useTasks();
     const {name = '', url = '', estimationHours, cost} = editData;
     const [costTask, setCost] = useState(cost);
     const [estimation, setEstimationHours] = useState(estimationHours);
@@ -58,6 +58,7 @@ function EditModal({show, handleClose, editData}) {
                         <Form.Control type="number" defaultValue={+cost} onChange={onPaymentChange} />
                     </Form.Group>
                 </Form>
+                {state.error && <h6>{state.error}</h6>}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>

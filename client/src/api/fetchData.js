@@ -15,7 +15,7 @@ export const fetchData = async dispatch => {
     } catch (e) {
         dispatch({
             type: actionTypes.GET_TASKS_FAILED,
-            payload: e.message
+            payload: "Ошибка загрузки данных"
         });
     }
 };
