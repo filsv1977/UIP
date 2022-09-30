@@ -1,6 +1,6 @@
 import {DB} from '../../../index.js';
 
-const listTask = async (req, res) => {
+const list = async (req, res) => {
     let {closed} = req.query;
     let tasks = DB.select();
 
@@ -15,4 +15,4 @@ const listTask = async (req, res) => {
     return res.json(response);
 };
 
-export default listTask;
+export default list;

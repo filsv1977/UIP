@@ -1,11 +1,8 @@
 import {Router} from 'express';
-import updateTask from './update.js';
-import listTask from './getList.js';
+import list from './list.js';
 
 const router = Router();
 
-router.get('/', listTask);
-
-router.put('/:id', updateTask);
+router.get('/', list);
 
 export default router;

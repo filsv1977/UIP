@@ -1,28 +1,17 @@
 import {Router} from 'express';
-import patchTask from './patch.js';
-import logon from './authLogin.js';
-import passport from 'passport';
-import logoff from './authLogoff.js';
+import patchTask from './tasks/update.js';
+import logon from './auth/logon.js';
+import logoff from './auth/logoff.js';
 import exportTasks from './export.js';
 
 const router = Router();
 
-router.patch(
-    '/tasks/:id',
-    // passport.authenticate('basic', {session: false}),
-    // true,
-    patchTask
-);
+router.patch('/tasks/:id', patchTask);
 
-router.get(
-    '/export',
-    passport.authenticate('basic', {session: false}),
-    // true,
-    exportTasks
-);
+router.get('/export', exportTasks);
 
-router.post('/auth/logon', passport.authenticate('basic', {session: false}), logon);
+router.post('/auth/logon', logon);
 
-router.get('/auth/logoff', passport.authenticate('basic', {session: false}), logoff);
+router.get('/auth/logoff', logoff);
 
 export default router;
