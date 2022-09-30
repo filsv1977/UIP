@@ -18,6 +18,12 @@ class DbEngine {
                 this.insert({...TASK_TEMPLATE, ...elem});
             }
         });
+
+        this._db.forEach(elem => {
+            if (!tasks.some(item => item.name === elem.name)) {
+                elem.deleted = true;
+            }
+        });
     }
 
     getNewId() {
@@ -56,6 +62,7 @@ class DbEngine {
     };
 
     update = (id, data) => {
+        console.log('@@@@ update');
         let index = this.getIndex(id);
         if (index > -1) {
             this._db[index] = {id, ...data};
