@@ -9,7 +9,7 @@ const patchTask = async (req, res) => {
     let result = false;
     if (params.id !== undefined) {
         body.ubx = body.estimationHours * HOURLY_RATE;
-        body.usdt = body.ubx * ubx2usdt;
+        body.usdt = (body.ubx * ubx2usdt).toFixed(2);
         result = DB.update(+params.id, body);
     }
 

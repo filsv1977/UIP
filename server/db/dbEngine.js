@@ -1,15 +1,13 @@
 import {TASK_TEMPLATE} from './consts.js';
-import {saveDB} from '../helpers/db.js';
+import fs from 'fs';
 
 class DbEngine {
-    _db;
+    _db = [];
+    _db_path;
 
-    constructor() {
-        this._db = [];
-    }
-
-    initDbFromFile(data) {
-        this._db = data;
+    constructor(path) {
+        this._db_path = path;
+        this.load();
     }
 
     addWebTaskInDb(tasks) {
@@ -22,6 +20,7 @@ class DbEngine {
         this._db.forEach(elem => {
             if (!tasks.some(item => item.name === elem.name)) {
                 elem.deleted = true;
+                this.save();
             }
         });
     }
@@ -38,9 +37,10 @@ class DbEngine {
         try {
             data.id = this.getNewId();
             this._db.push(data);
-            saveDB(this._db);
+            this.save();
             return true;
-        } catch (e) {
+        } catch (error) {
+            console.error(error);
             return false;
         }
     }
@@ -48,38 +48,63 @@ class DbEngine {
     select() {
         try {
             return this._db;
-        } catch (e) {
+        } catch (error) {
+            console.error(error);
             return false;
         }
     }
 
-    selectById = id => {
+    selectById(id) {
         let index = this.getIndex(id);
         if (index > -1) {
             return this._db[index];
         }
         return false;
-    };
+    }
 
-    update = (id, data) => {
+    update(id, data) {
         let index = this.getIndex(id);
         if (index > -1) {
-            this._db[index] = {id, ...data};
-            saveDB(this._db);
+            this._db[index] = {...this._db[index], ...data};
+            this.save();
             return true;
         }
         return false;
-    };
+    }
 
-    delete = id => {
+    delete(id) {
         let index = this.getIndex(id);
         if (index > -1) {
             this._db.splice(index, 1);
-            saveDB(this._db);
+            this.save();
             return true;
         }
         return false;
-    };
+    }
+
+    load() {
+        fs.readFile(this._db_path, 'utf8', (error, data) => {
+            if (error) {
+                console.error(error);
+                return;
+            }
+
+            try {
+                this.addWebTaskInDb(JSON.parse(data));
+            } catch (error) {
+                this._db = [];
+                console.error(error);
+            }
+        });
+    }
+
+    save() {
+        fs.writeFile(this._db_path, JSON.stringify(this._db), error => {
+            if (error) {
+                console.error(error);
+            }
+        });
+    }
 }
 
 export default DbEngine;

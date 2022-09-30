@@ -13,8 +13,8 @@ export const getExchangeUbx = () => {
         try {
             const {price} = JSON.parse(body);
             ubx2usdt = price;
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(error);
         }
     });
 };
