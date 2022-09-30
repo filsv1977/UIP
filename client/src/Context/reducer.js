@@ -87,7 +87,7 @@ export const taskReducer = (state, action) => {
             return {
                 ...state,
                 isAdmin: false,
-                error: action.payload,
+                error: action.payload
             };
         }
 
