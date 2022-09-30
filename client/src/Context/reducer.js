@@ -83,6 +83,14 @@ export const taskReducer = (state, action) => {
             };
         }
 
+        case actionTypes.LOGOUT_ADMIN_FAILED: {
+            return {
+                ...state,
+                isAdmin: false,
+                error: action.payload,
+            };
+        }
+
         default:
             return state;
     }
