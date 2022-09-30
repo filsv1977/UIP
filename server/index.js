@@ -7,7 +7,7 @@ import cors from 'cors';
 import {loadDB} from './helpers/db.js';
 import {getTaskListFromWeb} from './helpers/uipsPageParser.js';
 import {startSchedulerGetTasks} from './utils/shedullerGetTask.js';
-import {getExchangeUbx} from './helpers/convertUbx2Usdt.js';
+import {getExchangeUbx} from './helpers/getExchangeUbx.js';
 
 export const DB = new DbEngine();
 

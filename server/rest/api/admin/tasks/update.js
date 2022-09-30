@@ -1,5 +1,5 @@
 import {DB} from '../../../../index.js';
-import {ubx2usdt} from '../../../../helpers/convertUbx2Usdt.js';
+import {ubx2usdt} from '../../../../helpers/getExchangeUbx.js';
 
 const HOURLY_RATE = 1500;
 
