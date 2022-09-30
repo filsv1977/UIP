@@ -4,9 +4,9 @@ import {actionTypes} from "../Context/actionTypes";
 
 axiosRetry(axios, {retries: 3});
 
-export const logIn =async (body, dispatch) => {
+export const logIn = (body, dispatch) => {
   try {
-   await axios.post('/admin/auth/logon', body).then(result => {
+    axios.post('/admin/auth/logon', body).then(result => {
       if(result.data.success){
         dispatch({
           type: actionTypes.LOGIN_ADMIN_SUCCESS,

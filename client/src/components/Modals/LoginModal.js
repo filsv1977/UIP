@@ -1,7 +1,7 @@
 import Modal from "react-bootstrap/Modal";
 import {Form} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {logIn} from "../../api/login";
 import {useTasks} from "../../Context/reducer";
 
@@ -19,12 +19,14 @@ function LoginModal({show, handleClose}) {
     setPassword(value);
   };
 
-  const handleSubmit = async (e) => {
+  useEffect(() =>{
+    if (state.isAdmin) handleClose()
+  }, [state.isAdmin])
+
+  const handleSubmit = (e) => {
     e.preventDefault()
 
-    await logIn({login, password}, dispatch)
-
-    if (state.isAdmin) handleClose()
+    logIn({login, password}, dispatch)
   }
 
   return (
