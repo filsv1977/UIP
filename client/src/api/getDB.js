@@ -17,7 +17,7 @@ export const exportDB = async dispatch => {
     } catch (e) {
         dispatch({
             type: actionTypes.EXPORT_DB_FAILED,
-            payload: "Ошибка экспорта данных"
+            payload: 'Ошибка экспорта данных'
         });
     }
 };

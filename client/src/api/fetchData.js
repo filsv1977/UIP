@@ -5,19 +5,17 @@ import {actionTypes} from '../Context/actionTypes';
 axiosRetry(axios, {retries: 3});
 
 export const fetchData = async (dispatch, id = 0, query = '?closed=0') => {
-    console.log(query)
     try {
-        console.log(id, query)
         await axios.get(`/tasks${query}`).then(result => {
             dispatch({
                 type: actionTypes.GET_TASKS_SUCCESS,
-                payload: {data:result.data.data, activeFilterBtn:id}
+                payload: {data: result.data.data, activeFilterBtn: id}
             });
         });
     } catch (e) {
         dispatch({
             type: actionTypes.GET_TASKS_FAILED,
-            payload: "Ошибка загрузки данных"
+            payload: 'Ошибка загрузки данных'
         });
     }
 };

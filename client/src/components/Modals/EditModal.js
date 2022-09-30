@@ -7,13 +7,8 @@ import {editTask} from '../../api/editTask';
 
 function EditModal({show, handleClose, editData}) {
     const {state, dispatch} = useTasks();
-    const {name = '', url = '', estimationHours, cost} = editData;
-    const [costTask, setCost] = useState(cost);
+    const {name = '', url = '', estimationHours} = editData;
     const [estimation, setEstimationHours] = useState(estimationHours);
-
-    const onPaymentChange = ({target: {value}}) => {
-        setCost(value);
-    };
 
     const onEstimationHoursChange = ({target: {value}}) => {
         setEstimationHours(value);
@@ -24,7 +19,6 @@ function EditModal({show, handleClose, editData}) {
 
         let newData = {
             ...editData,
-            cost: +costTask || +cost,
             estimationHours: +estimation || estimationHours
         };
         editTask(newData, dispatch);
@@ -51,11 +45,6 @@ function EditModal({show, handleClose, editData}) {
                     <Form.Group className="mb-3" controlId="formBasicEstimationHours">
                         <Form.Label>Оценка задачи</Form.Label>
                         <Form.Control type="number" defaultValue={estimationHours} onChange={onEstimationHoursChange} />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="formBasicCost">
-                        <Form.Label>Стоимость</Form.Label>
-                        <Form.Control type="number" defaultValue={+cost} onChange={onPaymentChange} />
                     </Form.Group>
                 </Form>
                 {state.error && <h6>{state.error}</h6>}

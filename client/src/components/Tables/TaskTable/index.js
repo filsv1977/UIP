@@ -15,7 +15,8 @@ function TasksTable() {
             <td>{task.name}</td>
             <td>{<a href={task.url}>{task.url}</a>}</td>
             <td>{task.estimationHours}</td>
-            <td>{task.cost}</td>
+            <td>{task.ubx}</td>
+            <td>{task.usdt}</td>
             <td>{task.performer.nickname + ' ' + task.performer.walletAddress || ''}</td>
         </tr>
     ));
@@ -35,7 +36,8 @@ function TasksTable() {
                         <th scope="col">Наименование задачи</th>
                         <th scope="col">Адрес задачи</th>
                         <th scope="col">Оценка задачи</th>
-                        <th scope="col">Стоимость</th>
+                        <th scope="col">Стоимость в UBX</th>
+                        <th scope="col">Стоимость в USD</th>
                         <th scope="col">Исполнитель</th>
                     </tr>
                 </thead>

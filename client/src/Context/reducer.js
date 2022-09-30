@@ -8,7 +8,7 @@ export const initialState = {
     isAdmin: false,
     isLoading: false,
     error: '',
-    activeFilterBtn:0
+    activeFilterBtn: 0
 };
 
 export const ContextApp = React.createContext();
@@ -17,7 +17,7 @@ export const TasksContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(taskReducer, initialState);
 
     useEffect(() => {
-        fetchData(dispatch,  0, '?closed=0');
+        fetchData(dispatch, 0, '?closed=0');
     }, []);
 
     return <ContextApp.Provider value={{state, dispatch}}>{children}</ContextApp.Provider>;
@@ -48,8 +48,8 @@ export const taskReducer = (state, action) => {
 
         case actionTypes.EDIT_TASK_SUCCESS: {
             let {id} = action.payload;
-            let newData = state.tasks.map(task => (+task.id === +id ? action.payload : task));
 
+            let newData = state.tasks.map(task => (+task.id === +id ? action.payload : task));
             return {
                 ...state,
                 tasks: newData

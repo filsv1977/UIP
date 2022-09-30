@@ -9,13 +9,13 @@ export const editTask = async (body, dispatch) => {
         await axios.patch(`/admin/tasks/${body.id}`, body).then(result => {
             dispatch({
                 type: actionTypes.EDIT_TASK_SUCCESS,
-                payload: body
+                payload: result.data
             });
         });
     } catch (e) {
         dispatch({
             type: actionTypes.EDIT_TASK_FAILED,
-            payload: "Ошибка редактирования данных"
+            payload: 'Ошибка редактирования данных'
         });
     }
 };

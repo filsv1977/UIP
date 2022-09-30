@@ -62,7 +62,6 @@ class DbEngine {
     };
 
     update = (id, data) => {
-        console.log('@@@@ update');
         let index = this.getIndex(id);
         if (index > -1) {
             this._db[index] = {id, ...data};

@@ -24,16 +24,12 @@ function AdminTasksTable() {
             <td>{task.name}</td>
             <td>{<a href={task.url}>{task.url}</a>}</td>
             <td>{task.estimationHours}</td>
-            <td>{task.cost}</td>
+            <td>{task.ubx}</td>
+            <td>{task.usdt}</td>
             <td>{task.performer.nickname + ' ' + task.performer.walletAddress || ''}</td>
             <td>
                 {
-                    <Button
-                      onClick={handleShow}
-                      variant={'outline-primary'}
-                      type="button"
-                      className="btn btn-sm"
-                    >
+                    <Button onClick={handleShow} variant={'outline-primary'} type="button" className="btn btn-sm">
                         Редактировать
                     </Button>
                 }
@@ -61,10 +57,10 @@ function AdminTasksTable() {
                         <th scope="col">
                             {
                                 <Button
-                                  type="button"
-                                  className="btn btn-sm"
-                                  onClick={onExportDB}
-                                  variant={'outline-primary'}
+                                    type="button"
+                                    className="btn btn-sm"
+                                    onClick={onExportDB}
+                                    variant={'outline-primary'}
                                 >
                                     Экспорт
                                 </Button>
@@ -73,7 +69,8 @@ function AdminTasksTable() {
                         <th scope="col">Наименование задачи</th>
                         <th scope="col">Адрес задачи</th>
                         <th scope="col">Оценка задачи</th>
-                        <th scope="col">Стоимость</th>
+                        <th scope="col">Стоимость в UBX</th>
+                        <th scope="col">Стоимость в USD</th>
                         <th scope="col">Исполнитель</th>
                         <th scope={'col'}>Редактировать</th>
                     </tr>
