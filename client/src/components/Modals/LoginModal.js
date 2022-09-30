@@ -5,25 +5,26 @@ import React, {useState} from "react";
 import {logIn} from "../../api/login";
 import {useTasks} from "../../Context/reducer";
 
-
-function LoginModal({show, handleClose }) {
+function LoginModal({show, handleClose}) {
   const [login, setLogin] = useState('')
-  const [password, setPassword]= useState('')
+  const [password, setPassword] = useState('')
 
-  const {dispatch} = useTasks()
+  const {state, dispatch} = useTasks()
 
-  const onChangeLogin = ({ target: { value } }) => {
+  const onChangeLogin = ({target: {value}}) => {
     setLogin(value);
   };
 
-  const onChangePassword = ({ target: { value } }) => {
+  const onChangePassword = ({target: {value}}) => {
     setPassword(value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await logIn({login,password}, dispatch)
-    handleClose()
+
+    await logIn({login, password}, dispatch)
+
+    if (state.isAdmin) handleClose()
   }
 
   return (
@@ -34,7 +35,7 @@ function LoginModal({show, handleClose }) {
       <Modal.Body>
         <Form onSubmit={handleSubmit} id={'myForm'}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Login</Form.Label>
+            <Form.Label>Логин</Form.Label>
             <Form.Control type="text" placeholder="Введите логин" onChange={onChangeLogin}/>
           </Form.Group>
 
@@ -43,6 +44,7 @@ function LoginModal({show, handleClose }) {
             <Form.Control type="password" placeholder="Password" onChange={onChangePassword}/>
           </Form.Group>
         </Form>
+        {state.error && <h6>{state.error}</h6>}
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
