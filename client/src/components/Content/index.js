@@ -1,10 +1,8 @@
 import React from 'react';
-import AdminTasksTable from "../Tables/AdminTaskTable";
-import TasksTable from "../Tables/TaskTable";
-
+import AdminTasksTable from '../Tables/AdminTaskTable';
+import TasksTable from '../Tables/TaskTable';
 
 function Content({isAdmin}) {
-
     return (
         <main role="main" className="pb-3">
             <div className="text-center">
@@ -21,9 +19,7 @@ function Content({isAdmin}) {
                     Interested developers can apply to implement certain UIPs.
                 </p>
             </div>
-            <div className="text-center">
-              {isAdmin? <AdminTasksTable/> : <TasksTable />}
-            </div>
+            <div className="text-center">{isAdmin ? <AdminTasksTable /> : <TasksTable />}</div>
         </main>
     );
 }

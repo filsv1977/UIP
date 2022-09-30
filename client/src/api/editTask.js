@@ -1,22 +1,21 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import {actionTypes} from "../Context/actionTypes";
+import {actionTypes} from '../Context/actionTypes';
 
 axiosRetry(axios, {retries: 3});
 
 export const editTask = async (body, dispatch) => {
-  try {
-    await axios.patch(`/admin/tasks/${body.id}`, body).then(result => {
-      dispatch({
-        type: actionTypes.EDIT_TASK_SUCCESS,
-        payload: body
-      })
-    })
-  } catch (e) {
-    dispatch({
-      type: actionTypes.EDIT_TASK_FAILED,
-      payload: e.message
-    })
-  }
-}
-
+    try {
+        await axios.patch(`/admin/tasks/${body.id}`, body).then(result => {
+            dispatch({
+                type: actionTypes.EDIT_TASK_SUCCESS,
+                payload: body
+            });
+        });
+    } catch (e) {
+        dispatch({
+            type: actionTypes.EDIT_TASK_FAILED,
+            payload: e.message
+        });
+    }
+};
