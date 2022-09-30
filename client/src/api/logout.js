@@ -14,7 +14,7 @@ export const logOut = async dispatch => {
         });
     } catch (e) {
         dispatch({
-            type: actionTypes.EDIT_TASK_FAILED,
+            type: actionTypes.LOGOUT_ADMIN_FAILED,
             payload: e.message
         });
     }
