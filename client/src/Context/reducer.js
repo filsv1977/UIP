@@ -68,7 +68,7 @@ export const taskReducer = (state, action) => {
         isAdmin: true
       };
     }
-    case actionTypes.GET_TASKS_FAILED: {
+    case actionTypes.LOGIN_ADMIN_FAILED: {
       return {
         ...state,
         error: action.payload,

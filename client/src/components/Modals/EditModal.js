@@ -19,7 +19,7 @@ function EditModal({show, handleClose , editData }) {
     setEstimationHours(value);
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
     let newData = {
@@ -27,7 +27,7 @@ function EditModal({show, handleClose , editData }) {
       cost: +costTask || +cost,
       estimationHours: +estimation || estimationHours
     }
-    await editTask( newData, dispatch)
+    editTask( newData, dispatch)
     handleClose()
   }
 

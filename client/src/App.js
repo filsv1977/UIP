@@ -13,7 +13,7 @@ function App() {
       <div className="d-flex flex-column min-vh-100">
         <NavBar/>
         <Routes>
-          <Route path="/" element={<HomePage/>}/>
+          <Route path="/" exact element={<HomePage/>}/>
           <Route path="/admin" element={<AdminPage/>}/>
         </Routes>
         <Footer/>
