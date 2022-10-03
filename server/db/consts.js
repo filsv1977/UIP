@@ -5,8 +5,8 @@ export const TASK_TEMPLATE = {
     url: '',
     name: '',
     estimationHours: 0,
-    ubx: 0,
-    usdt: 0,
+    ubxPrice: 0,
+    usdtPrice: 0,
     performer: {
         nickname: '',
         walletAddress: ''

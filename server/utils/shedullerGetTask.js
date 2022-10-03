@@ -1,8 +1,13 @@
 import {getTaskListFromWeb} from '../helpers/uipsPageParser.js';
+import {getExchangeUbx} from '../helpers/getExchangeUbx.js';
 
 const PERIOD_GET_TASK = 60000;
-let id_scheduler;
 
 export const startSchedulerGetTasks = () => {
-    id_scheduler = setInterval(getTaskListFromWeb, PERIOD_GET_TASK);
+    setInterval(executeFunctions, PERIOD_GET_TASK);
 };
+
+function executeFunctions() {
+    getTaskListFromWeb();
+    getExchangeUbx();
+}
