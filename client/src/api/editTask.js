@@ -5,6 +5,7 @@ import {actionTypes} from '../Context/actionTypes';
 axiosRetry(axios, {retries: 3});
 
 export const editTask = async (body, dispatch) => {
+    console.log(body)
     try {
         await axios.patch(`/admin/tasks/${body.id}`, body).then(result => {
             dispatch({
