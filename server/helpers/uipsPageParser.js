@@ -1,15 +1,15 @@
 import {DB} from '../index.js';
-import request from 'request';
+import axios from 'axios';
 
 const GIT_URL = 'https://github.com/';
 const TASKS_LIST_URL = `${GIT_URL}SilentNotaryEcosystem/UIPS/`;
 
-export const getTaskListFromWeb = () => {
-    request(TASKS_LIST_URL, function (err, res, body) {
-        if (err) throw err;
+export const getTaskListFromWeb = async () => {
+    try {
+        const res = await axios.get(TASKS_LIST_URL);
 
-        let c = body.match(/Sil.*mediawiki(?=<)/g);
-        const tasks = c.map(e => {
+        let tasksData = res.data.match(/Sil.*mediawiki(?=<)/g);
+        const tasks = tasksData.map(e => {
             let urlAndName = e.split('">');
             return {
                 url: GIT_URL + urlAndName[0],
@@ -18,5 +18,7 @@ export const getTaskListFromWeb = () => {
         });
 
         DB.addWebTaskInDb(tasks);
-    });
+    } catch (error) {
+        console.error(error);
+    }
 };

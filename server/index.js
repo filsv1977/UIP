@@ -14,9 +14,6 @@ import {getExchangeUbx} from './helpers/getExchangeUbx.js';
 import {DB_FILE_NAME} from './db/consts.js';
 import * as path from 'path';
 import {fileURLToPath} from 'url';
-// import adminRouter from './rest/api/admin/index.js';
-// import logoff from './rest/api/admin/auth/logoff.js';
-// import router from './rest/api/admin/index.js';
 
 export const DB = new DbEngine(DB_FILE_NAME);
 

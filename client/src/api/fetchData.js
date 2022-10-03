@@ -15,7 +15,7 @@ export const fetchData = async (dispatch, id = 0, query = '?closed=0') => {
     } catch (e) {
         dispatch({
             type: actionTypes.GET_TASKS_FAILED,
-            payload: 'Ошибка загрузки данных'
+            payload: 'Data loading error'
         });
     }
 };

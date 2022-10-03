@@ -28,7 +28,7 @@ function TasksTable() {
 
     return (
         <div className={'table-responsive'}>
-            {state.isLoading && <h6>Идет загрузка</h6>}
+            {state.isLoading && <h6>Loading</h6>}
             {state.error && <h6>{state.error}</h6>}
             <Table className="table" hover data-click-to-select="true">
                 <thead>

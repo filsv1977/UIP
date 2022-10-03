@@ -15,7 +15,7 @@ export const editTask = async (body, dispatch) => {
     } catch (e) {
         dispatch({
             type: actionTypes.EDIT_TASK_FAILED,
-            payload: 'Ошибка редактирования данных'
+            payload: 'Data editing error'
         });
     }
 };
