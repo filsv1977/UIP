@@ -3,10 +3,10 @@ import fs from 'fs';
 
 class DbEngine {
     _db = [];
-    _db_path;
+    _dbPath;
 
     constructor(path) {
-        this._db_path = path;
+        this._dbPath = path;
         this._load();
     }
 
@@ -83,7 +83,7 @@ class DbEngine {
     }
 
     _load() {
-        fs.readFile(this._db_path, 'utf8', (error, data) => {
+        fs.readFile(this._dbPath, 'utf8', (error, data) => {
             if (error) {
                 console.error(error);
                 return;
@@ -99,7 +99,7 @@ class DbEngine {
     }
 
     _save() {
-        fs.writeFile(this._db_path, JSON.stringify(this._db), error => {
+        fs.writeFile(this._dbPath, JSON.stringify(this._db), error => {
             if (error) {
                 console.error(error);
             }

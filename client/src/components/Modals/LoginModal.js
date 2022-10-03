@@ -12,13 +12,9 @@ function LoginModal({show, handleClose}) {
     const navigate = useNavigate();
     const {state, dispatch} = useTasks();
 
-    const onChangeLogin = ({target: {value}}) => {
-        setLogin(value);
-    };
+    const onChangeLogin = ({target: {value}}) => setLogin(value);
 
-    const onChangePassword = ({target: {value}}) => {
-        setPassword(value);
-    };
+    const onChangePassword = ({target: {value}}) => setPassword(value);
 
     useEffect(() => {
         if (state.isAdmin) handleClose();
