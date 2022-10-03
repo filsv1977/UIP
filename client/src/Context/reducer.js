@@ -17,8 +17,14 @@ export const TasksContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(taskReducer, initialState);
 
     useEffect(() => {
-        fetchData(dispatch, 0, '?closed=0');
-    }, []);
+        if (!state.tasks.length) fetchData(dispatch, state.activeFilterBtn, `?closed=${state.activeFilterBtn}`);
+        const intervalId = setInterval(
+            () => fetchData(dispatch, state.activeFilterBtn, `?closed=${state.activeFilterBtn}`),
+            300000
+        );
+
+        return () => clearInterval(intervalId);
+    }, [state.tasks]);
 
     return <ContextApp.Provider value={{state, dispatch}}>{children}</ContextApp.Provider>;
 };
