@@ -31,3 +31,4 @@ yarn-error.log*
 ./client/build
 /client/build/
 /.idea/jsLibraryMappings.xml
+/server/.env
