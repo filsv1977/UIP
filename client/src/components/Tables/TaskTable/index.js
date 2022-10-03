@@ -15,8 +15,8 @@ function TasksTable() {
             <td>{task.name}</td>
             <td>{<a href={task.url}>{task.url}</a>}</td>
             <td>{task.estimationHours}</td>
-            <td>{task.ubx}</td>
-            <td>{task.usdt}</td>
+            <td>{task.ubxPrice}</td>
+            <td>{task.usdtPrice}</td>
             <td>{task.performer.nickname + ' ' + task.performer.walletAddress || ''}</td>
         </tr>
     ));
