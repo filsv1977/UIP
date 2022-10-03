@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import React, {useEffect, useState} from 'react';
 import {logIn} from '../../api/login';
 import {useTasks} from '../../Context/reducer';
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 
 function LoginModal({show, handleClose}) {
     const [login, setLogin] = useState('');
@@ -30,10 +30,10 @@ function LoginModal({show, handleClose}) {
         logIn({login, password}, dispatch);
     };
 
-    const onHandleClose = ()=>{
+    const onHandleClose = () => {
         navigate('/');
-        handleClose()
-    }
+        handleClose();
+    };
 
     return (
         <Modal show={show} onHide={handleClose}>

@@ -10,6 +10,7 @@
 
 # production
 /build
+/client/build
 
 # misc
 .DS_Store
@@ -27,3 +28,6 @@ yarn-error.log*
 /.idea/UIP.iml
 /.idea/vcs.xml
 /.idea/.gitignore
+./client/build
+/client/build/
+/.idea/jsLibraryMappings.xml
