@@ -32,17 +32,17 @@ function LoginModal({show, handleClose}) {
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Авторизация</Modal.Title>
+                <Modal.Title>Authorization</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit} id={'myForm'}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Логин</Form.Label>
-                        <Form.Control type="text" placeholder="Введите логин" onChange={onChangeLogin} />
+                        <Form.Label>Login</Form.Label>
+                        <Form.Control type="text" placeholder="Enter login" onChange={onChangeLogin} />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Пароль</Form.Label>
+                        <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" onChange={onChangePassword} />
                     </Form.Group>
                 </Form>
@@ -50,10 +50,10 @@ function LoginModal({show, handleClose}) {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-secondary" onClick={handleClose}>
-                    Закрыть
+                    Close
                 </Button>
                 <Button variant="outline-primary" type="submit" form="myForm">
-                    Войти
+                    Enter
                 </Button>
             </Modal.Footer>
         </Modal>

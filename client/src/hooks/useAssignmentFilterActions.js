@@ -7,7 +7,7 @@ export default function useAssignmentFilterActions() {
     const assignmentFilterActions = [
         {
             id: filterAction.OPEN,
-            text: 'Открытые',
+            text: 'Opened',
             meta: {
                 query: '?closed=0'
             },
@@ -17,7 +17,7 @@ export default function useAssignmentFilterActions() {
         },
         {
             id: filterAction.CLOSED,
-            text: 'Закрытые',
+            text: 'Closed',
             meta: {
                 query: '?closed=1'
             },

@@ -15,7 +15,7 @@ export const logIn = (body, dispatch) => {
             } else {
                 dispatch({
                     type: actionTypes.LOGIN_ADMIN_FAILED,
-                    payload: 'Введен не верный логин/пароль'
+                    payload: 'Invalid username/password entered'
                 });
             }
         });

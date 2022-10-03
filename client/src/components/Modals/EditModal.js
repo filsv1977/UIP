@@ -28,22 +28,22 @@ function EditModal({show, handleClose, editData}) {
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Редактировать задачу</Modal.Title>
+                <Modal.Title>Edit task</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit} id={'myForm'}>
                     <Form.Group className="mb-3" controlId="formBasicTask">
-                        <Form.Label>Наименование задачи</Form.Label>
+                        <Form.Label>Task</Form.Label>
                         <Form.Control type="text" disabled defaultValue={name} />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicUrl">
-                        <Form.Label>Адрес задачи</Form.Label>
+                        <Form.Label>URL</Form.Label>
                         <Form.Control type="text" defaultValue={url} disabled />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicEstimationHours">
-                        <Form.Label>Оценка задачи</Form.Label>
+                        <Form.Label>Estimation hours</Form.Label>
                         <Form.Control type="number" defaultValue={estimationHours} onChange={onEstimationHoursChange} />
                     </Form.Group>
                 </Form>
@@ -51,10 +51,10 @@ function EditModal({show, handleClose, editData}) {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-secondary" onClick={handleClose}>
-                    Отменить
+                    Cancel
                 </Button>
                 <Button variant="outline-primary" type="submit" form="myForm">
-                    Применить
+                    Ok
                 </Button>
             </Modal.Footer>
         </Modal>

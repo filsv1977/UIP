@@ -33,12 +33,12 @@ function TasksTable() {
             <Table className="table" hover data-click-to-select="true">
                 <thead>
                     <tr>
-                        <th scope="col">Наименование задачи</th>
-                        <th scope="col">Адрес задачи</th>
-                        <th scope="col">Оценка задачи</th>
-                        <th scope="col">Стоимость в UBX</th>
-                        <th scope="col">Стоимость в USD</th>
-                        <th scope="col">Исполнитель</th>
+                        <th scope="col">Task</th>
+                        <th scope="col">URL</th>
+                        <th scope="col">Estimation hours</th>
+                        <th scope="col">Cost in UBX</th>
+                        <th scope="col">Cost in USDT</th>
+                        <th scope="col">Performer</th>
                     </tr>
                 </thead>
                 <tbody>{generateTable}</tbody>
