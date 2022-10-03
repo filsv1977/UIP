@@ -27,7 +27,7 @@ function AssignmentFilterButtonsActions() {
             {assignmentFilterActions.map(x => (
                 <Button
                     key={x.id}
-                    onClick={() => fetchData(dispatch, x.id, x.meta.query)}
+                    onClick={() => fetchData(dispatch, x.id)}
                     variant={x.button.variant(state.activeFilterBtn === x.id)}
                     size={'sm'}
                 >

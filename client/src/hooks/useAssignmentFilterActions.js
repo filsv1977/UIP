@@ -8,9 +8,6 @@ export default function useAssignmentFilterActions() {
         {
             id: filterAction.OPEN,
             text: 'Opened',
-            meta: {
-                query: '?closed=0'
-            },
             button: {
                 variant: active => (active ? 'outline-danger' : 'outline-primary')
             }
@@ -18,9 +15,6 @@ export default function useAssignmentFilterActions() {
         {
             id: filterAction.CLOSED,
             text: 'Closed',
-            meta: {
-                query: '?closed=1'
-            },
             button: {
                 variant: active => (active ? 'outline-danger' : 'outline-primary')
             }

@@ -4,9 +4,9 @@ import {actionTypes} from '../Context/actionTypes';
 
 axiosRetry(axios, {retries: 3});
 
-export const fetchData = async (dispatch, id = 0, query = '?closed=0') => {
+export const fetchData = async (dispatch, id = 0) => {
     try {
-        await axios.get(`/tasks${query}`).then(result => {
+        await axios.get(`/tasks?closed=${id}`).then(result => {
             dispatch({
                 type: actionTypes.GET_TASKS_SUCCESS,
                 payload: {data: result.data.data, activeFilterBtn: id}

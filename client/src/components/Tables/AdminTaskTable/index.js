@@ -8,17 +8,25 @@ function AdminTasksTable() {
 
     const onEditTask = (e, editData) => {
         let newData = {...editData};
-        if (e.target.id === 'estimationHours') {
+        if (e.target.id.includes('estimationHours')) {
             newData.estimationHours = +e.target.value;
         }
-        if (e.target.id === 'nickname') {
+        if (e.target.id.includes('nickname')) {
             newData.performer = {...editData.performer, nickname: e.target.value};
         }
-        if (e.target.id === 'walletAddress') {
+        if (e.target.id.includes('walletAddress')) {
             newData.performer = {...editData.performer, walletAddress: e.target.value};
         }
         editTask(newData, dispatch);
     };
+
+  const handleKeyDown = (e, editData) => {
+    if (e.key === 'Enter') {
+      onEditTask(e, editData)
+      const el = document.getElementById(e.target.id)
+      if (el) el.blur()
+    }
+  }
 
     const generateTable = (state?.tasks || []).map(task => (
         <tr key={task.id}>
@@ -34,11 +42,13 @@ function AdminTasksTable() {
                     <InputGroup className="mb-sm-1">
                         <Form.Control
                             placeholder="Enter hours"
-                            id={'estimationHours'}
+                            id={'estimationHours'+task.id}
                             aria-label="estimationHours"
                             aria-describedby="basic-addon1"
                             defaultValue={task.estimationHours}
                             onBlur={e => onEditTask(e, task)}
+                            onKeyDown={e => handleKeyDown(e, task)}
+                            type={"number"}
                         />
                     </InputGroup>
                 }
@@ -50,10 +60,11 @@ function AdminTasksTable() {
                     <InputGroup className="mb-sm-1">
                         <Form.Control
                             aria-label="Name"
-                            id={'nickname'}
+                            id={'nickname'+task.id}
                             placeholder="Enter name"
                             defaultValue={task.performer.nickname || ''}
                             onBlur={e => onEditTask(e, task)}
+                            onKeyDown={e => handleKeyDown(e, task)}
                         />
                     </InputGroup>
                 }
@@ -64,9 +75,10 @@ function AdminTasksTable() {
                         <Form.Control
                             aria-label="Wallet"
                             placeholder="Enter wallet"
-                            id={'walletAddress'}
+                            id={'walletAddress'+task.id}
                             defaultValue={task.performer.walletAddress || ''}
                             onBlur={e => onEditTask(e, task)}
+                            onKeyDown={e => handleKeyDown(e, task)}
                         />
                     </InputGroup>
                 }
