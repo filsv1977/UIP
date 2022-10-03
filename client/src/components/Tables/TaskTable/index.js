@@ -6,10 +6,14 @@ function TasksTable() {
     const {state} = useTasks();
 
     const generateTable = (state?.tasks || []).map(task => (
-        <tr
-            key={task.id}
-        >
-            <td>{<a href={task.url} target='_blank'>{task.name}</a>}</td>
+        <tr key={task.id}>
+            <td>
+                {
+                    <a href={task.url} target="_blank">
+                        {task.name}
+                    </a>
+                }
+            </td>
             <td>{task.estimationHours}</td>
             <td>{task.ubxPrice}</td>
             <td>{task.usdtPrice}</td>
