@@ -4,15 +4,20 @@
   "description": "",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": "18.x",
+    "npm": "8.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node ./server/index.js",
     "client": "cd client && npm start",
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node  index.js",
     "lint": "./node_modules/.bin/eslint './**/*.js'",
     "check": "npx prettier --check .",
     "fix": "npx prettier --write .",
-    "husky": "husky install && ./hookSetup.sh"
+    "husky": "husky install && ./hookSetup.sh",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -24,7 +29,8 @@
     "md5": "^2.3.0",
     "morgan": "~1.9.1",
     "request": "^2.88.2",
-    "axios": "^0.27.2"
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.3"
   },
   "devDependencies": {
     "concurrently": "^5.0.0",
