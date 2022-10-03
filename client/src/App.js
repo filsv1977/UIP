@@ -11,7 +11,6 @@ function App() {
     return (
         <TasksContextProvider>
             <div className="d-flex flex-column min-vh-100 px-2 ">
-                <NavBar />
                 <Routes>
                     <Route path="/" exact element={<HomePage />} />
                     <Route path="/admin" element={<AdminPage />} />

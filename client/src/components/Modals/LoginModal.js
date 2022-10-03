@@ -4,11 +4,12 @@ import Button from 'react-bootstrap/Button';
 import React, {useEffect, useState} from 'react';
 import {logIn} from '../../api/login';
 import {useTasks} from '../../Context/reducer';
+import {useNavigate} from "react-router-dom";
 
 function LoginModal({show, handleClose}) {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
-
+    const navigate = useNavigate();
     const {state, dispatch} = useTasks();
 
     const onChangeLogin = ({target: {value}}) => {
@@ -28,6 +29,11 @@ function LoginModal({show, handleClose}) {
 
         logIn({login, password}, dispatch);
     };
+
+    const onHandleClose = ()=>{
+        navigate('/');
+        handleClose()
+    }
 
     return (
         <Modal show={show} onHide={handleClose}>
@@ -49,7 +55,7 @@ function LoginModal({show, handleClose}) {
                 {state.error && <h6>{state.error}</h6>}
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="outline-secondary" onClick={handleClose}>
+                <Button variant="outline-secondary" onClick={onHandleClose}>
                     Close
                 </Button>
                 <Button variant="outline-primary" type="submit" form="myForm">
