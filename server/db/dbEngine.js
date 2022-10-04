@@ -41,25 +41,20 @@ class DbEngine {
             return true;
         } catch (error) {
             console.error(error);
-            return false;
+            return {success: false, message: `Task not added`};
         }
     }
 
     select() {
-        try {
-            return this._db;
-        } catch (error) {
-            console.error(error);
-            return false;
-        }
+        return {success: true, data: this._db};
     }
 
     _selectById(id) {
         let index = this._getIndex(id);
         if (index > -1) {
-            return this._db[index];
+            return {success: true, data: this._db[index]};
         }
-        return false;
+        return {success: false, message: `Task with id=${id} not found`};
     }
 
     update(id, data) {
@@ -67,9 +62,9 @@ class DbEngine {
         if (index > -1) {
             this._db[index] = {...this._db[index], ...data};
             this._save();
-            return true;
+            return {success: true, data: this._db[index]};
         }
-        return false;
+        return {success: false, message: `Task with id=${id} not found`};
     }
 
     _delete(id) {
@@ -77,9 +72,9 @@ class DbEngine {
         if (index > -1) {
             this._db.splice(index, 1);
             this._save();
-            return true;
+            return {success: true};
         }
-        return false;
+        return {success: false, message: `Task with id=${id} not found`};
     }
 
     _load() {

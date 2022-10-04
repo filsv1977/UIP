@@ -2,17 +2,18 @@ import {DB} from '../../../index.js';
 
 const list = async (req, res) => {
     let {closed} = req.query;
-    let tasks = DB.select();
 
-    let result = tasks.filter(item => (+closed ? item.performer.nickname !== '' : item.performer.nickname === ''));
+    try {
+        const answer = DB.select();
+        const data = answer.data.filter(item =>
+            +closed ? item.performer.nickname !== '' : item.performer.nickname === ''
+        );
 
-    let response = {success: false};
-    if (result !== false) {
-        response.success = true;
-        response.data = result;
+        res.json({success: answer.success, data});
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, message: 'DB is broken'});
     }
-
-    return res.json(response);
 };
 
 export default list;

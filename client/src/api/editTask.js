@@ -7,6 +7,8 @@ axiosRetry(axios, {retries: 3});
 export const editTask = async (body, dispatch) => {
     try {
         await axios.patch(`/admin/tasks/${body.id}`, body).then(result => {
+            if (!result.data.success) throw new Error(result.data.message);
+
             dispatch({
                 type: actionTypes.EDIT_TASK_SUCCESS,
                 payload: result.data
@@ -15,7 +17,7 @@ export const editTask = async (body, dispatch) => {
     } catch (e) {
         dispatch({
             type: actionTypes.EDIT_TASK_FAILED,
-            payload: 'Data editing error'
+            payload: e.message
         });
     }
 };

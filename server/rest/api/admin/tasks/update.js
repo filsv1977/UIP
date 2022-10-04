@@ -13,7 +13,7 @@ const patchTask = async (req, res) => {
         result = DB.update(+params.id, body);
     }
 
-    return res.json({success: result, ...body});
+    return res.json(result);
 };
 
 export default patchTask;

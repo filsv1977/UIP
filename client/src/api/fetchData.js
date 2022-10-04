@@ -7,6 +7,8 @@ axiosRetry(axios, {retries: 3});
 export const fetchData = async (dispatch, id = 0) => {
     try {
         await axios.get(`/tasks?closed=${id}`).then(result => {
+            if (!result.data.success) throw new Error(result.data.message);
+
             dispatch({
                 type: actionTypes.GET_TASKS_SUCCESS,
                 payload: {data: result.data.data, activeFilterBtn: id}
@@ -15,7 +17,7 @@ export const fetchData = async (dispatch, id = 0) => {
     } catch (e) {
         dispatch({
             type: actionTypes.GET_TASKS_FAILED,
-            payload: 'Data loading error'
+            payload: e.message
         });
     }
 };
