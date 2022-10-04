@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import AdminPage from './pages/AdminPage';
 import Footer from './components/Footer';
 import {TasksContextProvider} from './Context/reducer';
+import SpinnerBtn from "./components/Spinner";
 import './App.css';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
                     <Route path="/" exact element={<HomePage />} />
                     <Route path="/admin" element={<AdminPage />} />
                 </Routes>
+                <SpinnerBtn/>
                 <Footer />
             </div>
         </TasksContextProvider>
