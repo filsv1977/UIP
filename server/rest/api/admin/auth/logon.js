@@ -1,7 +1,5 @@
 import md5 from 'md5';
-
-const PASSWORD = '21232f297a57a5a743894a0e4a801fc3';
-const LOGIN = 'admin';
+import {LOGIN, PASSWORD} from '../../../../index.js';
 
 const logon = async (req, res) => {
     const {login, password} = req.body;

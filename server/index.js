@@ -31,6 +31,8 @@ if (process.env.NODE_ENV === 'production') {
 restRoutes(app);
 
 const serverPort = process.env.PORT || 4000;
+export const PASSWORD = process.env.PASSWORD;
+export const LOGIN = process.env.LOGIN;
 
 app.listen(serverPort, () => {
     console.log(`Example app listening on port ${serverPort}!`);
