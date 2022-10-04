@@ -1,6 +1,8 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import {useTasks} from '../../../Context/reducer';
+import Error from '../../Error';
+import SpinnerBtn from '../../Spinner';
 
 function TasksTable() {
     const {state} = useTasks();
@@ -24,9 +26,9 @@ function TasksTable() {
 
     return (
         <div className={'table-responsive'}>
-            {state.isLoading && <h6>Loading...</h6>}
-            {state.error && <h6>{state.error}</h6>}
-            <Table className="taskTable" hover data-click-to-select="true">
+            {state.isLoading && <SpinnerBtn />}
+            {state.error && <Error message={state.error} />}
+            <Table className="align-middle" hover data-click-to-select="true">
                 <thead>
                     <tr>
                         <th scope="col">Task</th>

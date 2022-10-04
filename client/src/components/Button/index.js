@@ -23,7 +23,7 @@ function AssignmentFilterButtonsActions() {
     };
 
     return (
-        <Stack direction="horizontal" gap={2}>
+        <Stack className="mb-2" direction="horizontal" gap={2}>
             {assignmentFilterActions.map(x => (
                 <Button
                     key={x.id}

@@ -41,7 +41,8 @@ export const taskReducer = (state, action) => {
                 ...state,
                 tasks: action.payload.data,
                 activeFilterBtn: action.payload.activeFilterBtn,
-                isLoading: false
+                isLoading: false,
+                error: false
             };
         }
         case actionTypes.GET_TASKS_FAILED: {
@@ -53,12 +54,21 @@ export const taskReducer = (state, action) => {
         }
 
         case actionTypes.EDIT_TASK_SUCCESS: {
-            let {id} = action.payload;
+            const {
+                id,
+                performer: {nickname}
+            } = action.payload;
+            const {activeFilterBtn, tasks} = state;
 
-            let newData = state.tasks.map(task => (+task.id === +id ? action.payload : task));
+            let newData =
+                !activeFilterBtn && nickname
+                    ? tasks.filter(task => +task.id !== +id)
+                    : tasks.map(task => (+task.id === +id ? action.payload : task));
+
             return {
                 ...state,
-                tasks: newData
+                tasks: newData,
+                error: false
             };
         }
         case actionTypes.EDIT_TASK_FAILED: {
@@ -71,7 +81,8 @@ export const taskReducer = (state, action) => {
         case actionTypes.LOGIN_ADMIN_SUCCESS: {
             return {
                 ...state,
-                isAdmin: true
+                isAdmin: true,
+                error: false
             };
         }
         case actionTypes.LOGIN_ADMIN_FAILED: {
@@ -85,7 +96,8 @@ export const taskReducer = (state, action) => {
         case actionTypes.LOGOUT_ADMIN: {
             return {
                 ...state,
-                isAdmin: false
+                isAdmin: false,
+                error: false
             };
         }
 

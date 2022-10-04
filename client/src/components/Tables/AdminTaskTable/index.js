@@ -1,7 +1,9 @@
 import React from 'react';
-import {Table, InputGroup, Form} from 'react-bootstrap';
+import {Table, Form} from 'react-bootstrap';
 import {useTasks} from '../../../Context/reducer';
 import {editTask} from '../../../api/editTask';
+import Error from '../../Error';
+import SpinnerBtn from '../../Spinner';
 
 function AdminTasksTable() {
     const {state, dispatch} = useTasks();
@@ -9,7 +11,7 @@ function AdminTasksTable() {
     const onEditTask = (e, editData) => {
         let newData = {...editData};
         if (e.target.id.includes('estimationHours')) {
-            newData.estimationHours = +e.target.value;
+            newData.estimationHours = Number(e.target.value);
         }
         if (e.target.id.includes('nickname')) {
             newData.performer = {...editData.performer, nickname: e.target.value};
@@ -39,48 +41,45 @@ function AdminTasksTable() {
             </td>
             <td>
                 {
-                    <InputGroup className="mb-sm-1">
-                        <Form.Control
-                            placeholder="Enter hours"
-                            id={'estimationHours' + task.id}
-                            aria-label="estimationHours"
-                            aria-describedby="basic-addon1"
-                            defaultValue={task.estimationHours}
-                            onBlur={e => onEditTask(e, task)}
-                            onKeyDown={e => handleKeyDown(e, task)}
-                            type={'number'}
-                        />
-                    </InputGroup>
+                    <Form.Control
+                        className="form-control form-control-sm"
+                        placeholder="Enter hours"
+                        id={'estimationHours' + task.id}
+                        aria-label="estimationHours"
+                        aria-describedby="basic-addon1"
+                        defaultValue={task.estimationHours}
+                        onBlur={e => onEditTask(e, task)}
+                        onKeyDown={e => handleKeyDown(e, task)}
+                        type={'number'}
+                    />
                 }
             </td>
             <td>{task.ubxPrice}</td>
             <td>{task.usdtPrice}</td>
             <td>
                 {
-                    <InputGroup className="mb-sm-1">
-                        <Form.Control
-                            aria-label="Name"
-                            id={'nickname' + task.id}
-                            placeholder="Enter name"
-                            defaultValue={task.performer.nickname || ''}
-                            onBlur={e => onEditTask(e, task)}
-                            onKeyDown={e => handleKeyDown(e, task)}
-                        />
-                    </InputGroup>
+                    <Form.Control
+                        className="form-control form-control-sm"
+                        aria-label="Name"
+                        id={'nickname' + task.id}
+                        placeholder="Enter name"
+                        defaultValue={task.performer.nickname || ''}
+                        onBlur={e => onEditTask(e, task)}
+                        onKeyDown={e => handleKeyDown(e, task)}
+                    />
                 }
             </td>
             <td>
                 {
-                    <InputGroup className="mb-sm-1">
-                        <Form.Control
-                            aria-label="Wallet"
-                            placeholder="Enter wallet"
-                            id={'walletAddress' + task.id}
-                            defaultValue={task.performer.walletAddress || ''}
-                            onBlur={e => onEditTask(e, task)}
-                            onKeyDown={e => handleKeyDown(e, task)}
-                        />
-                    </InputGroup>
+                    <Form.Control
+                        className="form-control form-control-sm"
+                        aria-label="Wallet"
+                        placeholder="Enter wallet"
+                        id={'walletAddress' + task.id}
+                        defaultValue={task.performer.walletAddress || ''}
+                        onBlur={e => onEditTask(e, task)}
+                        onKeyDown={e => handleKeyDown(e, task)}
+                    />
                 }
             </td>
         </tr>
@@ -88,9 +87,9 @@ function AdminTasksTable() {
 
     return (
         <div className={'table-responsive'}>
-            {state.isLoading && <h6>Loading...</h6>}
-            {state.error && <h6>{state.error}</h6>}
-            <Table className="taskTable" hover data-click-to-select="true">
+            {state.isLoading && <SpinnerBtn />}
+            {state.error && <Error message={state.error} />}
+            <Table className="align-middle" hover data-click-to-select="true">
                 <thead>
                     <tr>
                         <th scope="col">Task</th>

@@ -5,6 +5,7 @@ import React, {useEffect, useState} from 'react';
 import {logIn} from '../../api/login';
 import {useTasks} from '../../Context/reducer';
 import {useNavigate} from 'react-router-dom';
+import Error from '../Error';
 
 function LoginModal({show, handleClose}) {
     const [login, setLogin] = useState('');
@@ -58,7 +59,7 @@ function LoginModal({show, handleClose}) {
                         />
                     </Form.Group>
                 </Form>
-                {state.error && <h6>{state.error}</h6>}
+                {state.error && <Error message={state.error} />}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-secondary" onClick={onHandleClose}>

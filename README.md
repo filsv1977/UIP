@@ -9,6 +9,6 @@ Add login and password to .env file.
 For example: login - admin, password - admin
 
 ```
-LOGIN=admin
+USER=admin
 PASSWORD=21232f297a57a5a743894a0e4a801fc3
 ```
