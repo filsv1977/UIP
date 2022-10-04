@@ -6,6 +6,7 @@ axiosRetry(axios, {retries: 3});
 
 export const fetchData = async (dispatch, id = 0) => {
     try {
+        dispatch({type: actionTypes.GET_TASKS});
         await axios.get(`/tasks?closed=${id}`).then(result => {
             dispatch({
                 type: actionTypes.GET_TASKS_SUCCESS,

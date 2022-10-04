@@ -54,12 +54,16 @@ export const taskReducer = (state, action) => {
         }
 
         case actionTypes.EDIT_TASK_SUCCESS: {
-            const {id, performer: {nickname}} = action.payload;
-            const {activeFilterBtn, tasks} = state
+            const {
+                id,
+                performer: {nickname}
+            } = action.payload;
+            const {activeFilterBtn, tasks} = state;
 
-           let newData = (!activeFilterBtn && nickname) ?
-             tasks.filter(task => +task.id !== +id):
-             tasks.map(task => +task.id === +id ? action.payload : task);
+            let newData =
+                !activeFilterBtn && nickname
+                    ? tasks.filter(task => +task.id !== +id)
+                    : tasks.map(task => (+task.id === +id ? action.payload : task));
 
             return {
                 ...state,
