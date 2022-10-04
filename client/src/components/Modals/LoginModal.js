@@ -6,6 +6,7 @@ import {logIn} from '../../api/login';
 import {useTasks} from '../../Context/reducer';
 import {useNavigate} from 'react-router-dom';
 import Error from '../Error';
+import {actionTypes} from '../../Context/actionTypes';
 
 function LoginModal({show, handleClose}) {
     const [login, setLogin] = useState('');
@@ -29,6 +30,7 @@ function LoginModal({show, handleClose}) {
 
     const onHandleClose = () => {
         navigate('/');
+        dispatch({type: actionTypes.LOGOUT_ADMIN});
         handleClose();
     };
 

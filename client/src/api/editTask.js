@@ -11,7 +11,7 @@ export const editTask = async (body, dispatch) => {
 
             dispatch({
                 type: actionTypes.EDIT_TASK_SUCCESS,
-                payload: result.data
+                payload: result.data.data
             });
         });
     } catch (e) {

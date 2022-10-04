@@ -1,4 +1,4 @@
-export const DB_FILE_NAME = './db/db1.json';
+export const DB_FILE_NAME = './db/db.json';
 
 export const TASK_TEMPLATE = {
     id: 0,
