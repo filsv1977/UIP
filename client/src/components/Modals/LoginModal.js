@@ -5,6 +5,7 @@ import React, {useEffect, useState} from 'react';
 import {logIn} from '../../api/login';
 import {useTasks} from '../../Context/reducer';
 import {useNavigate} from 'react-router-dom';
+import Error from '../Error';
 
 function LoginModal({show, handleClose}) {
     const [login, setLogin] = useState('');
@@ -40,15 +41,25 @@ function LoginModal({show, handleClose}) {
                 <Form onSubmit={handleSubmit} id={'myForm'}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Login</Form.Label>
-                        <Form.Control type="text" placeholder="Enter login"  autoComplete="on" onChange={onChangeLogin} />
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter login"
+                            autoComplete="on"
+                            onChange={onChangeLogin}
+                        />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password"  autoComplete="off" onChange={onChangePassword} />
+                        <Form.Control
+                            type="password"
+                            placeholder="Password"
+                            autoComplete="off"
+                            onChange={onChangePassword}
+                        />
                     </Form.Group>
                 </Form>
-                {state.error && <h6>{state.error}</h6>}
+                {state.error && <Error message={state.error} />}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-secondary" onClick={onHandleClose}>
