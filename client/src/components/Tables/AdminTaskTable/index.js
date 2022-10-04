@@ -1,33 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Table, Form} from 'react-bootstrap';
 import {useTasks} from '../../../Context/reducer';
 import {editTask} from '../../../api/editTask';
 import Error from '../../Error';
 import SpinnerBtn from '../../Spinner';
+import EditComponent from '../../EditComponent';
 
 function AdminTasksTable() {
+    const style = {width: '15vw'};
     const {state, dispatch} = useTasks();
+    const [editRow, setEditRow] = useState(false);
+    const [rowId, setRowId] = useState(null);
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
-    const onEditTask = (e, editData) => {
+    const [estimationHours, setHours] = useState(0);
+    const [nickname, setNickname] = useState('');
+    const [wallet, setWallet] = useState('');
+
+    const onEditTask = editData => {
+        if (estimationHours < 0) return;
         let newData = {...editData};
-        if (e.target.id.includes('estimationHours')) {
-            newData.estimationHours = Number(e.target.value);
-        }
-        if (e.target.id.includes('nickname')) {
-            newData.performer = {...editData.performer, nickname: e.target.value};
-        }
-        if (e.target.id.includes('walletAddress')) {
-            newData.performer = {...editData.performer, walletAddress: e.target.value};
-        }
+        if (estimationHours) newData.estimationHours = Number(estimationHours);
+        newData.performer = {
+            nickname: nickname || editData.performer.nickname,
+            walletAddress: wallet || editData.performer.walletAddress
+        };
+
         editTask(newData, dispatch);
+        setRowId(null);
+        setEditRow(false);
+        setHours(0);
+        setNickname('');
+        setWallet('');
     };
 
-    const handleKeyDown = (e, editData) => {
-        if (e.key === 'Enter') {
-            onEditTask(e, editData);
-            const el = document.getElementById(e.target.id);
-            if (el) el.blur();
-        }
+    const onSetHours = e => {
+        const isValid = e.target.value > 0;
+        setFormSubmitted(isValid);
+        setHours(+e.target.value);
     };
 
     const generateTable = (state?.tasks || []).map(task => (
@@ -39,47 +49,70 @@ function AdminTasksTable() {
                     </a>
                 }
             </td>
-            <td>
-                {
-                    <Form.Control
-                        className="form-control form-control-sm"
-                        placeholder="Enter hours"
-                        id={'estimationHours' + task.id}
-                        aria-label="estimationHours"
-                        aria-describedby="basic-addon1"
-                        defaultValue={task.estimationHours}
-                        onBlur={e => onEditTask(e, task)}
-                        onKeyDown={e => handleKeyDown(e, task)}
-                        type={'number'}
-                    />
-                }
+            <td style={style}>
+                {editRow && +task.id === +rowId ? (
+                    <>
+                        <Form.Control
+                            className="form-control form-control-sm"
+                            placeholder="Enter hours"
+                            id={'estimationHours' + task.id}
+                            aria-label="estimationHours"
+                            min="0"
+                            aria-describedby="basic-addon1"
+                            defaultValue={task.estimationHours}
+                            onChange={onSetHours}
+                            type={'number'}
+                            isInvalid={+estimationHours < 0}
+                        />
+                        <Form.Control.Feedback type="invalid" />
+                    </>
+                ) : (
+                    task.estimationHours
+                )}
             </td>
             <td>{task.ubxPrice}</td>
             <td>{task.usdtPrice}</td>
-            <td>
-                {
+            <td style={style}>
+                {editRow && +task.id === +rowId ? (
                     <Form.Control
                         className="form-control form-control-sm"
                         aria-label="Name"
                         id={'nickname' + task.id}
                         placeholder="Enter name"
                         defaultValue={task.performer.nickname || ''}
-                        onBlur={e => onEditTask(e, task)}
-                        onKeyDown={e => handleKeyDown(e, task)}
+                        onChange={e => setNickname(e.target.value)}
                     />
-                }
+                ) : (
+                    task.performer.nickname || ''
+                )}
             </td>
-            <td>
-                {
+            <td style={style}>
+                {editRow && +task.id === +rowId ? (
                     <Form.Control
                         className="form-control form-control-sm"
                         aria-label="Wallet"
                         placeholder="Enter wallet"
                         id={'walletAddress' + task.id}
                         defaultValue={task.performer.walletAddress || ''}
-                        onBlur={e => onEditTask(e, task)}
-                        onKeyDown={e => handleKeyDown(e, task)}
+                        onChange={e => setWallet(e.target.value)}
                     />
+                ) : (
+                    task.performer.walletAddress || ''
+                )}
+            </td>
+            <td>
+                {
+                    <div className="d-flex flex-row justify-content-center align-items-center">
+                        <EditComponent
+                            data={task}
+                            rowId={rowId}
+                            taskId={task.id}
+                            setEditRow={setEditRow}
+                            setRowId={setRowId}
+                            onEditTask={onEditTask}
+                            formSubmitted={formSubmitted}
+                        />
+                    </div>
                 }
             </td>
         </tr>
@@ -98,6 +131,7 @@ function AdminTasksTable() {
                         <th scope="col">Cost in USDT</th>
                         <th scope="col">Nickname</th>
                         <th scope="col">Wallet</th>
+                        <th scope="col">Edit</th>
                     </tr>
                 </thead>
                 <tbody>{generateTable}</tbody>
