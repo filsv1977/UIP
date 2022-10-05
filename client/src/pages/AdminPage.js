@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Content from '../components/Content';
 import LoginModal from '../components/Modals/LoginModal';
 import {useTasks} from '../Context/reducer';
+import {fetchData} from "../api/fetchData";
 
 function AdminPage() {
     const {
@@ -11,6 +12,10 @@ function AdminPage() {
 
     useEffect(() => {
         setVisible(true);
+    }, []);
+
+    useEffect(() => {
+        fetchData(dispatch, null);
     }, []);
 
     return (
