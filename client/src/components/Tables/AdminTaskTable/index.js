@@ -40,9 +40,7 @@ function AdminTasksTable() {
         setHours(+e.target.value);
     };
 
-  console.log(state?.tasks)
-
-  const generateTable = (state?.tasks || []).map(task => (
+    const generateTable = (state?.tasks || []).map(task => (
         <tr key={task.id}>
             <td>
                 {
@@ -64,7 +62,7 @@ function AdminTasksTable() {
                             defaultValue={task.estimationHours}
                             onChange={onSetHours}
                             type={'number'}
-                            isInvalid={estimationHours<0 || +estimationHours < 0}
+                            isInvalid={estimationHours < 0 || +estimationHours < 0}
                         />
                         <Form.Control.Feedback type="invalid" />
                     </>

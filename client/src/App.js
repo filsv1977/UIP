@@ -1,5 +1,5 @@
 import React from 'react';
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, Navigate} from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AdminPage from './pages/AdminPage';
 import Footer from './components/Footer';
@@ -12,7 +12,9 @@ function App() {
         <TasksContextProvider>
             <div className="d-flex flex-column min-vh-100 px-2 ">
                 <Routes>
-                    <Route path="/" exact element={<HomePage />} />
+                    <Route path="/" exact element={<Navigate to="/open" replace />} />
+                    <Route path="/open" exact element={<HomePage implemented={false} />} />
+                    <Route path="/implemented" exact element={<HomePage implemented={true} />} />
                     <Route path="/admin" element={<AdminPage />} />
                 </Routes>
                 <SpinnerBtn />

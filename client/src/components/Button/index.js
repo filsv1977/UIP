@@ -1,50 +1,25 @@
-import React from 'react';
-import useAssignmentFilterActions from '../../hooks/useAssignmentFilterActions';
+import React, {useState} from 'react';
+import useAssignmentActions from '../../hooks/useAssignmentActions';
 import {Button, Stack} from 'react-bootstrap';
 import {useTasks} from '../../Context/reducer';
-import {fetchData} from '../../api/fetchData';
-import {logOut} from '../../api/logout';
-import {useNavigate} from 'react-router-dom';
-import {exportDB} from '../../api/getDB';
 
 function AssignmentFilterButtonsActions() {
-    const {assignmentFilterActions} = useAssignmentFilterActions();
-    const {state, dispatch} = useTasks();
-    const navigate = useNavigate();
-
-    const onLogout = () => {
-        logOut(dispatch).then(() => {
-            navigate('/');
-        });
-    };
-
-    const onExportDB = () => {
-        exportDB(dispatch);
-    };
+    const {state} = useTasks();
+    const {assignmentFilterActions} = useAssignmentActions(state.isAdmin);
+    const [active, setActive] = useState(0);
 
     return (
         <Stack className="mb-2" direction="horizontal" gap={2}>
             {assignmentFilterActions.map(x => (
                 <Button
                     key={x.id}
-                    onClick={() => fetchData(dispatch, x.id)}
-                    variant={x.button.variant(state.activeFilterBtn === x.id)}
+                    onClick={e => x.onClick(e, setActive)}
+                    variant={x.button.variant(active)}
                     size={'sm'}
                 >
                     {x.text}
                 </Button>
             ))}
-
-            {state.isAdmin && (
-                <Button type="button" className="btn btn-sm" onClick={onExportDB} variant={'outline-primary'}>
-                    Export
-                </Button>
-            )}
-            {state.isAdmin && (
-                <Button key={'logout'} onClick={onLogout} variant={'outline-secondary'} size={'sm'}>
-                    Logout
-                </Button>
-            )}
         </Stack>
     );
 }

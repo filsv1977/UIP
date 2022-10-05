@@ -2,6 +2,7 @@ import {useState} from 'react';
 
 export default function useEditButtonActions() {
     const [isEdit, setEdit] = useState(false);
+
     const filterAction = {
         OPEN: 0,
         SAVE: 1,
@@ -12,7 +13,7 @@ export default function useEditButtonActions() {
         {
             id: filterAction.OPEN,
             text: 'Edit',
-            onClick: (e, data, setEditRow, setRowId ) => {
+            onClick: (e, data, setEditRow, setRowId) => {
                 setRowId(data.id);
                 setEdit(true);
                 setEditRow(true);
@@ -35,14 +36,24 @@ export default function useEditButtonActions() {
             id: filterAction.CLOSE,
             text: 'Close',
             width: '50px',
-            onClick: (e, data, setEditRow, setRowId, onEditTask, setHours,setNickname, setWallet, setFormSubmitted) => {
+            onClick: (
+                e,
+                data,
+                setEditRow,
+                setRowId,
+                onEditTask,
+                setHours,
+                setNickname,
+                setWallet,
+                setFormSubmitted
+            ) => {
                 setRowId(null);
                 setEdit(false);
                 setEditRow(false);
-                setHours(0)
-                setNickname('')
-                setWallet('')
-                setFormSubmitted(true)
+                setHours(0);
+                setNickname('');
+                setWallet('');
+                setFormSubmitted(true);
             },
             variant: 'outline-primary',
             style: {marginLeft: '2px', width: '50px'}

@@ -4,10 +4,12 @@ import {actionTypes} from '../Context/actionTypes';
 
 axiosRetry(axios, {retries: 3});
 
-export const fetchData = async (dispatch, id = 0) => {
+export const fetchData = async (dispatch, id) => {
     try {
+        const url = id == null ? '/tasks' : `/tasks?closed=${id}`;
+
         dispatch({type: actionTypes.GET_TASKS});
-        await axios.get(`/tasks?closed=${id}`).then(result => {
+        await axios.get(url).then(result => {
             if (!result.data.success) throw new Error(result.data.message);
 
             dispatch({
