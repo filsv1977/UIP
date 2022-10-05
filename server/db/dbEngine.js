@@ -10,18 +10,22 @@ class DbEngine {
         this._load();
     }
 
-    addWebTaskInDb(tasks) {
-        tasks.forEach(elem => {
-            if (!this._db.some(item => item.name === elem.name)) {
-                this._insert({...TASK_TEMPLATE, ...elem});
-            }
-        });
+    addWebTaskInDb(tasksList) {
+        const tasks = [...tasksList];
 
         this._db.forEach(elem => {
-            if (!tasks.some(item => item.name === elem.name)) {
+            const index = tasks.findIndex(item => elem.name === item.name);
+            if (index > -1) {
+                elem = {...elem, ...tasks[index]};
+                tasks.splice(index, 1);
+            } else {
                 elem.deleted = true;
-                this._save();
             }
+            this._save();
+        });
+
+        tasks.forEach(elem => {
+            this._insert({...TASK_TEMPLATE, ...elem});
         });
     }
 
@@ -31,6 +35,10 @@ class DbEngine {
 
     _getIndex(id) {
         return this._db.findIndex(item => +item.id === +id);
+    }
+
+    _getIndexByTaskName(name) {
+        return this._db.findIndex(item => item.name === name);
     }
 
     _insert(data) {
@@ -46,7 +54,7 @@ class DbEngine {
     }
 
     select() {
-        return {success: true, data: this._db};
+        return {success: true, data: this._db.filter(item => !item.deleted)}; //.filter(item => !item.deleted)
     }
 
     _selectById(id) {

@@ -13,8 +13,8 @@ function App() {
             <div className="d-flex flex-column min-vh-100 px-2 ">
                 <Routes>
                     <Route path="/" exact element={<Navigate to="/open" replace />} />
-                    <Route path="/open" exact element={<HomePage implemented={false} />} />
-                    <Route path="/implemented" exact element={<HomePage implemented={true} />} />
+                    <Route path="/open" element={<HomePage implemented={0} />} />
+                    <Route path="/implemented" exact element={<HomePage implemented={1} />} />
                     <Route path="/admin" element={<AdminPage />} />
                 </Routes>
                 <SpinnerBtn />
