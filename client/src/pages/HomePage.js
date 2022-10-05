@@ -13,7 +13,7 @@ function HomePage({implemented}) {
         fetchData(dispatch, implemented);
     }, []);
 
-    return <Content isAdmin={isAdmin} implemented={implemented} />;
+    return <Content isAdmin={isAdmin} />;
 }
 
 export default HomePage;
