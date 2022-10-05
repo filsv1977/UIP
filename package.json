@@ -22,14 +22,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.12",
     "config": "^3.3.8",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.1",
     "md5": "^2.3.0",
-    "morgan": "~1.9.1",
-    "axios": "^0.27.2",
-    "dotenv": "^16.0.3"
+    "morgan": "~1.9.1"
   },
   "devDependencies": {
     "concurrently": "^5.0.0",
