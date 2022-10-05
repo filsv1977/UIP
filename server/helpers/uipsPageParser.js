@@ -7,9 +7,9 @@ const TASKS_LIST_URL = `${GIT_URL}SilentNotaryEcosystem/UIPS/`;
 
 export const getTaskListFromWeb = async () => {
     try {
-        const res = await axios.get(TASKS_LIST_URL);
+        const result = await axios.get(TASKS_LIST_URL);
 
-        const tasksData = res.data.match(/Sil.*mediawiki(?=<)/g);
+        const tasksData = result.data.match(/Sil.*mediawiki(?=<)/g);
         let tasks = tasksData.map(e => {
             let urlAndName = e.split('">');
             return {
