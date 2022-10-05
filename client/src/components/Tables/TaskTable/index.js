@@ -20,7 +20,6 @@ function TasksTable() {
             <td>{task.ubxPrice}</td>
             <td>{task.usdtPrice}</td>
             <td>{task.performer.nickname}</td>
-            <td>{task.performer.walletAddress}</td>
         </tr>
     ));
 
@@ -36,7 +35,6 @@ function TasksTable() {
                         <th scope="col">Cost in UBX</th>
                         <th scope="col">Cost in USDT</th>
                         <th scope="col">Nickname</th>
-                        <th scope="col">Wallet</th>
                     </tr>
                 </thead>
                 <tbody>{generateTable}</tbody>

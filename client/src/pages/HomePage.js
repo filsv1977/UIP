@@ -9,11 +9,10 @@ function HomePage({implemented}) {
     } = useTasks();
 
     useEffect(() => {
-        console.log(111, implemented)
         fetchData(dispatch, implemented);
     }, []);
 
-    return <Content isAdmin={isAdmin} implemented={implemented} />;
+    return <Content isAdmin={isAdmin} />;
 }
 
 export default HomePage;
