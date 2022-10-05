@@ -3,6 +3,6 @@ import list from './list.js';
 
 const router = Router();
 
-router.get('/tasks', list);
+router.get('/', list);
 
 export default router;
