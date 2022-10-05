@@ -7,14 +7,27 @@ import {TasksContextProvider} from './Context/reducer';
 import SpinnerBtn from './components/Spinner';
 import './App.css';
 
+function PrivateRoute({ children, ...rest }) {
+    let auth = useAuth();
+    return (
+      <Route
+        {...rest}
+        render={() => isAdmin()
+          ? children
+          : <Redirect to="/login" />
+        }
+      />
+    );
+}
+
 function App() {
     return (
         <TasksContextProvider>
             <div className="d-flex flex-column min-vh-100 px-2 ">
                 <Routes>
                     <Route path="/" exact element={<Navigate to="/open" replace />} />
-                    <Route path="/open" element={<HomePage implemented={false} />} />
-                    <Route path="/implemented" exact element={<HomePage implemented={true} />} />
+                    <Route path="/open" element={<HomePage implemented={0} />} />
+                    <Route path="/implemented" exact element={<HomePage implemented={1} />} />
                     <Route path="/admin" element={<AdminPage />} />
                 </Routes>
                 <SpinnerBtn />

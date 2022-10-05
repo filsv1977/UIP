@@ -22,10 +22,6 @@ export const TasksContextProvider = ({children}) => {
         return () => clearInterval(intervalId);
     }, [state]);
 
-    useEffect(() => {
-        fetchData(dispatch, state.activeFilterBtn);
-    }, []);
-
     return <ContextApp.Provider value={{state, dispatch}}>{children}</ContextApp.Provider>;
 };
 
