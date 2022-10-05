@@ -6,16 +6,19 @@ const list = async (req, res) => {
     try {
         const answer = DB.select();
 
-        let isImplemented = item => {
-            return implemented === undefined || item.performer.nickname !== '' || item.implemented;
+        let filter = item => {
+            if (implemented === undefined) return true;
+
+            let closed = item.performer.nickname !== '' || item.implemented;
+            if (+implemented) return closed;
+            return !closed;
         };
 
         const data = [];
 
         answer.data.forEach(item => {
-            if (+implemented ? isImplemented(item) : !isImplemented(item)) {
+            if (filter(item)) {
                 let x = JSON.parse(JSON.stringify(item));
-                delete x.performer.walletAddress;
                 data.push(x);
             }
         });

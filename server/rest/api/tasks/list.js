@@ -1,4 +1,5 @@
 import {DB} from '../../../index.js';
+// import {isAdmin} from "../../../strategies/isAdmin.js";
 
 const list = async (req, res) => {
     let {implemented} = req.query;
@@ -10,8 +11,7 @@ const list = async (req, res) => {
             if (implemented === undefined) return true;
 
             let closed = item.performer.nickname !== '' || item.implemented;
-
-            if (implemented) return closed;
+            if (+implemented) return closed;
             return !closed;
         };
 

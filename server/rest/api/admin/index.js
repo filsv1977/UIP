@@ -9,7 +9,7 @@ const router = Router();
 
 router.patch('/tasks/:id', patchTask);
 
-router.patch('/tasks', list);
+router.patch('/', list);
 
 router.get('/export', exportTasks);
 
