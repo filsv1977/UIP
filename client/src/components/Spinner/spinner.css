@@ -1,14 +1,17 @@
-.spinner {
-    position: absolute;
-    right: 50vw;
-    bottom: 50vh;
-    z-index: 9000;
+.background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    padding-top: 50px;
+    left: 0;
+    display: inline-block;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #ffffff;
 }
 
-topIndex {
-    z-index: 9000;
-    opacity: 0.1;
-    position: absolute;
-    width: 90vw;
-    height: 100vh;
+.caption {
+    margin-left: 5px;
 }

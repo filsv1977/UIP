@@ -124,8 +124,6 @@ function AdminTasksTable() {
 
     return (
         <div className={'table-responsive'}>
-            {state.isLoading && <SpinnerBtn />}
-            {state.error && <Error message={state.error} />}
             <Table className="align-middle" hover data-click-to-select="true">
                 <thead>
                     <tr>
@@ -138,7 +136,9 @@ function AdminTasksTable() {
                         <th scope="col">Edit</th>
                     </tr>
                 </thead>
+                <SpinnerBtn />
                 <tbody>{generateTable}</tbody>
+                {state.error && <Error message={state.error} />}
             </Table>
         </div>
     );

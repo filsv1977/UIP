@@ -1,7 +1,7 @@
 import {Button, Spinner} from 'react-bootstrap';
-import './spinner.css';
 import {useTasks} from '../../Context/reducer';
 import {useEffect, useState} from 'react';
+import './spinner.css';
 
 function SpinnerBtn() {
     const {
@@ -28,11 +28,13 @@ function SpinnerBtn() {
     return (
         <>
             {show && (
-                <div className="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center overflow-hidden">
-                    <Button variant="primary" disabled>
-                        <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
-                        Loading...
-                    </Button>
+                <div className="background">
+                    <div className="spinner">
+                        <Button variant="primary" disabled>
+                            <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
+                            <span className="caption">Loading...</span>
+                        </Button>
+                    </div>
                 </div>
             )}
         </>
