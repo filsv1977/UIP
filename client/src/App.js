@@ -7,19 +7,6 @@ import {TasksContextProvider} from './Context/reducer';
 import SpinnerBtn from './components/Spinner';
 import './App.css';
 
-function PrivateRoute({ children, ...rest }) {
-    let auth = useAuth();
-    return (
-      <Route
-        {...rest}
-        render={() => isAdmin()
-          ? children
-          : <Redirect to="/login" />
-        }
-      />
-    );
-}
-
 function App() {
     return (
         <TasksContextProvider>
