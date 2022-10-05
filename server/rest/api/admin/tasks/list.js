@@ -1,4 +1,4 @@
-import {DB} from '../../../index.js';
+import {DB} from '../../../../index.js';
 
 const list = async (req, res) => {
     let {implemented} = req.query;
@@ -6,19 +6,14 @@ const list = async (req, res) => {
     try {
         const answer = DB.select();
 
-        let filter = item => {
-            if (implemented === undefined) return true;
-
-            let closed = item.performer.nickname !== '' || item.implemented;
-
-            if (implemented) return closed;
-            return !closed;
+        let isImplemented = item => {
+            return implemented === undefined || item.performer.nickname !== '' || item.implemented;
         };
 
         const data = [];
 
         answer.data.forEach(item => {
-            if (filter(item)) {
+            if (+implemented ? isImplemented(item) : !isImplemented(item)) {
                 let x = JSON.parse(JSON.stringify(item));
                 delete x.performer.walletAddress;
                 data.push(x);

@@ -11,5 +11,6 @@ export const TASK_TEMPLATE = {
         nickname: '',
         walletAddress: ''
     },
+    implemented: false,
     deleted: false
 };

@@ -3,10 +3,13 @@ import patchTask from './tasks/update.js';
 import logon from './auth/logon.js';
 import logoff from './auth/logoff.js';
 import exportTasks from './export.js';
+import list from './tasks/list.js';
 
 const router = Router();
 
 router.patch('/tasks/:id', patchTask);
+
+router.patch('/tasks', list);
 
 router.get('/export', exportTasks);
 
