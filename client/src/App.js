@@ -14,7 +14,6 @@ function App() {
                 <Routes>
                     <Route path="/" exact element={<HomePage />} />
                     <Route path="/admin" element={<AdminPage />} />
-                    <Route path="/tasks" element={<HomePage />} />
                 </Routes>
                 <SpinnerBtn />
                 <Footer />
