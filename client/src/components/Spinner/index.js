@@ -30,13 +30,13 @@ function SpinnerBtn() {
       {show && (
         <div
           className="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center">
-          <div className="spinner-border" role="status">
+          {/*<div className="spinner-border" role="status">*/}
             <Button variant="primary" disabled>
               <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true"/>
               Loading...
             </Button>
 
-          </div>
+          {/*</div>*/}
         </div>
       )}
     </>
