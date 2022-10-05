@@ -1,17 +1,20 @@
+import * as dotenv from 'dotenv';
 import express from 'express';
-import config from 'config';
 import logger from 'morgan';
 import DbEngine from './db/dbEngine.js';
 import restRoutes from './rest/index.js';
 import cors from 'cors';
-import {loadDB} from './helpers/db.js';
 import {getTaskListFromWeb} from './helpers/uipsPageParser.js';
 import {startSchedulerGetTasks} from './utils/shedullerGetTask.js';
+import {getExchangeUbx} from './helpers/getExchangeUbx.js';
+import {DB_FILE_NAME} from './db/consts.js';
 
-export const DB = new DbEngine();
+export const DB = new DbEngine(DB_FILE_NAME);
 
-loadDB();
+dotenv.config();
+
 getTaskListFromWeb();
+getExchangeUbx();
 startSchedulerGetTasks();
 
 const app = express();
@@ -20,9 +23,18 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+    app.use('/admin', express.static('client/build'));
+    app.use('/open', express.static('client/build'));
+    app.use('/implemented', express.static('client/build'));
+}
+
 restRoutes(app);
 
-const serverPort = config.get('server.port');
+const serverPort = process.env.PORT || 4000;
+export const PASSWORD = process.env.PASSWORD;
+export const LOGIN = process.env.LOGIN;
 
 app.listen(serverPort, () => {
     console.log(`Example app listening on port ${serverPort}!`);

@@ -1,79 +1,113 @@
 import {TASK_TEMPLATE} from './consts.js';
-import {saveDB} from '../helpers/db.js';
+import fs from 'fs';
 
 class DbEngine {
-    _db;
+    _db = [];
+    _dbPath;
 
-    constructor() {
-        this._db = [];
+    constructor(path) {
+        this._dbPath = path;
+        this._load();
     }
 
-    initDbFromDile(data) {
-        this._db = data;
-    }
+    addWebTaskInDb(tasksList) {
+        const tasks = [...tasksList];
 
-    addWebTaskInDb(tasks) {
-        tasks.forEach(elem => {
-            if (!this._db.some(item => item.name === elem.name)) {
-                this.insert({...TASK_TEMPLATE, ...elem});
+        this._db.forEach(elem => {
+            const index = tasks.findIndex(item => elem.name === item.name);
+            if (index > -1) {
+                elem = {...elem, ...tasks[index]};
+                tasks.splice(index, 1);
+            } else {
+                elem.deleted = true;
             }
+            this._save();
+        });
+
+        tasks.forEach(elem => {
+            this._insert({...TASK_TEMPLATE, ...elem});
         });
     }
 
-    getNewId() {
+    _getNewId() {
         return this._db.length ? this._db.at(-1).id + 1 : 0;
     }
 
-    getIndex(id) {
+    _getIndex(id) {
         return this._db.findIndex(item => +item.id === +id);
     }
 
-    insert(data) {
+    _getIndexByTaskName(name) {
+        return this._db.findIndex(item => item.name === name);
+    }
+
+    _insert(data) {
         try {
-            data.id = this.getNewId();
+            data.id = this._getNewId();
             this._db.push(data);
-            saveDB(this._db);
+            this._save();
             return true;
-        } catch (e) {
-            return false;
+        } catch (error) {
+            console.error(error);
+            return {success: false, message: `Task not added`};
         }
     }
 
     select() {
-        try {
-            return this._db;
-        } catch (e) {
-            return false;
-        }
+        return {success: true, data: this._db.filter(item => !item.deleted)}; //.filter(item => !item.deleted)
     }
 
-    selectById = id => {
-        let index = this.getIndex(id);
+    _selectById(id) {
+        let index = this._getIndex(id);
         if (index > -1) {
-            return this._db[index];
+            return {success: true, data: this._db[index]};
         }
-        return false;
-    };
+        return {success: false, message: `Task with id=${id} not found`};
+    }
 
-    update = (id, data) => {
-        let index = this.getIndex(id);
+    update(id, data) {
+        let index = this._getIndex(id);
         if (index > -1) {
-            this._db[index] = {id, ...data};
-            saveDB(this._db);
-            return true;
+            this._db[index] = {...this._db[index], ...data};
+            this._save();
+            return {success: true, data: this._db[index]};
         }
-        return false;
-    };
+        return {success: false, message: `Task with id=${id} not found`};
+    }
 
-    delete = id => {
-        let index = this.getIndex(id);
+    _delete(id) {
+        let index = this._getIndex(id);
         if (index > -1) {
             this._db.splice(index, 1);
-            saveDB(this._db);
-            return true;
+            this._save();
+            return {success: true};
         }
-        return false;
-    };
+        return {success: false, message: `Task with id=${id} not found`};
+    }
+
+    _load() {
+        fs.readFile(this._dbPath, 'utf8', (error, data) => {
+            if (error) {
+                console.error(error);
+                return;
+            }
+
+            try {
+                this.addWebTaskInDb(JSON.parse(data));
+            } catch (error) {
+                this._db = [];
+                console.error(error);
+            }
+        });
+    }
+
+    _save() {
+        fs.writeFile(this._dbPath, JSON.stringify(this._db), error => {
+            if (error) {
+                console.error(error);
+            }
+        });
+    }
 }
 
 export default DbEngine;

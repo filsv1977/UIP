@@ -1,7 +1,9 @@
 import React from 'react';
-import TasksList from '../TasksList';
+import AdminTasksTable from '../Tables/AdminTaskTable';
+import TasksTable from '../Tables/TaskTable';
+import AssignmentFilterButtonsActions from '../Button';
 
-function Content() {
+function Content({isAdmin}) {
     return (
         <main role="main" className="pb-3">
             <div className="text-center">
@@ -18,9 +20,8 @@ function Content() {
                     Interested developers can apply to implement certain UIPs.
                 </p>
             </div>
-            <div className="text-center">
-                <TasksList />
-            </div>
+            <AssignmentFilterButtonsActions />
+            <div className="text-center">{isAdmin ? <AdminTasksTable /> : <TasksTable />}</div>
         </main>
     );
 }

@@ -5,9 +5,12 @@ export const TASK_TEMPLATE = {
     url: '',
     name: '',
     estimationHours: 0,
-    cost: 0,
+    ubxPrice: 0,
+    usdtPrice: 0,
     performer: {
         nickname: '',
         walletAddress: ''
-    }
+    },
+    implemented: false,
+    deleted: false
 };

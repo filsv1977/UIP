@@ -41,7 +41,6 @@ body {
     margin-bottom: 60px;
 }
 
-.row-select {
-    background-color: lightskyblue;
-    color: white;
+.invalidForm {
+    border-color: red;
 }

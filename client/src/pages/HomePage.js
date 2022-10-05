@@ -1,16 +1,12 @@
-import React, {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
-import {fetchData} from "../redux/tasks/fetchData";
-import Content from "../components/Content";
+import React from 'react';
+import Content from '../components/Content';
+import {useTasks} from '../Context/reducer';
 
-
-function HomePage() {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchData());
-    }, []);
-
-    return <Content />;
+function HomePage({implemented}) {
+    const {
+        state: {isAdmin = false}
+    } = useTasks();
+    return <Content isAdmin={isAdmin} implemented={implemented} />;
 }
 
 export default HomePage;
