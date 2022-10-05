@@ -26,6 +26,7 @@ app.use(express.urlencoded({extended: false}));
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
     app.use('/admin', express.static('client/build'));
+    app.use('/tasks', express.static('client/build'));
 }
 
 restRoutes(app);

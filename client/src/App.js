@@ -12,7 +12,7 @@ function App() {
         <TasksContextProvider>
             <div className="d-flex flex-column min-vh-100 px-2 ">
                 <Routes>
-                    <Route path="/" exact element={<HomePage />} />
+                    <Route path="/tasks" exact element={<HomePage />} />
                     <Route path="/admin" element={<AdminPage />} />
                 </Routes>
                 <SpinnerBtn />
