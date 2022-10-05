@@ -44,7 +44,7 @@ function AdminTasksTable() {
         <tr key={task.id}>
             <td>
                 {
-                    <a href={task.url} target="_blank">
+                    <a href={task.url} target="_blank" rel="noreferrer">
                         {task.name}
                     </a>
                 }

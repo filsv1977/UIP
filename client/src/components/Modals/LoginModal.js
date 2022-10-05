@@ -20,7 +20,7 @@ function LoginModal({show, handleClose}) {
 
     useEffect(() => {
         if (state.isAdmin) handleClose();
-    }, [state.isAdmin]);
+    }, [state.isAdmin, handleClose]);
 
     const handleSubmit = e => {
         e.preventDefault();
