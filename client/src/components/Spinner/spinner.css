@@ -2,4 +2,13 @@
     position: absolute;
     right: 50vw;
     bottom: 50vh;
+    z-index: 9000;
+}
+
+topIndex{
+    z-index: 9000;
+    opacity: 0.1;
+    position: absolute;
+    width: 90vw;
+    height: 100vh;
 }
