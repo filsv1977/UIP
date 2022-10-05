@@ -11,7 +11,7 @@ function AdminTasksTable() {
     const {state, dispatch} = useTasks();
     const [editRow, setEditRow] = useState(false);
     const [rowId, setRowId] = useState(null);
-    const [formSubmitted, setFormSubmitted] = useState(false);
+    const [formSubmitted, setFormSubmitted] = useState(true);
 
     const [estimationHours, setHours] = useState(0);
     const [nickname, setNickname] = useState('');
@@ -40,7 +40,9 @@ function AdminTasksTable() {
         setHours(+e.target.value);
     };
 
-    const generateTable = (state?.tasks || []).map(task => (
+  console.log(state?.tasks)
+
+  const generateTable = (state?.tasks || []).map(task => (
         <tr key={task.id}>
             <td>
                 {
@@ -62,7 +64,7 @@ function AdminTasksTable() {
                             defaultValue={task.estimationHours}
                             onChange={onSetHours}
                             type={'number'}
-                            isInvalid={+estimationHours < 0}
+                            isInvalid={estimationHours<0 || +estimationHours < 0}
                         />
                         <Form.Control.Feedback type="invalid" />
                     </>
@@ -111,6 +113,10 @@ function AdminTasksTable() {
                             setRowId={setRowId}
                             onEditTask={onEditTask}
                             formSubmitted={formSubmitted}
+                            setHours={setHours}
+                            setNickname={setNickname}
+                            setWallet={setWallet}
+                            setFormSubmitted={setFormSubmitted}
                         />
                     </div>
                 }
