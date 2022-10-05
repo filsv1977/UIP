@@ -6,7 +6,7 @@ import {fetchData} from "../api/fetchData";
 
 function AdminPage() {
     const {
-        state: {isAdmin = false}
+        state: {isAdmin = false}, dispatch
     } = useTasks();
     const [visible, setVisible] = useState(false);
 
