@@ -7,6 +7,7 @@ import {useTasks} from '../../Context/reducer';
 import {useNavigate} from 'react-router-dom';
 import Error from '../Error';
 import {actionTypes} from '../../Context/actionTypes';
+import './loginModal.css';
 
 function LoginModal({show, handleClose}) {
     const [login, setLogin] = useState('');
@@ -35,7 +36,7 @@ function LoginModal({show, handleClose}) {
     };
 
     return (
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} className="modal-backdrop">
             <Modal.Header closeButton>
                 <Modal.Title>Authorization</Modal.Title>
             </Modal.Header>
