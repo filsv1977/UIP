@@ -1,4 +1,4 @@
-import {Button, Spinner} from 'react-bootstrap';
+import {Spinner} from 'react-bootstrap';
 import {useTasks} from '../../Context/reducer';
 import {useEffect, useState} from 'react';
 import './spinner.css';
@@ -28,14 +28,12 @@ function SpinnerBtn() {
     return (
         <>
             {show && (
-                <div className="background">
-                    <div className="spinner">
-                        <Button variant="primary" disabled>
-                            <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
-                            <span className="caption">Loading...</span>
-                        </Button>
+                <>
+                    <div className="background">
+                        <Spinner animation="border" variant="primary" />
                     </div>
-                </div>
+                    <div className="backgroundAll"></div>
+                </>
             )}
         </>
     );

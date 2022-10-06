@@ -10,8 +10,22 @@
     justify-content: center;
     overflow: hidden;
     background-color: #ffffff;
+    z-index: 2;
 }
 
 .caption {
     margin-left: 5px;
+}
+
+.backgroundAll {
+    width: 100%;
+    height: 100%;
+    background-color: #ec7e7e;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
 }
