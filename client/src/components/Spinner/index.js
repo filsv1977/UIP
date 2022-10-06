@@ -1,6 +1,7 @@
-import {Button, Spinner} from 'react-bootstrap';
 import {useTasks} from '../../Context/reducer';
 import {useEffect, useState} from 'react';
+import {FadeLoader} from 'react-spinners';
+import './spinner.css';
 
 function SpinnerBtn() {
     const {
@@ -27,12 +28,11 @@ function SpinnerBtn() {
     return (
         <>
             {show && (
-                <div className="position-absolute w-100 h-100 d-flex flex-column align-items-center bg-white justify-content-center overflow-hidden">
-                    <Button variant="primary" disabled>
-                        <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true" />
-                        Loading...
-                    </Button>
-                </div>
+                <>
+                    <div className="background"></div>
+                    <FadeLoader className="spinner" color="#0dcaf0" width={5} speedMultiplier={2} />
+                    <div className="backgroundAll"></div>
+                </>
             )}
         </>
     );

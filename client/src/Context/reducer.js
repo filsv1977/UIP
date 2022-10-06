@@ -17,7 +17,7 @@ export const TasksContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(taskReducer, initialState);
 
     useEffect(() => {
-        const intervalId = setInterval(() => fetchData(dispatch, state.activeFilterBtn), 300000);
+        const intervalId = setInterval(() => fetchData(dispatch, state.activeFilterBtn, false), 300000);
 
         return () => clearInterval(intervalId);
     }, [state]);
@@ -30,7 +30,7 @@ export const taskReducer = (state, action) => {
         case actionTypes.GET_TASKS:
             return {
                 ...state,
-                isLoading: true
+                isLoading: action.noSetLoading
             };
         case actionTypes.GET_TASKS_SUCCESS: {
             return {
