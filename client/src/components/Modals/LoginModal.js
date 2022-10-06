@@ -66,10 +66,10 @@ function LoginModal({show, handleClose}) {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-secondary" onClick={onHandleClose}>
-                    Close
+                    Cancel
                 </Button>
                 <Button variant="outline-primary" type="submit" form="myForm">
-                    Enter
+                    Submit
                 </Button>
             </Modal.Footer>
         </Modal>

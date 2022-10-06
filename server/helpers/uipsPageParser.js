@@ -32,6 +32,12 @@ export const getTaskStatuses = async tasks => {
             await axios.get(tasksList[i].url).then(result => {
                 const $ = cheerio.load(result.data);
                 tasksList[i].implemented = $('#user-content-status').parent().next().text().trim() === 'Implemented';
+
+                let title = $('pre').text();
+                let name = title.match(/(?<=Title:).*/);
+                if (name !== null) {
+                    tasksList[i].name = name[0].trim();
+                }
             });
         }
     } catch (error) {
