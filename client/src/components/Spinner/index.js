@@ -1,6 +1,6 @@
-import {Spinner} from 'react-bootstrap';
 import {useTasks} from '../../Context/reducer';
 import {useEffect, useState} from 'react';
+import {FadeLoader} from 'react-spinners';
 import './spinner.css';
 
 function SpinnerBtn() {
@@ -29,9 +29,8 @@ function SpinnerBtn() {
         <>
             {show && (
                 <>
-                    <div className="background">
-                        <Spinner animation="border" variant="primary" />
-                    </div>
+                    <div className="background"></div>
+                    <FadeLoader className="spinner" color="#0dcaf0" width={5} speedMultiplier={2} />
                     <div className="backgroundAll"></div>
                 </>
             )}
