@@ -17,6 +17,7 @@
     z-index: 3;
     left: 50vw !important;
     margin-top: 10px;
+    transform: scale(0.7);
 }
 
 .backgroundAll {
