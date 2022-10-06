@@ -4,7 +4,6 @@ import HomePage from './pages/HomePage';
 import AdminPage from './pages/AdminPage';
 import Footer from './components/Footer';
 import {TasksContextProvider} from './Context/reducer';
-import './App.css';
 
 function App() {
     return (
