@@ -1,5 +1,4 @@
 import {Button, Spinner} from 'react-bootstrap';
-import './spinner.css';
 import {useTasks} from '../../Context/reducer';
 import {useEffect, useState} from 'react';
 

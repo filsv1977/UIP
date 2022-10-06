@@ -26,12 +26,13 @@ function AdminTasksTable() {
             walletAddress: wallet || editData.performer.walletAddress
         };
 
-        editTask(newData, dispatch);
-        setRowId(null);
-        setEditRow(false);
-        setHours(0);
-        setNickname('');
-        setWallet('');
+        editTask(newData, dispatch).then(_=>{
+          setRowId(null);
+          setEditRow(false);
+          setHours(0);
+          setNickname('');
+          setWallet('');
+        });
     };
 
     const onSetHours = e => {
