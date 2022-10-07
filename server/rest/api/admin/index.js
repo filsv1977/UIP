@@ -12,7 +12,7 @@ router.patch('/tasks/:id', patchTask);
 
 router.get('/export', exportTasks);
 
-router.get('/convert', isAdmin, convertParams);
+router.get('/convert', convertParams);
 
 router.post('/auth/logon', logon);
 

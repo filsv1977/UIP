@@ -5,6 +5,7 @@ import {editTask} from '../../../api/editTask';
 import Error from '../../Error';
 import SpinnerBtn from '../../Spinner';
 import EditComponent from '../../EditComponent';
+import {actionTypes} from '../../../Context/actionTypes';
 
 function AdminTasksTable() {
     const style = {width: '15vw'};
@@ -35,10 +36,23 @@ function AdminTasksTable() {
         });
     };
 
-    const onSetHours = e => {
+    const onSetHours = (e, id) => {
         const isValid = e.target.value > 0;
         setFormSubmitted(isValid);
         setHours(+e.target.value);
+
+        const {rate, ubx2usdt} = state.currentExchange;
+
+        dispatch({
+            type: actionTypes.SET_COST_VALUES,
+            payload: {
+                id,
+                data: {
+                    rate: rate * +e.target.value,
+                    ubx2usdt: +(ubx2usdt * rate * +e.target.value).toFixed(2)
+                }
+            }
+        });
     };
 
     const generateTable = (state?.tasks || []).map(task => (
@@ -61,7 +75,7 @@ function AdminTasksTable() {
                             min="0"
                             aria-describedby="basic-addon1"
                             defaultValue={task.estimationHours}
-                            onChange={onSetHours}
+                            onChange={e => onSetHours(e, task.id)}
                             type={'number'}
                             isInvalid={estimationHours < 0 || +estimationHours < 0}
                         />

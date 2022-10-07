@@ -1,7 +1,10 @@
 import {useState} from 'react';
+import {getCurrentExchange} from '../api/getCurrentExchange';
+import {useTasks} from '../Context/reducer';
 
 export default function useEditButtonActions() {
     const [isEdit, setEdit] = useState(false);
+    const {dispatch} = useTasks();
 
     const filterAction = {
         OPEN: 0,
@@ -14,9 +17,11 @@ export default function useEditButtonActions() {
             id: filterAction.OPEN,
             text: 'Edit',
             onClick: (e, data, setEditRow, setRowId) => {
-                setRowId(data.id);
-                setEdit(true);
-                setEditRow(true);
+                getCurrentExchange(dispatch).then(_ => {
+                    setRowId(data.id);
+                    setEdit(true);
+                    setEditRow(true);
+                });
             },
             variant: 'outline-primary',
             style: {width: '100px'}

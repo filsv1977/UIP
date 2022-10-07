@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useReducer} from 'react';
 import {actionTypes} from './actionTypes';
-
 import {fetchData} from '../api/fetchData';
 
 export const initialState = {
@@ -8,7 +7,8 @@ export const initialState = {
     isAdmin: false,
     isLoading: false,
     error: '',
-    activeFilterBtn: 0
+    activeFilterBtn: 0,
+    currentExchange: {rate: 0, ubx2usdt: 0}
 };
 
 export const ContextApp = React.createContext();
@@ -42,6 +42,26 @@ export const taskReducer = (state, action) => {
             };
         }
         case actionTypes.GET_TASKS_FAILED: {
+            return {
+                ...state,
+                error: action.payload,
+                isLoading: false
+            };
+        }
+        case actionTypes.GET_EXCHANGE_RATE:
+            return {
+                ...state,
+                isLoading: action.noSetLoading
+            };
+        case actionTypes.GET_EXCHANGE_RATE_SUCCESS: {
+            return {
+                ...state,
+                currentExchange: action.payload,
+                isLoading: false,
+                error: false
+            };
+        }
+        case actionTypes.GET_EXCHANGE_RATE_FAILED: {
             return {
                 ...state,
                 error: action.payload,
@@ -102,6 +122,20 @@ export const taskReducer = (state, action) => {
                 ...state,
                 isAdmin: false,
                 error: action.payload
+            };
+        }
+
+        case actionTypes.SET_COST_VALUES: {
+            const {
+                id,
+                data: {rate, ubx2usdt}
+            } = action.payload;
+            let newData = (state.tasks || []).map(task =>
+                task.id === id ? {...task, ubxPrice: rate, usdtPrice: ubx2usdt} : task
+            );
+            return {
+                ...state,
+                tasks: newData
             };
         }
 
