@@ -1,7 +1,7 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import {actionTypes} from '../Context/actionTypes';
-import {fetchData} from "./fetchData";
+import {fetchData} from './fetchData';
 
 axiosRetry(axios, {retries: 3});
 

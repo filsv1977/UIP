@@ -5,7 +5,7 @@ import {useTasks} from '../Context/reducer';
 
 function AdminPage() {
     const {
-        state: {isAdmin = false},
+        state: {isAdmin = false}
     } = useTasks();
     const [visible, setVisible] = useState(false);
 
