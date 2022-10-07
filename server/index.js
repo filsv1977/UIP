@@ -1,4 +1,3 @@
-import * as dotenv from 'dotenv';
 import express from 'express';
 import logger from 'morgan';
 import DbEngine from './db/dbEngine.js';
@@ -10,8 +9,6 @@ import {getExchangeUbx} from './helpers/getExchangeUbx.js';
 import {DB_FILE_NAME} from './db/consts.js';
 
 export const DB = new DbEngine(DB_FILE_NAME);
-
-dotenv.config();
 
 getTaskListFromWeb();
 getExchangeUbx();
