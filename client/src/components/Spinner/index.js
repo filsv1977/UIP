@@ -16,7 +16,7 @@ function SpinnerBtn() {
             setShow(true);
             setTimeout(() => {
                 setIsEndTimer(true);
-            }, 400);
+            }, 40000);
         } else {
             if (isEndTimer) {
                 setShow(false);

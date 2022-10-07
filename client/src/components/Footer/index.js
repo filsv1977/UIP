@@ -1,8 +1,12 @@
 import React from 'react';
-import './footer.css';
 
 function Footer() {
-    return <footer className="container mt-auto footer">&copy; 2022 - ubix</footer>;
+    return(
+    <footer className="fixed-bottom">
+        <div className="text-center">
+           &copy; 2022 - ubix
+        </div>
+    </footer>)
 }
 
 export default Footer;
