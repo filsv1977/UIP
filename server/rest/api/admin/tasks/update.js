@@ -1,7 +1,6 @@
 import {DB} from '../../../../index.js';
 import {ubx2usdt} from '../../../../helpers/getExchangeUbx.js';
-
-const HOURLY_RATE = 431965;
+import {HOURLY_RATE} from '../../../../utils/globalVariables.js';
 
 const patchTask = async (req, res) => {
     let {body, params} = req;

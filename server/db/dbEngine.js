@@ -21,12 +21,13 @@ class DbEngine {
             } else {
                 elem.deleted = true;
             }
-            this._save();
         });
 
         tasks.forEach(elem => {
-            this._insert({...TASK_TEMPLATE, ...elem});
+            this._db.push({...TASK_TEMPLATE, ...elem, id: this._getNewId()});
         });
+
+        this._save();
     }
 
     _getNewId() {
