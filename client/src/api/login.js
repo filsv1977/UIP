@@ -1,6 +1,7 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import {actionTypes} from '../Context/actionTypes';
+import {fetchData} from "./fetchData";
 
 axiosRetry(axios, {retries: 3});
 
@@ -12,6 +13,7 @@ export const logIn = (body, dispatch) => {
                     type: actionTypes.LOGIN_ADMIN_SUCCESS,
                     payload: result.data.success
                 });
+                fetchData(dispatch, null);
             } else {
                 dispatch({
                     type: actionTypes.LOGIN_ADMIN_FAILED,
