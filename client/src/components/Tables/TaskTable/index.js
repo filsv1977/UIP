@@ -23,22 +23,34 @@ function TasksTable() {
         </tr>
     ));
 
+    let spinnerTh = {
+        fontSize: '1px',
+        lineHeight: 0,
+        padding: 0
+    };
+
     return (
         <div className={'table-responsive'}>
             <Table className="align-middle" hover data-click-to-select="true">
                 <thead>
                     <tr>
-                        <th scope="col">Task</th>
+                        <th className={'w-25'} scope="col">
+                            Task
+                        </th>
                         <th scope="col">Estimation hours</th>
                         <th scope="col">Cost in UBX</th>
                         <th scope="col">Cost in USDT</th>
                         <th scope="col">Nickname</th>
                     </tr>
+                    <tr>
+                        <th style={spinnerTh} scope="col" colSpan="5">
+                            <SpinnerBtn />
+                        </th>
+                    </tr>
                 </thead>
-                <SpinnerBtn />
                 <tbody>{generateTable}</tbody>
-                {state.error && <Error message={state.error} />}
             </Table>
+            {state.error && <Error message={state.error} />}
         </div>
     );
 }
