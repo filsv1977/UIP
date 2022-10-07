@@ -26,7 +26,7 @@ function TasksTable() {
     let spinnerTh = {
         fontSize: '1px',
         lineHeight: 0,
-        padding: 0
+        padding: 0,
     };
 
     return (
@@ -42,8 +42,8 @@ function TasksTable() {
                         <th scope="col">Cost in USDT</th>
                         <th scope="col">Nickname</th>
                     </tr>
-                    <tr className={"justify-content-center align-items-center" }>
-                        <th>
+                    <tr>
+                        <th className={"position-absolute w-0 h-50 d-flex flex-column align-items-center justify-content-center"} style={spinnerTh} scope="col" colSpan="5">>
                             <SpinnerBtn />
                         </th>
                     </tr>

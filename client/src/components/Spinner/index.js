@@ -29,9 +29,9 @@ function SpinnerBtn() {
         <>
             {show && (
                 <>
-                    <div className="background"></div>
+                    {/*<div className="background"></div>*/}
                     <FadeLoader className="spinner" color="#0dcaf0" width={5} height={20} speedMultiplier={2} />
-                    <div className="backgroundAll"></div>
+                    {/*<div className="backgroundAll"></div>*/}
                 </>
             )}
         </>
