@@ -36,7 +36,7 @@ function LoginModal({show, handleClose}) {
     };
 
     return (
-        <Modal show={show} onHide={handleClose} className="modal-backdrop">
+        <Modal show={show} onHide={onHandleClose} className="modal-backdrop">
             <Modal.Header closeButton>
                 <Modal.Title>Authorization</Modal.Title>
             </Modal.Header>

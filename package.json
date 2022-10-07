@@ -9,9 +9,9 @@
     "npm": "8.x"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "server": "node ./server/index.js",
     "client": "cd client && npm start",
+    "dev": "concurrently \"node ./server/index.js\" \"cd client && npm start\"",
     "start": "node ./server/index.js",
     "lint": "./node_modules/.bin/eslint './**/*.js'",
     "check": "npx prettier --check .",
@@ -28,8 +28,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "md5": "^2.3.0",
-    "morgan": "~1.9.1",
-    "react-spinners": "^0.13.5"
+    "morgan": "~1.9.1"
   },
   "devDependencies": {
     "concurrently": "^5.0.0",
