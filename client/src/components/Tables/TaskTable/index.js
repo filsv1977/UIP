@@ -42,8 +42,8 @@ function TasksTable() {
                         <th scope="col">Cost in USDT</th>
                         <th scope="col">Nickname</th>
                     </tr>
-                    <tr className={"justify-content-center align-items-center" }>
-                        <th>
+                    <tr className={'justify-content-center align-items-center'}>
+                        <th style={spinnerTh} scope="col" colSpan="5">
                             <SpinnerBtn />
                         </th>
                     </tr>
