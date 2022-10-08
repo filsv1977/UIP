@@ -158,13 +158,15 @@ function AdminTasksTable() {
                         <th scope="col">Wallet</th>
                         <th scope="col">Edit</th>
                     </tr>
-                    <tr>
-                        <th style={spinnerTh} scope="col" colSpan="5">
-                            <SpinnerBtn />
-                        </th>
-                    </tr>
                 </thead>
-                <tbody>{generateTable}</tbody>
+                <tbody>
+                    <tr>
+                        <td style={spinnerTh} scope="col" colSpan="7">
+                            <SpinnerBtn />
+                        </td>
+                    </tr>
+                    {generateTable}
+                </tbody>
             </Table>
             {state.error && <Error message={state.error} />}
         </div>

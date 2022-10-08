@@ -42,13 +42,15 @@ function TasksTable() {
                         <th scope="col">Cost in USDT</th>
                         <th scope="col">Nickname</th>
                     </tr>
-                    <tr className={'justify-content-center align-items-center'}>
-                        <th style={spinnerTh} scope="col" colSpan="5">
-                            <SpinnerBtn />
-                        </th>
-                    </tr>
                 </thead>
-                <tbody>{generateTable}</tbody>
+                <tbody>
+                    <tr className={'justify-content-center align-items-center'}>
+                        <td style={spinnerTh} scope="col" colSpan="5">
+                            <SpinnerBtn />
+                        </td>
+                    </tr>
+                    {generateTable}
+                </tbody>
             </Table>
             {state.error && <Error message={state.error} />}
         </div>

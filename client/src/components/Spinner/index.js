@@ -13,11 +13,13 @@ function SpinnerBtn() {
     let [show, setShow] = useState(false);
     let [isEndTimer, setIsEndTimer] = useState(false);
     const [pos, setPos] = useState(0);
+    const [bgHeight, setBgHeight] = useState(0);
 
     useEffect(() => {
         const {innerHeight: height} = window;
         if (refBg?.current?.offsetTop) {
             setPos((height - refBg.current.offsetTop) / 2 - 24);
+            setBgHeight(document.body.clientHeight - refBg.current.offsetTop);
         }
     }, [refBg?.current]);
 
@@ -40,7 +42,7 @@ function SpinnerBtn() {
             {show && (
                 <>
                     <div className="backgroundAll"></div>
-                    <div ref={refBg} className="background"></div>
+                    <div ref={refBg} className="background" style={{height: bgHeight}}></div>
                     <FadeLoader
                         style={{marginTop: pos}}
                         className="spinner"
