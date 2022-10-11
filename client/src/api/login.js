@@ -10,20 +10,20 @@ export const logIn = (body, dispatch) => {
         axios.post('/admin/auth/logon', body).then(result => {
             if (result.data.success) {
                 dispatch({
-                    type: actionTypes.LOGIN_ADMIN_SUCCESS,
+                    type: actionTypes.LOGIN_ADMIN.FULFILLED,
                     payload: result.data.success
                 });
                 fetchData(dispatch, null);
             } else {
                 dispatch({
-                    type: actionTypes.LOGIN_ADMIN_FAILED,
+                    type: actionTypes.LOGIN_ADMIN.REJECTED,
                     payload: 'Invalid username/password entered'
                 });
             }
         });
     } catch (e) {
         dispatch({
-            type: actionTypes.LOGIN_ADMIN_FAILED,
+            type: actionTypes.LOGIN_ADMIN.REJECTED,
             payload: e.message
         });
     }

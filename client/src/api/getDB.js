@@ -11,12 +11,12 @@ export const exportDB = async dispatch => {
             saveToFile('db.json', result.data);
 
             dispatch({
-                type: actionTypes.EXPORT_DB_SUCCESS
+                type: actionTypes.EXPORT_DB.FULFILLED
             });
         });
     } catch (e) {
         dispatch({
-            type: actionTypes.EXPORT_DB_FAILED,
+            type: actionTypes.EXPORT_DB.REJECTED,
             payload: 'Data export error'
         });
     }

@@ -10,13 +10,13 @@ export const editTask = async (body, dispatch) => {
             if (!result.data.success) throw new Error(result.data.message);
 
             dispatch({
-                type: actionTypes.EDIT_TASK_SUCCESS,
+                type: actionTypes.EDIT_TASK.FULFILLED,
                 payload: result.data.data
             });
         });
     } catch (e) {
         dispatch({
-            type: actionTypes.EDIT_TASK_FAILED,
+            type: actionTypes.EDIT_TASK.REJECTED,
             payload: e.message
         });
     }
