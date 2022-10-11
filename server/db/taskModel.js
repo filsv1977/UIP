@@ -1,5 +1,3 @@
-export const DB_FILE_NAME = './db/db.json';
-
 export const TASK_TEMPLATE = {
     id: 0,
     url: '',
@@ -9,7 +7,8 @@ export const TASK_TEMPLATE = {
     usdtPrice: 0,
     performer: {
         nickname: '',
-        walletAddress: ''
+        walletAddress: '',
+        hasImplementedByUbixTeam: false
     },
     implemented: false,
     deleted: false

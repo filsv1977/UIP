@@ -5,13 +5,10 @@ import restRoutes from './rest/index.js';
 import cors from 'cors';
 import {getTaskListFromWeb} from './helpers/uipsPageParser.js';
 import {startSchedulerGetTasks} from './utils/shedullerGetTask.js';
-import {getExchangeUbx} from './helpers/getExchangeUbx.js';
-import {DB_FILE_NAME} from './db/consts.js';
 
-export const DB = new DbEngine(DB_FILE_NAME);
+export const DB = new DbEngine(process.env.DB_FILE_NAME);
 
 getTaskListFromWeb();
-getExchangeUbx();
 startSchedulerGetTasks();
 
 const app = express();
@@ -30,8 +27,6 @@ if (process.env.NODE_ENV === 'production') {
 restRoutes(app);
 
 const serverPort = process.env.PORT || 4000;
-export const PASSWORD = process.env.PASSWORD;
-export const LOGIN = process.env.LOGIN;
 
 app.listen(serverPort, () => {
     console.log(`Example app listening on port ${serverPort}!`);
