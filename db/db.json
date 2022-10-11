@@ -3,13 +3,13 @@
         "id": 0,
         "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-1.mediawiki",
         "name": "Drop Outdatet Transactions from MemPool",
-        "estimationHours": 0,
-        "ubxPrice": 0,
-        "usdtPrice": 0,
+        "estimationHours": 1,
+        "ubxPrice": 431965,
+        "usdtPrice": 18.27,
         "performer": {
-            "nickname": "UBIX Team",
-            "walletAddress": "",
-            "hasImplementedByUbixTeam": true
+            "nickname": "test",
+            "walletAddress": "qiwi",
+            "hasImplementedByUbixTeam": false
         },
         "implemented": true,
         "deleted": false
@@ -37,9 +37,9 @@
         "ubxPrice": 0,
         "usdtPrice": 0,
         "performer": {
-            "nickname": "UBIX Team",
+            "nickname": "",
             "walletAddress": "",
-            "hasImplementedByUbixTeam": true
+            "hasImplementedByUbixTeam": false
         },
         "implemented": false,
         "deleted": false
@@ -52,9 +52,9 @@
         "ubxPrice": 0,
         "usdtPrice": 0,
         "performer": {
-            "nickname": "UBIX Team",
+            "nickname": "",
             "walletAddress": "",
-            "hasImplementedByUbixTeam": true
+            "hasImplementedByUbixTeam": false
         },
         "implemented": false,
         "deleted": false
