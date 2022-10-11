@@ -27,12 +27,12 @@ export const TasksContextProvider = ({children}) => {
 
 export const taskReducer = (state, action) => {
     switch (action.type) {
-        case actionTypes.GET_TASKS:
+        case actionTypes.GET_TASKS.PENDING:
             return {
                 ...state,
                 isLoading: action.noSetLoading
             };
-        case actionTypes.GET_TASKS_SUCCESS: {
+        case actionTypes.GET_TASKS.FULFILLED: {
             return {
                 ...state,
                 tasks: action.payload.data,
@@ -41,7 +41,7 @@ export const taskReducer = (state, action) => {
                 error: false
             };
         }
-        case actionTypes.GET_TASKS_FAILED: {
+        case actionTypes.GET_TASKS.REJECTED: {
             return {
                 ...state,
                 error: action.payload,
@@ -53,7 +53,7 @@ export const taskReducer = (state, action) => {
                 ...state,
                 isLoading: action.noSetLoading
             };
-        case actionTypes.GET_EXCHANGE_RATE_SUCCESS: {
+        case actionTypes.GET_EXCHANGE_RATE.FULFILLED: {
             return {
                 ...state,
                 currentExchange: action.payload,
@@ -61,7 +61,7 @@ export const taskReducer = (state, action) => {
                 error: false
             };
         }
-        case actionTypes.GET_EXCHANGE_RATE_FAILED: {
+        case actionTypes.GET_EXCHANGE_RATE.REJECTED: {
             return {
                 ...state,
                 error: action.payload,
@@ -69,7 +69,7 @@ export const taskReducer = (state, action) => {
             };
         }
 
-        case actionTypes.EDIT_TASK_SUCCESS: {
+        case actionTypes.EDIT_TASK.FULFILLED: {
             const {
                 id,
                 performer: {nickname}
@@ -87,21 +87,21 @@ export const taskReducer = (state, action) => {
                 error: false
             };
         }
-        case actionTypes.EDIT_TASK_FAILED: {
+        case actionTypes.EDIT_TASK.REJECTED: {
             return {
                 ...state,
                 error: action.payload
             };
         }
 
-        case actionTypes.LOGIN_ADMIN_SUCCESS: {
+        case actionTypes.LOGIN_ADMIN.FULFILLED: {
             return {
                 ...state,
                 isAdmin: true,
                 error: false
             };
         }
-        case actionTypes.LOGIN_ADMIN_FAILED: {
+        case actionTypes.LOGIN_ADMIN.REJECTED: {
             return {
                 ...state,
                 error: action.payload,
@@ -109,7 +109,7 @@ export const taskReducer = (state, action) => {
             };
         }
 
-        case actionTypes.LOGOUT_ADMIN: {
+        case actionTypes.LOGOUT_ADMIN.FULFILLED: {
             return {
                 ...state,
                 isAdmin: false,
@@ -117,7 +117,7 @@ export const taskReducer = (state, action) => {
             };
         }
 
-        case actionTypes.LOGOUT_ADMIN_FAILED: {
+        case actionTypes.LOGOUT_ADMIN.REJECTED: {
             return {
                 ...state,
                 isAdmin: false,

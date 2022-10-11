@@ -12,13 +12,13 @@ export const getCurrentExchange = async dispatch => {
             if (!result.data.success) throw new Error(result.data.message);
 
             dispatch({
-                type: actionTypes.GET_EXCHANGE_RATE_SUCCESS,
+                type: actionTypes.GET_EXCHANGE_RATE.FULFILLED,
                 payload: result.data.data
             });
         });
     } catch (e) {
         dispatch({
-            type: actionTypes.GET_EXCHANGE_RATE_FAILED,
+            type: actionTypes.GET_EXCHANGE_RATE.REJECTED,
             payload: e.message
         });
     }
