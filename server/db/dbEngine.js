@@ -1,16 +1,19 @@
-import {TASK_TEMPLATE} from './consts.js';
+import {TASK_TEMPLATE} from './taskModel.js';
 import fs from 'fs';
 
 class DbEngine {
-    _db = [];
-    _dbPath;
-
     constructor(path) {
+        if (typeof DbEngine.instance === 'object') {
+            return DbEngine.instance;
+        }
+
+        DbEngine.instance = this;
         this._dbPath = path;
         this._load();
+        return this;
     }
 
-    addWebTaskInDb(tasksList) {
+    loadUips(tasksList) {
         const tasks = [...tasksList];
 
         this._db.forEach(elem => {
@@ -28,6 +31,20 @@ class DbEngine {
         });
 
         this._save();
+    }
+
+    select() {
+        return {success: true, data: this._db.filter(item => !item.deleted)};
+    }
+
+    update(id, data) {
+        let index = this._getIndex(id);
+        if (index > -1) {
+            this._db[index] = {...this._db[index], ...data};
+            this._save();
+            return {success: true, data: this._db[index]};
+        }
+        return {success: false, message: `Task with id=${id} not found`};
     }
 
     _getNewId() {
@@ -54,23 +71,9 @@ class DbEngine {
         }
     }
 
-    select() {
-        return {success: true, data: this._db.filter(item => !item.deleted)}; //.filter(item => !item.deleted)
-    }
-
     _selectById(id) {
         let index = this._getIndex(id);
         if (index > -1) {
-            return {success: true, data: this._db[index]};
-        }
-        return {success: false, message: `Task with id=${id} not found`};
-    }
-
-    update(id, data) {
-        let index = this._getIndex(id);
-        if (index > -1) {
-            this._db[index] = {...this._db[index], ...data};
-            this._save();
             return {success: true, data: this._db[index]};
         }
         return {success: false, message: `Task with id=${id} not found`};
@@ -86,28 +89,22 @@ class DbEngine {
         return {success: false, message: `Task with id=${id} not found`};
     }
 
-    _load() {
-        fs.readFile(this._dbPath, 'utf8', (error, data) => {
-            if (error) {
-                console.error(error);
-                return;
-            }
-
-            try {
-                this.addWebTaskInDb(JSON.parse(data));
-            } catch (error) {
-                this._db = [];
-                console.error(error);
-            }
+    _save() {
+        fs.promises.writeFile(this._dbPath, JSON.stringify(this._db, null, 4)).catch(error => {
+            console.log(error);
         });
     }
 
-    _save() {
-        fs.writeFile(this._dbPath, JSON.stringify(this._db), error => {
-            if (error) {
-                console.error(error);
-            }
-        });
+    _load() {
+        fs.promises
+            .readFile(this._dbPath, 'utf8')
+            .then(result => {
+                this._db = JSON.parse(result);
+            })
+            .catch(error => {
+                this._db = [];
+                console.log(error);
+            });
     }
 }
 
