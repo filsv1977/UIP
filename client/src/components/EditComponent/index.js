@@ -13,7 +13,8 @@ function EditComponent({
     setHours,
     setNickname,
     setWallet,
-    setFormSubmitted
+    setFormSubmitted,
+    setTeam
 }) {
     const {editButtonActions, isEdit, filterAction} = useEditButtonActions();
 
@@ -37,7 +38,8 @@ function EditComponent({
                             setHours,
                             setNickname,
                             setWallet,
-                            setFormSubmitted
+                            setFormSubmitted,
+                            setTeam
                         )
                     }
                     variant={x.variant}

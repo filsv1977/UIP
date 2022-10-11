@@ -9,7 +9,7 @@ export const fetchData = async (dispatch, id, noSetLoading = true) => {
         const url = id == null ? '/tasks' : `/tasks?implemented=${id}`;
 
         dispatch({type: actionTypes.GET_TASKS.PENDING, noSetLoading});
-       await axios.get(url).then(result => {
+        await axios.get(url).then(result => {
             if (!result.data.success) throw new Error(result.data.message);
 
             dispatch({

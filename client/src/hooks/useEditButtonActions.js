@@ -16,11 +16,26 @@ export default function useEditButtonActions() {
         {
             id: filterAction.OPEN,
             text: 'Edit',
-            onClick: (e, data, setEditRow, setRowId) => {
+            onClick: (
+                e,
+                data,
+                setEditRow,
+                setRowId,
+                onEditTask,
+                setHours,
+                setNickname,
+                setWallet,
+                setFormSubmitted,
+                setTeam
+            ) => {
                 getCurrentExchange(dispatch).then(_ => {
                     setRowId(data.id);
                     setEdit(true);
                     setEditRow(true);
+                    setHours(data.estimationHours || 0);
+                    setNickname(data.performer?.nickname || '');
+                    setWallet(data.performer?.walletAddress || '');
+                    setTeam(data.performer?.hasImplementedByUbixTeam || false);
                 });
             },
             variant: 'outline-primary',

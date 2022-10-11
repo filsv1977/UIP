@@ -1,4 +1,4 @@
-import create from '../utils/createPromiseActionType'
+import create from '../utils/createPromiseActionType';
 
 export const actionTypes = {
     EDIT_TASK: create('EDIT_TASK'),

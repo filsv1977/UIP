@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {Table, Form, InputGroup} from 'react-bootstrap';
 import {useTasks} from '../../../Context/reducer';
 import {editTask} from '../../../api/editTask';
@@ -8,6 +8,7 @@ import EditComponent from '../../EditComponent';
 import {actionTypes} from '../../../Context/actionTypes';
 
 function AdminTasksTable() {
+    const inputRef = useRef(null);
     const style = {width: '15vw'};
     const {state, dispatch} = useTasks();
     const [editRow, setEditRow] = useState(false);
@@ -25,9 +26,16 @@ function AdminTasksTable() {
         let newData = {...editData};
         if (estimationHours) newData.estimationHours = Number(estimationHours);
         newData.performer = {
-            nickname: nickname || editData.performer.nickname,
-            walletAddress: wallet || editData.performer.walletAddress
+            nickname: nickname,
+            walletAddress: wallet,
+            hasImplementedByUbixTeam: teamBox
         };
+
+        if (teamBox) {
+            newData.estimationHours = 0;
+            newData.ubxPrice = 0;
+            newData.usdtPrice = 0;
+        }
 
         editTask(newData, dispatch).then(_ => {
             setRowId(null);
@@ -57,19 +65,19 @@ function AdminTasksTable() {
         });
     };
 
-    const setTeamWork = (e)=> {
-        console.log("UBIX Team", e.target.checked)
-
+    const setTeamWork = e => {
         if (e.target.checked) {
             setNickname('UBIX Team');
+            inputRef.current.value = 'UBIX Team';
             setWallet('');
-            setHours(0)
+            setHours(0);
         } else {
-            console.log('@@@@@ else')
+            setNickname('');
+            inputRef.current.value = '';
         }
 
-
-    }
+        setTeam(e.target.checked);
+    };
 
     const generateTable = (state?.tasks || []).map(task => (
         <tr key={task.id}>
@@ -106,15 +114,19 @@ function AdminTasksTable() {
             <td style={style}>
                 {editRow && +task.id === +rowId ? (
                     <InputGroup size={'sm'}>
-                        <InputGroup.Checkbox defaultValue={task.performer?.hasImplementedByUbixTeam || false} onChange={e => setTeamWork(e)} aria-label="Checkbox for following text input" />
-                    <Form.Control
-                        className="form-control form-control-sm"
-                        aria-label="Name"
-                        id={'nickname' + task.id}
-                        placeholder="Enter name"
-                        defaultValue={task.performer.nickname || ''}
-                        onChange={e => setNickname(e.target.value)}
-                    />
+                        <InputGroup.Checkbox
+                            defaultChecked={task.performer.hasImplementedByUbixTeam ? 'checked' : false}
+                            onChange={e => setTeamWork(e)}
+                        />
+                        <Form.Control
+                            ref={inputRef}
+                            className="form-control form-control-sm"
+                            aria-label="Name"
+                            id={'nickname' + task.id}
+                            placeholder="Enter name"
+                            value={nickname}
+                            onChange={e => setNickname(e.target.value)}
+                        />
                     </InputGroup>
                 ) : (
                     task.performer.nickname || ''
@@ -149,6 +161,7 @@ function AdminTasksTable() {
                             setNickname={setNickname}
                             setWallet={setWallet}
                             setFormSubmitted={setFormSubmitted}
+                            setTeam={setTeam}
                         />
                     </div>
                 }
