@@ -8,7 +8,9 @@ import EditComponent from '../../EditComponent';
 import {actionTypes} from '../../../Context/actionTypes';
 
 function AdminTasksTable() {
-    const inputRef = useRef(null);
+    const inputEstimationHoursRef = useRef(null);
+    const inputNicknameRef = useRef(null);
+    const inputWalletRef = useRef(null);
     const style = {width: '15vw'};
     const {state, dispatch} = useTasks();
     const [editRow, setEditRow] = useState(false);
@@ -30,6 +32,12 @@ function AdminTasksTable() {
             walletAddress: wallet,
             hasImplementedByUbixTeam: teamBox
         };
+
+        if(teamBox) {
+            newData.estimationHours = 0
+            newData.ubxPrice = 0
+            newData.usdtPrice = 0
+        }
 
         editTask(newData, dispatch).then(_ => {
             setRowId(null);
@@ -62,12 +70,14 @@ function AdminTasksTable() {
     const setTeamWork = e => {
         if (e.target.checked) {
             setNickname('UBIX Team');
-            inputRef.current.value = 'UBIX Team';
+            inputNicknameRef.current.value = 'UBIX Team';
+            inputWalletRef.current.value = '';
+            inputEstimationHoursRef.current.value = 0;
             setWallet('');
             setHours(0);
         } else {
             setNickname('');
-            inputRef.current.value = '';
+            inputNicknameRef.current.value = '';
         }
 
         setTeam(e.target.checked);
@@ -86,6 +96,7 @@ function AdminTasksTable() {
                 {editRow && +task.id === +rowId ? (
                     <>
                         <Form.Control
+                            ref={inputEstimationHoursRef}
                             className="form-control form-control-sm"
                             placeholder="Enter hours"
                             id={'estimationHours' + task.id}
@@ -95,7 +106,7 @@ function AdminTasksTable() {
                             defaultValue={task.estimationHours}
                             onChange={e => onSetHours(e, task.id)}
                             type={'number'}
-                            isInvalid={estimationHours < 0 || +estimationHours < 0}
+                            isInvalid={+estimationHours < 0}
                         />
                         <Form.Control.Feedback type="invalid" />
                     </>
@@ -113,7 +124,7 @@ function AdminTasksTable() {
                             onChange={e => setTeamWork(e)}
                         />
                         <Form.Control
-                            ref={inputRef}
+                            ref={inputNicknameRef}
                             className="form-control form-control-sm"
                             aria-label="Name"
                             id={'nickname' + task.id}
@@ -129,6 +140,7 @@ function AdminTasksTable() {
             <td style={style}>
                 {editRow && +task.id === +rowId ? (
                     <Form.Control
+                        ref={inputWalletRef}
                         className="form-control form-control-sm"
                         aria-label="Wallet"
                         placeholder="Enter wallet"
