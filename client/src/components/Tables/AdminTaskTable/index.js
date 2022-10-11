@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Table, Form} from 'react-bootstrap';
+import {Table, Form, InputGroup} from 'react-bootstrap';
 import {useTasks} from '../../../Context/reducer';
 import {editTask} from '../../../api/editTask';
 import Error from '../../Error';
@@ -17,6 +17,8 @@ function AdminTasksTable() {
     const [estimationHours, setHours] = useState(0);
     const [nickname, setNickname] = useState('');
     const [wallet, setWallet] = useState('');
+
+    const [teamBox, setTeam] = useState(false);
 
     const onEditTask = editData => {
         if (estimationHours < 0) return;
@@ -55,6 +57,20 @@ function AdminTasksTable() {
         });
     };
 
+    const setTeamWork = (e)=> {
+        console.log("UBIX Team", e.target.checked)
+
+        if (e.target.checked) {
+            setNickname('UBIX Team');
+            setWallet('');
+            setHours(0)
+        } else {
+            console.log('@@@@@ else')
+        }
+
+
+    }
+
     const generateTable = (state?.tasks || []).map(task => (
         <tr key={task.id}>
             <td>
@@ -89,6 +105,8 @@ function AdminTasksTable() {
             <td>{task.usdtPrice}</td>
             <td style={style}>
                 {editRow && +task.id === +rowId ? (
+                    <InputGroup size={'sm'}>
+                        <InputGroup.Checkbox defaultValue={task.performer?.hasImplementedByUbixTeam || false} onChange={e => setTeamWork(e)} aria-label="Checkbox for following text input" />
                     <Form.Control
                         className="form-control form-control-sm"
                         aria-label="Name"
@@ -97,6 +115,7 @@ function AdminTasksTable() {
                         defaultValue={task.performer.nickname || ''}
                         onChange={e => setNickname(e.target.value)}
                     />
+                    </InputGroup>
                 ) : (
                     task.performer.nickname || ''
                 )}
