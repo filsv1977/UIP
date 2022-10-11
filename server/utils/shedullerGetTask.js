@@ -1,5 +1,5 @@
 import {getTaskListFromWeb} from '../helpers/uipsPageParser.js';
-import {getExchangeUbx} from '../helpers/getExchangeUbx.js';
+import exchangeUbx from '../helpers/exchangeUbx.js';
 
 const PERIOD_GET_TASK = 600000;
 
@@ -9,5 +9,5 @@ export const startSchedulerGetTasks = () => {
 
 function executeFunctions() {
     getTaskListFromWeb();
-    getExchangeUbx();
+    exchangeUbx.loadUbx2Usdt();
 }

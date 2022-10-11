@@ -23,6 +23,7 @@ const list = async (req, res) => {
                 let x = JSON.parse(JSON.stringify(item));
                 if (!isAdmin()) {
                     delete x.performer.walletAddress;
+                    delete x.performer.hasImplementedByUbixTeam;
                 }
                 data.push(x);
             }
