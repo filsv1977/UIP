@@ -70,8 +70,7 @@ function AdminTasksTable() {
             setWallet('');
             setHours(0);
         } else {
-            console.log('@@@@@ ',task)
-            setNickname('');
+            setNickname(task.performer?.nickname || "");
         }
 
         setTeam(e.target.checked);
