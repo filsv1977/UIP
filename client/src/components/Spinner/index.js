@@ -43,14 +43,14 @@ function SpinnerBtn() {
                 <>
                     <div className="backgroundAll"></div>
                     <div ref={refBg} className="background" style={{height: bgHeight}}></div>
-                    <FadeLoader
+                    {bgHeight && <FadeLoader
                         style={{marginTop: pos}}
                         className="spinner"
                         color="#0dcaf0"
                         width={5}
                         height={20}
                         speedMultiplier={2}
-                    />
+                    />}
                 </>
             )}
         </>
