@@ -148,7 +148,7 @@ function AdminTasksTable() {
                     type="checkbox"
                     id={'hasImplemented' + task.id}
                     disabled={!editRow || (editRow && task.id !== rowId)}
-                    defaultChecked={task.performer.hasImplementedByUbixTeam}
+                    checked={editRow && task.id == rowId ? teamBox : task.performer.hasImplementedByUbixTeam}
                     onChange={e => setTeamWork(e, task)}
                 />
             </td>
