@@ -1,5 +1,5 @@
-import React, {useRef, useState} from 'react';
-import {Table, Form, InputGroup} from 'react-bootstrap';
+import React, {useState} from 'react';
+import {Table, Form} from 'react-bootstrap';
 import {useTasks} from '../../../Context/reducer';
 import {editTask} from '../../../api/editTask';
 import Error from '../../Error';
@@ -8,9 +8,6 @@ import EditComponent from '../../EditComponent';
 import {actionTypes} from '../../../Context/actionTypes';
 
 function AdminTasksTable() {
-    const inputEstimationHoursRef = useRef(null);
-    const inputNicknameRef = useRef(null);
-    const inputWalletRef = useRef(null);
     const style = {width: '15vw'};
     const {state, dispatch} = useTasks();
     const [editRow, setEditRow] = useState(false);
@@ -33,10 +30,10 @@ function AdminTasksTable() {
             hasImplementedByUbixTeam: teamBox
         };
 
-        if(teamBox) {
-            newData.estimationHours = 0
-            newData.ubxPrice = 0
-            newData.usdtPrice = 0
+        if (teamBox) {
+            newData.estimationHours = 0;
+            newData.ubxPrice = 0;
+            newData.usdtPrice = 0;
         }
 
         editTask(newData, dispatch).then(_ => {
@@ -67,17 +64,14 @@ function AdminTasksTable() {
         });
     };
 
-    const setTeamWork = e => {
+    const setTeamWork = (e, task) => {
         if (e.target.checked) {
             setNickname('UBIX Team');
-            inputNicknameRef.current.value = 'UBIX Team';
-            inputWalletRef.current.value = '';
-            inputEstimationHoursRef.current.value = 0;
             setWallet('');
             setHours(0);
         } else {
+            console.log('@@@@@ ',task)
             setNickname('');
-            inputNicknameRef.current.value = '';
         }
 
         setTeam(e.target.checked);
@@ -93,10 +87,9 @@ function AdminTasksTable() {
                 }
             </td>
             <td style={style}>
-                {editRow && +task.id === +rowId ? (
+                {editRow && +task.id === +rowId && !teamBox ? (
                     <>
                         <Form.Control
-                            ref={inputEstimationHoursRef}
                             className="form-control form-control-sm"
                             placeholder="Enter hours"
                             id={'estimationHours' + task.id}
@@ -110,37 +103,33 @@ function AdminTasksTable() {
                         />
                         <Form.Control.Feedback type="invalid" />
                     </>
+                ) : editRow && +task.id === +rowId && teamBox ? (
+                    '-'
                 ) : (
                     task.estimationHours
                 )}
             </td>
-            <td>{task.ubxPrice}</td>
-            <td>{task.usdtPrice}</td>
+            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.ubxPrice}</td>
+            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.usdtPrice}</td>
             <td style={style}>
-                {editRow && +task.id === +rowId ? (
-                    <InputGroup size={'sm'}>
-                        <InputGroup.Checkbox
-                            defaultChecked={task.performer.hasImplementedByUbixTeam ? 'checked' : false}
-                            onChange={e => setTeamWork(e)}
-                        />
-                        <Form.Control
-                            ref={inputNicknameRef}
-                            className="form-control form-control-sm"
-                            aria-label="Name"
-                            id={'nickname' + task.id}
-                            placeholder="Enter name"
-                            value={nickname}
-                            onChange={e => setNickname(e.target.value)}
-                        />
-                    </InputGroup>
+                {editRow && +task.id === +rowId && !teamBox ? (
+                    <Form.Control
+                        className="form-control form-control-sm"
+                        aria-label="Name"
+                        id={'nickname' + task.id}
+                        placeholder="Enter name"
+                        value={nickname}
+                        onChange={e => setNickname(e.target.value)}
+                    />
+                ) : editRow && +task.id === +rowId && teamBox ? (
+                  nickname
                 ) : (
                     task.performer.nickname || ''
                 )}
             </td>
             <td style={style}>
-                {editRow && +task.id === +rowId ? (
+                {editRow && +task.id === +rowId && !teamBox ? (
                     <Form.Control
-                        ref={inputWalletRef}
                         className="form-control form-control-sm"
                         aria-label="Wallet"
                         placeholder="Enter wallet"
@@ -148,9 +137,21 @@ function AdminTasksTable() {
                         defaultValue={task.performer.walletAddress || ''}
                         onChange={e => setWallet(e.target.value)}
                     />
+                ) : editRow && +task.id === +rowId && teamBox ? (
+                    '-'
                 ) : (
                     task.performer.walletAddress || ''
                 )}
+            </td>
+            <td style={style}>
+                <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id={'hasImplemented' + task.id}
+                    disabled={!editRow || (editRow && task.id !== rowId)}
+                    defaultChecked={task.performer.hasImplementedByUbixTeam}
+                    onChange={e => setTeamWork(e, task)}
+                />
             </td>
             <td>
                 {
@@ -194,6 +195,7 @@ function AdminTasksTable() {
                         <th scope="col">Cost in USDT</th>
                         <th scope="col">Nickname</th>
                         <th scope="col">Wallet</th>
+                        <th scope="col">Implemented By Ubix Team</th>
                         <th scope="col">Edit</th>
                     </tr>
                 </thead>

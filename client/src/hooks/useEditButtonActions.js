@@ -45,10 +45,21 @@ export default function useEditButtonActions() {
             id: filterAction.SAVE,
             text: 'Save',
             width: '50px',
-            onClick: (e, data, setEditRow, setRowId, onEditTask, setHours, setNickname, setWallet, setFormSubmitted, setTeam) => {
+            onClick: (
+                e,
+                data,
+                setEditRow,
+                setRowId,
+                onEditTask,
+                setHours,
+                setNickname,
+                setWallet,
+                setFormSubmitted,
+                setTeam
+            ) => {
                 onEditTask(data);
                 setEdit(false);
-                setTeam(false)
+                setTeam(false);
             },
             variant: 'outline-danger',
             style: {marginRight: '2px', width: '50px'}
@@ -76,7 +87,7 @@ export default function useEditButtonActions() {
                 setNickname('');
                 setWallet('');
                 setFormSubmitted(true);
-                setTeam(false)
+                setTeam(false);
             },
             variant: 'outline-primary',
             style: {marginLeft: '2px', width: '50px'}
