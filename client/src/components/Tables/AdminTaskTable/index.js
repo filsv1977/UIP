@@ -31,12 +31,6 @@ function AdminTasksTable() {
             hasImplementedByUbixTeam: teamBox
         };
 
-        if (teamBox) {
-            newData.estimationHours = 0;
-            newData.ubxPrice = 0;
-            newData.usdtPrice = 0;
-        }
-
         editTask(newData, dispatch).then(_ => {
             setRowId(null);
             setEditRow(false);
