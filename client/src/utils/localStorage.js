@@ -1,15 +1,19 @@
 import {hexDecode, hexEncode} from './convertHex';
 
 export const addAuthorizationKey = (login, password) => {
+    console.log(login, password);
     localStorage.setItem('login', login);
     localStorage.setItem('password', hexEncode(password));
 };
 
 export const getAuthorizationKey = () => {
-    return {
-        login: localStorage.getItem('login'),
-        password: hexDecode(localStorage.getItem('password'))
-    };
+    let token;
+    const login = localStorage.getItem('login');
+    const password = hexDecode(localStorage.getItem('password'));
+    if (login && password) {
+        token = {login, password};
+    }
+    return token;
 };
 
 export const delAuthorizationKey = () => {

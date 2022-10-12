@@ -7,9 +7,9 @@
         "ubxPrice": 0,
         "usdtPrice": 0,
         "performer": {
-            "nickname": "",
+            "nickname": "UBIX Team",
             "walletAddress": "",
-            "hasImplementedByUbixTeam": false
+            "hasImplementedByUbixTeam": true
         },
         "implemented": true,
         "deleted": false
@@ -18,12 +18,12 @@
         "id": 1,
         "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-2.mediawiki",
         "name": "Node or running RPC reduces performance upon receiving transactions",
-        "estimationHours": 0,
-        "ubxPrice": 0,
-        "usdtPrice": 0,
+        "estimationHours": 1,
+        "ubxPrice": 431965,
+        "usdtPrice": 19.27,
         "performer": {
-            "nickname": "",
-            "walletAddress": "",
+            "nickname": "2",
+            "walletAddress": "3",
             "hasImplementedByUbixTeam": false
         },
         "implemented": true,

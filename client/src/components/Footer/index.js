@@ -16,8 +16,14 @@ function Footer() {
                         </a>
                     </div>
                     <div className="col-md-6 pt-3">
-                        To participate send an email to <a target="_blank" rel="noreferrer" href="mailto:uip@ubix.network">uip@ubix.network</a> or send a message on telegram to{' '}
-                        <a target="_blank"  rel="noreferrer" href="https://t.me/klowert">@klowert</a>
+                        To participate send an email to{' '}
+                        <a target="_blank" rel="noreferrer" href="mailto:uip@ubix.network">
+                            uip@ubix.network
+                        </a>{' '}
+                        or send a message on telegram to{' '}
+                        <a target="_blank" rel="noreferrer" href="https://t.me/klowert">
+                            @klowert
+                        </a>
                         <div className="footer-copyright text-center py-3">
                             Copyright © 2022 SilentNotary. All rights reserved.
                         </div>
