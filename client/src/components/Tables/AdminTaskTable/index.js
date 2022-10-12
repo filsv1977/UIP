@@ -105,11 +105,11 @@ function AdminTasksTable() {
                 ) : editRow && +task.id === +rowId && teamBox ? (
                     '-'
                 ) : (
-                    task.estimationHours
+                    task.estimationHours || ""
                 )}
             </td>
-            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.ubxPrice}</td>
-            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.usdtPrice}</td>
+            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.ubxPrice || ""}</td>
+            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.usdtPrice || ''}</td>
             <td style={style}>
                 {editRow && +task.id === +rowId && !teamBox ? (
                     <Form.Control

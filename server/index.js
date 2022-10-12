@@ -1,5 +1,4 @@
 import express from 'express';
-import logger from 'morgan';
 import DbEngine from './db/dbEngine.js';
 import restRoutes from './rest/index.js';
 import cors from 'cors';
@@ -13,7 +12,6 @@ startSchedulerGetTasks();
 
 const app = express();
 app.use(cors());
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
