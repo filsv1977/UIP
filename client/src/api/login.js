@@ -14,12 +14,23 @@ export const logIn = (body, dispatch) => {
                     type: actionTypes.LOGIN_ADMIN.FULFILLED,
                     payload: result.data.success
                 });
+
                 addAuthorizationKey(body.login, body.password);
+
+                dispatch({
+                    type: actionTypes.CLOSE_MODAL,
+                    payload: false
+                });
+
                 fetchData(dispatch, null);
             } else {
                 dispatch({
                     type: actionTypes.LOGIN_ADMIN.REJECTED,
                     payload: 'Invalid username/password entered'
+                });
+                dispatch({
+                    type: actionTypes.SET_VISIBLE,
+                    payload: true
                 });
             }
         });

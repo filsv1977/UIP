@@ -76,8 +76,6 @@ function AdminTasksTable() {
         setTeam(e.target.checked);
     };
 
-    console.log(nickname)
-
     const generateTable = (state?.tasks || []).map(task => (
         <tr key={task.id}>
             <td>

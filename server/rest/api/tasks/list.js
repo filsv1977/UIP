@@ -1,9 +1,9 @@
 import {DB} from '../../../index.js';
-import {foldAdminByPath, isAdmin} from '../../../strategies/isAdmin.js';
+import {isAdminByHeader} from '../../../strategies/isAdminByHeader.js';
 
 const list = async (req, res) => {
     let {implemented} = req.query;
-    foldAdminByPath(req.headers.referer);
+    const authHeader = req.headers.authorization;
 
     try {
         const answer = DB.select();
@@ -21,7 +21,7 @@ const list = async (req, res) => {
         answer.data.forEach(item => {
             if (filter(item)) {
                 let x = JSON.parse(JSON.stringify(item));
-                if (!isAdmin()) {
+                if (!isAdminByHeader(authHeader)) {
                     delete x.performer.walletAddress;
                     delete x.performer.hasImplementedByUbixTeam;
                 }

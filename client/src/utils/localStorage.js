@@ -6,10 +6,13 @@ export const addAuthorizationKey = (login, password) => {
 };
 
 export const getAuthorizationKey = () => {
-    return {
-        login: localStorage.getItem('login'),
-        password: hexDecode(localStorage.getItem('password'))
-    };
+    let token;
+    const login = localStorage.getItem('login');
+    const password = hexDecode(localStorage.getItem('password'));
+    if (login && password) {
+        token = {login, password};
+    }
+    return token;
 };
 
 export const delAuthorizationKey = () => {

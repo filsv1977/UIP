@@ -2,14 +2,15 @@ import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import {actionTypes} from '../Context/actionTypes';
 import {getAuthorizationKey} from '../utils/localStorage';
+import {fetchData} from './fetchData';
 
 axiosRetry(axios, {retries: 3});
 
-export const fetchData = async (dispatch, id, noSetLoading = true) => {
+export const checkToken = async dispatch => {
     try {
-        const url = id == null ? '/tasks' : `/tasks?implemented=${id}`;
+        const url = `/admin/auth/checkToken`;
         const token = getAuthorizationKey();
-        dispatch({type: actionTypes.GET_TASKS.PENDING, noSetLoading});
+        dispatch({type: actionTypes.CHECK_TOKEN.PENDING});
         await axios
             .get(
                 url,
@@ -20,17 +21,23 @@ export const fetchData = async (dispatch, id, noSetLoading = true) => {
                     : {}
             )
             .then(result => {
-                if (!result.data.success) throw new Error(result.data.message);
+                dispatch({
+                    type: actionTypes.LOGIN_ADMIN.FULFILLED,
+                    payload: result.data.success
+                });
 
                 dispatch({
-                    type: actionTypes.GET_TASKS.FULFILLED,
-                    payload: {data: result.data.data, activeFilterBtn: id}
+                    type: actionTypes.SET_VISIBLE,
+                    payload: !result.data.success
                 });
+                if (result.data.success) {
+                    fetchData(dispatch, null);
+                }
             });
     } catch (e) {
         dispatch({
-            type: actionTypes.GET_TASKS.REJECTED,
-            payload: e.message
+            type: actionTypes.CHECK_TOKEN.REJECTED,
+            payload: false
         });
     }
 };
