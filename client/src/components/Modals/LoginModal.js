@@ -20,9 +20,9 @@ function LoginModal({show, handleClose}) {
 
     const onChangePassword = ({target: {value}}) => setPassword(value);
 
-    useEffect(() => {
-        if (state.isAdmin) handleClose();
-    }, [state.isAdmin, handleClose]);
+    // useEffect(() => {
+    //     if (state.isAdmin) handleClose();
+    // }, [state.isAdmin, handleClose]);
 
     const handleSubmit = e => {
         e.preventDefault();

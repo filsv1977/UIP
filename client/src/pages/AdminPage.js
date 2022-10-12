@@ -4,10 +4,12 @@ import LoginModal from '../components/Modals/LoginModal';
 import {useTasks} from '../Context/reducer';
 import {getAuthorizationKey} from '../utils/localStorage';
 import {logIn} from '../api/login';
+import {actionTypes} from "../Context/actionTypes";
+import {checkToken} from "../api/checkToken";
 
 function AdminPage() {
     const {
-        state: {isAdmin},
+        state: {isAdmin, showLogin, signedIn},
         dispatch
     } = useTasks();
     const [visible, setVisible] = useState(false);
@@ -15,16 +17,23 @@ function AdminPage() {
     useEffect(() => {
         const token = getAuthorizationKey();
         if (token) {
-            logIn({...token}, dispatch);
+            // logIn({...token}, dispatch);
+            checkToken(dispatch)
+
         }
 
-        if (!isAdmin) setVisible(true);
+        if (!signedIn) dispatch({
+                type: actionTypes.SET_VISIBLE,
+                payload: true
+            });
+
+        // if (!isAdmin) setVisible(true);
     }, []);
 
     return (
         <>
             <Content isAdmin={isAdmin} />
-            <LoginModal show={visible} handleClose={() => setVisible(false)} />
+            <LoginModal show={showLogin} handleClose={() => setVisible(false)} />
         </>
     );
 }
