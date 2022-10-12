@@ -7,5 +7,8 @@ export const actionTypes = {
     GET_TASKS: create('GET_TASKS'),
     LOGIN_ADMIN: create('LOGIN_ADMIN'),
     LOGOUT_ADMIN: create('LOGOUT_ADMIN'),
-    SET_COST_VALUES: 'SET_COST_VALUES'
+    CHECK_TOKEN: create('CHECK_TOKEN'),
+    SET_COST_VALUES: 'SET_COST_VALUES',
+    SET_VISIBLE: "SET_VISIBLE",
+    CLOSE_MODAL: "CLOSE_MODAL",
 };

@@ -8,7 +8,9 @@ export const initialState = {
     isLoading: false,
     error: '',
     activeFilterBtn: 0,
-    currentExchange: {rate: 0, ubx2usdt: 0}
+    currentExchange: {rate: 0, ubx2usdt: 0},
+    showLogin: false,
+    signedIn: false
 };
 
 export const ContextApp = React.createContext();
@@ -136,6 +138,42 @@ export const taskReducer = (state, action) => {
             return {
                 ...state,
                 tasks: newData
+            };
+        }
+
+        case actionTypes.SET_VISIBLE: {
+            return {
+                ...state,
+                showLogin: action.payload,
+            };
+        }
+
+        case actionTypes.CLOSE_MODAL: {
+            return {
+                ...state,
+                showLogin: action.payload,
+                error: false
+            };
+        }
+
+        case actionTypes.CHECK_TOKEN: {
+            return {
+                ...state,
+                showLogin: action.payload,
+                error: false
+            };
+        }
+
+        case actionTypes.CHECK_TOKEN.FULFILLED: {
+            return {
+                ...state,
+                signedIn: action.payload
+            };
+        }
+        case actionTypes.CHECK_TOKEN.REJECTED: {
+            return {
+                ...state,
+                signedIn: action.payload
             };
         }
 
