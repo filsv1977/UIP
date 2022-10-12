@@ -70,7 +70,7 @@ function AdminTasksTable() {
             setWallet('');
             setHours(0);
         } else {
-            setNickname(task.performer?.nickname || "");
+            setNickname(task.performer?.nickname || '');
         }
 
         setTeam(e.target.checked);
@@ -121,7 +121,7 @@ function AdminTasksTable() {
                         onChange={e => setNickname(e.target.value)}
                     />
                 ) : editRow && +task.id === +rowId && teamBox ? (
-                  nickname
+                    nickname
                 ) : (
                     task.performer.nickname || ''
                 )}
@@ -148,7 +148,7 @@ function AdminTasksTable() {
                     type="checkbox"
                     id={'hasImplemented' + task.id}
                     disabled={!editRow || (editRow && task.id !== rowId)}
-                    checked={editRow && task.id == rowId ? teamBox : task.performer.hasImplementedByUbixTeam}
+                    checked={editRow && +task.id === +rowId ? teamBox : task.performer.hasImplementedByUbixTeam}
                     onChange={e => setTeamWork(e, task)}
                 />
             </td>
