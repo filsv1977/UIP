@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import Content from '../components/Content';
 import {useTasks} from '../Context/reducer';
 import {fetchData} from '../api/fetchData';
+import {delAuthorizationKey} from '../utils/localStorage';
 
 function HomePage({implemented}) {
     const {
@@ -11,6 +12,7 @@ function HomePage({implemented}) {
 
     useEffect(() => {
         fetchData(dispatch, implemented);
+        delAuthorizationKey();
     }, []);
 
     return <Content isAdmin={isAdmin} />;
