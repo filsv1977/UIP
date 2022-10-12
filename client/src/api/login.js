@@ -16,10 +16,12 @@ export const logIn = (body, dispatch) => {
                 });
 
                 addAuthorizationKey(body.login, body.password);
+
                 dispatch({
                     type: actionTypes.CLOSE_MODAL,
                     payload: false
                 });
+
                 fetchData(dispatch, null);
             } else {
                 dispatch({

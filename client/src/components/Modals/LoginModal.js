@@ -1,7 +1,7 @@
 import Modal from 'react-bootstrap/Modal';
 import {Form} from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {logIn} from '../../api/login';
 import {useTasks} from '../../Context/reducer';
 import {useNavigate} from 'react-router-dom';
@@ -10,7 +10,7 @@ import {actionTypes} from '../../Context/actionTypes';
 import './loginModal.css';
 import md5 from 'md5';
 
-function LoginModal({show, handleClose}) {
+function LoginModal({show}) {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -19,10 +19,6 @@ function LoginModal({show, handleClose}) {
     const onChangeLogin = ({target: {value}}) => setLogin(value);
 
     const onChangePassword = ({target: {value}}) => setPassword(value);
-
-    // useEffect(() => {
-    //     if (state.isAdmin) handleClose();
-    // }, [state.isAdmin, handleClose]);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -33,7 +29,7 @@ function LoginModal({show, handleClose}) {
     const onHandleClose = () => {
         navigate('/');
         dispatch({type: actionTypes.LOGOUT_ADMIN});
-        handleClose();
+        dispatch({type: actionTypes.SET_VISIBLE, payload: false});
     };
 
     return (

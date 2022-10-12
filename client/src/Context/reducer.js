@@ -144,7 +144,7 @@ export const taskReducer = (state, action) => {
         case actionTypes.SET_VISIBLE: {
             return {
                 ...state,
-                showLogin: action.payload,
+                showLogin: action.payload
             };
         }
 

@@ -1,6 +1,8 @@
 export const isAdminByHeader = authHeader => {
     let auth = {};
     try {
+        if (!authHeader) return false;
+
         auth = JSON.parse(authHeader);
     } catch (error) {
         console.log(error);

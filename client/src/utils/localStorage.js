@@ -1,7 +1,6 @@
 import {hexDecode, hexEncode} from './convertHex';
 
 export const addAuthorizationKey = (login, password) => {
-    console.log(login, password);
     localStorage.setItem('login', login);
     localStorage.setItem('password', hexEncode(password));
 };

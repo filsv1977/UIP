@@ -7,9 +7,9 @@
         "ubxPrice": 0,
         "usdtPrice": 0,
         "performer": {
-            "nickname": "UBIX Team",
+            "nickname": "",
             "walletAddress": "",
-            "hasImplementedByUbixTeam": true
+            "hasImplementedByUbixTeam": false
         },
         "implemented": true,
         "deleted": false
@@ -22,8 +22,8 @@
         "ubxPrice": 431965,
         "usdtPrice": 19.27,
         "performer": {
-            "nickname": "2",
-            "walletAddress": "3",
+            "nickname": "",
+            "walletAddress": "",
             "hasImplementedByUbixTeam": false
         },
         "implemented": true,
@@ -37,9 +37,9 @@
         "ubxPrice": 0,
         "usdtPrice": 0,
         "performer": {
-            "nickname": "",
+            "nickname": "UBIX Team",
             "walletAddress": "",
-            "hasImplementedByUbixTeam": false
+            "hasImplementedByUbixTeam": true
         },
         "implemented": false,
         "deleted": false
@@ -52,9 +52,9 @@
         "ubxPrice": 0,
         "usdtPrice": 0,
         "performer": {
-            "nickname": "",
+            "nickname": "UBIX Team",
             "walletAddress": "",
-            "hasImplementedByUbixTeam": false
+            "hasImplementedByUbixTeam": true
         },
         "implemented": false,
         "deleted": false
