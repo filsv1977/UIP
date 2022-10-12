@@ -6,7 +6,6 @@ import {getAuthorizationKey} from '../utils/localStorage';
 axiosRetry(axios, {retries: 3});
 
 export const editTask = async (body, dispatch) => {
-    try {
         const token = getAuthorizationKey();
         await axios
             .patch(
@@ -25,11 +24,8 @@ export const editTask = async (body, dispatch) => {
                     type: actionTypes.EDIT_TASK.FULFILLED,
                     payload: result.data.data
                 });
-            });
-    } catch (e) {
-        dispatch({
-            type: actionTypes.EDIT_TASK.REJECTED,
-            payload: e.message
-        });
-    }
+            }).catch(e => dispatch({
+              type: actionTypes.EDIT_TASK.REJECTED,
+              payload: e.message
+          }));
 };

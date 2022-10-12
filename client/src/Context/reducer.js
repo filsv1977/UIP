@@ -148,32 +148,11 @@ export const taskReducer = (state, action) => {
             };
         }
 
-        case actionTypes.CLOSE_MODAL: {
-            return {
-                ...state,
-                showLogin: action.payload,
-                error: false
-            };
-        }
 
-        case actionTypes.CHECK_TOKEN: {
+        case actionTypes.TOKEN_ERROR: {
             return {
                 ...state,
-                showLogin: action.payload,
-                error: false
-            };
-        }
-
-        case actionTypes.CHECK_TOKEN.FULFILLED: {
-            return {
-                ...state,
-                signedIn: action.payload
-            };
-        }
-        case actionTypes.CHECK_TOKEN.REJECTED: {
-            return {
-                ...state,
-                signedIn: action.payload
+               error: action.payload
             };
         }
 

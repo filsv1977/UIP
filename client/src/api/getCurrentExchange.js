@@ -6,7 +6,6 @@ import {getAuthorizationKey} from '../utils/localStorage';
 axiosRetry(axios, {retries: 3});
 
 export const getCurrentExchange = async dispatch => {
-    try {
         const token = getAuthorizationKey();
         dispatch({type: actionTypes.GET_EXCHANGE_RATE});
 
@@ -26,11 +25,8 @@ export const getCurrentExchange = async dispatch => {
                     type: actionTypes.GET_EXCHANGE_RATE.FULFILLED,
                     payload: result.data.data
                 });
-            });
-    } catch (e) {
-        dispatch({
-            type: actionTypes.GET_EXCHANGE_RATE.REJECTED,
-            payload: e.message
-        });
-    }
+            }).catch(e => dispatch({
+              type: actionTypes.GET_EXCHANGE_RATE.REJECTED,
+              payload: e.message
+          }));
 };

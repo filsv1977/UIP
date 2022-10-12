@@ -7,10 +7,9 @@ import {fetchData} from './fetchData';
 axiosRetry(axios, {retries: 3});
 
 export const checkToken = async dispatch => {
-    try {
         const url = `/admin/auth/checkToken`;
         const token = getAuthorizationKey();
-        dispatch({type: actionTypes.CHECK_TOKEN.PENDING});
+
         await axios
             .get(
                 url,
@@ -33,11 +32,8 @@ export const checkToken = async dispatch => {
                 if (result.data.success) {
                     fetchData(dispatch, null);
                 }
-            });
-    } catch (e) {
-        dispatch({
-            type: actionTypes.CHECK_TOKEN.REJECTED,
-            payload: false
-        });
-    }
+            }).catch(e => dispatch({
+              type: actionTypes.TOKEN_ERROR,
+              payload: e.message
+          }))
 };
