@@ -13,10 +13,10 @@ function AdminPage() {
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
-        const {login, password} = getAuthorizationKey();
-        if (login && password) {
-            logIn({login, password}, dispatch);
-        }
+        // const {login, password} = getAuthorizationKey();
+        // if (login && password) {
+        //     logIn({login, password}, dispatch);
+        // }
         setVisible(true);
     }, []);
 
