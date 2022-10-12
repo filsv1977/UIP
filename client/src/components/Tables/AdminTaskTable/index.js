@@ -77,7 +77,7 @@ function AdminTasksTable() {
     };
 
     console.log(nickname)
-    console.log(editRow, +task.id === +rowId, teamBox)
+    console.log(editRow, state.tasks)
     console.log(teamBox)
 
     const generateTable = (state?.tasks || []).map(task => (
