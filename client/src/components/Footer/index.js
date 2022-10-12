@@ -1,6 +1,8 @@
 import React from 'react';
 import './footer.css';
 import logo from '../../image/logo.png';
+import telegram from '../../image/telegram.png';
+import mail from '../../image/mail.png'
 
 function Footer() {
     return (
@@ -17,8 +19,9 @@ function Footer() {
                     </div>
 
                     <div className="col-md-6 pt-3">
-                        To participate send an email to: <span>uip@ubix.network </span> or send a message on telegram to{' '}
-                        <span>@klowert</span>
+                        To participate send an email to <a target="_blank" rel="noreferrer" href="mailto:uip@ubix.network"><img src={mail} alt="email"/></a> or send a message on telegram to{' '}
+
+                        <a target="_blank"  rel="noreferrer" href="https://t.me/klowert"><img src={telegram} alt="telegram"/></a>
                         <div className="footer-copyright text-center py-3">
                             Copyright © 2022 SilentNotary. All rights reserved.
                         </div>
