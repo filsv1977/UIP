@@ -7,17 +7,18 @@ import {logIn} from '../api/login';
 
 function AdminPage() {
     const {
-        state: {isAdmin = false},
+        state: {isAdmin},
         dispatch
     } = useTasks();
     const [visible, setVisible] = useState(false);
 
     useEffect(() => {
-        // const {login, password} = getAuthorizationKey();
-        // if (login && password) {
-        //     logIn({login, password}, dispatch);
-        // }
-        setVisible(true);
+        const token = getAuthorizationKey();
+        if (token) {
+            logIn({...token}, dispatch);
+        }
+
+        if (!isAdmin) setVisible(true);
     }, []);
 
     return (

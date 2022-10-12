@@ -1,6 +1,7 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import {actionTypes} from '../Context/actionTypes';
+import {delAuthorizationKey} from '../utils/localStorage';
 
 axiosRetry(axios, {retries: 3});
 
@@ -11,6 +12,7 @@ export const logOut = async dispatch => {
                 type: actionTypes.LOGOUT_ADMIN.FULFILLED,
                 payload: result
             });
+            delAuthorizationKey();
         });
     } catch (e) {
         dispatch({

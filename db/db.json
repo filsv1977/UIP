@@ -3,13 +3,13 @@
         "id": 0,
         "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-1.mediawiki",
         "name": "Drop Outdatet Transactions from MemPool",
-        "estimationHours": 40,
-        "ubxPrice": 17278600,
-        "usdtPrice": 768.9,
+        "estimationHours": 0,
+        "ubxPrice": 0,
+        "usdtPrice": 0,
         "performer": {
-            "nickname": "qqq",
-            "walletAddress": "qiwi",
-            "hasImplementedByUbixTeam": false
+            "nickname": "UBIX Team",
+            "walletAddress": "",
+            "hasImplementedByUbixTeam": true
         },
         "implemented": true,
         "deleted": false
@@ -18,13 +18,13 @@
         "id": 1,
         "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-2.mediawiki",
         "name": "Node or running RPC reduces performance upon receiving transactions",
-        "estimationHours": 0,
-        "ubxPrice": 0,
-        "usdtPrice": 0,
+        "estimationHours": 1,
+        "ubxPrice": 431965,
+        "usdtPrice": 19.27,
         "performer": {
-            "nickname": "UBIX Team",
-            "walletAddress": "",
-            "hasImplementedByUbixTeam": true
+            "nickname": "2",
+            "walletAddress": "3",
+            "hasImplementedByUbixTeam": false
         },
         "implemented": true,
         "deleted": false
@@ -37,9 +37,9 @@
         "ubxPrice": 0,
         "usdtPrice": 0,
         "performer": {
-            "nickname": "UBIX Team",
+            "nickname": "",
             "walletAddress": "",
-            "hasImplementedByUbixTeam": true
+            "hasImplementedByUbixTeam": false
         },
         "implemented": false,
         "deleted": false

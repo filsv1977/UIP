@@ -14,7 +14,9 @@ export const logIn = (body, dispatch) => {
                     type: actionTypes.LOGIN_ADMIN.FULFILLED,
                     payload: result.data.success
                 });
+
                 addAuthorizationKey(body.login, body.password);
+
                 fetchData(dispatch, null);
             } else {
                 dispatch({
