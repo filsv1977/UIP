@@ -18,7 +18,7 @@ function SpinnerBtn() {
     useEffect(() => {
         const {innerHeight: height} = window;
         if (refBg?.current?.offsetTop) {
-            setPos((height - refBg.current.offsetTop) / 2 - 24);
+            setPos((height - refBg.current.offsetTop) / 2 - 120);
             setBgHeight(document.body.clientHeight - refBg.current.offsetTop);
         }
     }, [refBg?.current]);

@@ -7,9 +7,9 @@
         "ubxPrice": 0,
         "usdtPrice": 0,
         "performer": {
-            "nickname": "UBIX Team",
+            "nickname": "",
             "walletAddress": "",
-            "hasImplementedByUbixTeam": true
+            "hasImplementedByUbixTeam": false
         },
         "implemented": true,
         "deleted": false
@@ -22,9 +22,9 @@
         "ubxPrice": 0,
         "usdtPrice": 0,
         "performer": {
-            "nickname": "UBIX Team",
+            "nickname": "",
             "walletAddress": "",
-            "hasImplementedByUbixTeam": true
+            "hasImplementedByUbixTeam": false
         },
         "implemented": true,
         "deleted": false
