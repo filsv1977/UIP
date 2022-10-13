@@ -1,9 +1,8 @@
 import React from 'react';
-import logo from '../../image/logo.png';
+import logo from '../../image/UBIX network.svg';
 import './footer.css';
 
 function Footer() {
-    //fixed-bottom
     return (
         <footer
             className="page-footer font-small blue  footer text-center text-white"
@@ -12,8 +11,8 @@ function Footer() {
             <div className="container-fluid text-center text-md-left">
                 <div className="row">
                     <div className="col-md-3 d-flex align-items-center justify-content-center">
-                        <a className="logo_footer" href="https://silentnotary.com/" target="_blank" rel="noreferrer">
-                            <img src={logo} alt="UBIX" />
+                        <a className="logo_footer" href="https://ubix.network/" target="_blank" rel="noreferrer">
+                            <img className="icon" src={logo} alt="UBIX" height="69px" width="69px" />
                         </a>
                     </div>
                     <div className="col-md-6 pt-3">

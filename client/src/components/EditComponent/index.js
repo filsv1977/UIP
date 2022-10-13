@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
 import useEditButtonActions from '../../hooks/useEditButtonActions';
-import './index.css'
+import './index.css';
 
 function EditComponent({
     data,
