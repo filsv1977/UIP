@@ -44,3 +44,7 @@ body {
 .invalidForm {
     border-color: red;
 }
+
+.table {
+    table-layout: fixed;
+}

@@ -142,38 +142,17 @@ export const taskReducer = (state, action) => {
         }
 
         case actionTypes.SET_VISIBLE: {
+            console.log('@@@@ ctionTypes.SET_VISIBLE', action.payload);
             return {
                 ...state,
                 showLogin: action.payload
             };
         }
 
-        case actionTypes.CLOSE_MODAL: {
+        case actionTypes.TOKEN_ERROR: {
             return {
                 ...state,
-                showLogin: action.payload,
-                error: false
-            };
-        }
-
-        case actionTypes.CHECK_TOKEN: {
-            return {
-                ...state,
-                showLogin: action.payload,
-                error: false
-            };
-        }
-
-        case actionTypes.CHECK_TOKEN.FULFILLED: {
-            return {
-                ...state,
-                signedIn: action.payload
-            };
-        }
-        case actionTypes.CHECK_TOKEN.REJECTED: {
-            return {
-                ...state,
-                signedIn: action.payload
+                error: action.payload
             };
         }
 

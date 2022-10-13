@@ -9,17 +9,17 @@ function TasksTable() {
 
     const generateTable = (state?.tasks || []).map(task => (
         <tr key={task.id}>
-            <td>
+            <td className="text-truncate">
                 {
                     <a href={task.url} target="_blank" rel="noreferrer">
                         {task.name}
                     </a>
                 }
             </td>
-            <td>{task.estimationHours ? task.estimationHours : '-'}</td>
-            <td>{task.ubxPrice ? task.ubxPrice : '-'}</td>
-            <td>{task.usdtPrice ? task.ubxPrice : '-'}</td>
-            <td>{task.performer.nickname}</td>
+            <td className="text-truncate">{task.estimationHours ? task.estimationHours : '-'}</td>
+            <td className="text-truncate">{task.ubxPrice ? task.ubxPrice : '-'}</td>
+            <td className="text-truncate">{task.usdtPrice ? task.ubxPrice : '-'}</td>
+            <td className="text-truncate">{task.performer.nickname}</td>
         </tr>
     ));
 
@@ -34,13 +34,13 @@ function TasksTable() {
             <Table className="align-middle" hover data-click-to-select="true">
                 <thead>
                     <tr>
-                        <th className={'w-25'} scope="col">
+                        <th className="text-truncate" scope="col">
                             Task
                         </th>
-                        <th scope="col">Estimation hours</th>
-                        <th scope="col">Cost in UBX</th>
-                        <th scope="col">Cost in USDT</th>
-                        <th scope="col">Nickname</th>
+                        <th className="text-truncate" scope="col">Estimation hours</th>
+                        <th className="text-truncate" scope="col">Cost in UBX</th>
+                        <th className="text-truncate" scope="col">Cost in USDT</th>
+                        <th className="text-truncate" scope="col">Nickname</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -7,37 +7,36 @@ import {fetchData} from './fetchData';
 axiosRetry(axios, {retries: 3});
 
 export const checkToken = async dispatch => {
-    try {
-        const url = `/admin/auth/checkToken`;
-        const token = getAuthorizationKey();
-        dispatch({type: actionTypes.CHECK_TOKEN.PENDING});
-        await axios
-            .get(
-                url,
-                token
-                    ? {
-                          headers: {Authorization: JSON.stringify(token)}
-                      }
-                    : {}
-            )
-            .then(result => {
-                dispatch({
-                    type: actionTypes.LOGIN_ADMIN.FULFILLED,
-                    payload: result.data.success
-                });
+    const url = `/admin/auth/checkToken`;
+    const token = getAuthorizationKey();
 
-                dispatch({
-                    type: actionTypes.SET_VISIBLE,
-                    payload: !result.data.success
-                });
-                if (result.data.success) {
-                    fetchData(dispatch, null);
-                }
+    await axios
+        .get(
+            url,
+            token
+                ? {
+                      headers: {Authorization: JSON.stringify(token)}
+                  }
+                : {}
+        )
+        .then(result => {
+            dispatch({
+                type: actionTypes.LOGIN_ADMIN.FULFILLED,
+                payload: result.data.success
             });
-    } catch (e) {
-        dispatch({
-            type: actionTypes.CHECK_TOKEN.REJECTED,
-            payload: false
-        });
-    }
+
+            dispatch({
+                type: actionTypes.SET_VISIBLE,
+                payload: !result.data.success
+            });
+            if (result.data.success) {
+                fetchData(dispatch, null);
+            }
+        })
+        .catch(e =>
+            dispatch({
+                type: actionTypes.TOKEN_ERROR,
+                payload: e.message
+            })
+        );
 };

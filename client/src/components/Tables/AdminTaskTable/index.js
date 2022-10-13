@@ -78,14 +78,14 @@ function AdminTasksTable() {
 
     const generateTable = (state?.tasks || []).map(task => (
         <tr key={task.id}>
-            <td>
+            <td className="text-truncate">
                 {
                     <a href={task.url} target="_blank" rel="noreferrer">
                         {task.name}
                     </a>
                 }
             </td>
-            <td style={style}>
+            <td className="text-truncate" style={style}>
                 {editRow && +task.id === +rowId && !teamBox ? (
                     <>
                         <Form.Control
@@ -108,9 +108,9 @@ function AdminTasksTable() {
                     task.estimationHours || ''
                 )}
             </td>
-            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.ubxPrice || ''}</td>
-            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.usdtPrice || ''}</td>
-            <td style={style}>
+            <td className="text-truncate">{editRow && +task.id === +rowId && teamBox ? '-' : task.ubxPrice || ''}</td>
+            <td className="text-truncate">{editRow && +task.id === +rowId && teamBox ? '-' : task.usdtPrice || ''}</td>
+            <td className="text-truncate" style={style}>
                 {editRow && +task.id === +rowId && !teamBox ? (
                     <Form.Control
                         className="form-control form-control-sm"
@@ -126,7 +126,7 @@ function AdminTasksTable() {
                     task.performer.nickname || ''
                 )}
             </td>
-            <td style={style}>
+            <td className="text-truncate" style={style}>
                 {editRow && +task.id === +rowId && !teamBox ? (
                     <Form.Control
                         className="form-control form-control-sm"
@@ -142,7 +142,7 @@ function AdminTasksTable() {
                     task.performer.walletAddress || ''
                 )}
             </td>
-            <td style={style}>
+            <td className="text-truncate" style={style}>
                 <input
                     className="form-check-input"
                     type="checkbox"
@@ -186,15 +186,15 @@ function AdminTasksTable() {
             <Table className="align-middle" hover data-click-to-select="true">
                 <thead>
                     <tr>
-                        <th className={'w-25'} scope="col">
+                        <th className="text-truncate" scope="col">
                             Task
                         </th>
-                        <th scope="col">Estimation hours</th>
-                        <th scope="col">Cost in UBX</th>
-                        <th scope="col">Cost in USDT</th>
-                        <th scope="col">Nickname</th>
-                        <th scope="col">Wallet</th>
-                        <th scope="col">Implemented By Ubix Team</th>
+                        <th className="text-truncate" scope="col">Estimation hours</th>
+                        <th className="text-truncate" scope="col">Cost in UBX</th>
+                        <th className="text-truncate" scope="col">Cost in USDT</th>
+                        <th className="text-truncate" scope="col">Nickname</th>
+                        <th className="text-truncate" scope="col">Wallet</th>
+                        <th className="text-truncate" scope="col">Implemented By Ubix Team</th>
                         <th scope="col">Edit</th>
                     </tr>
                 </thead>

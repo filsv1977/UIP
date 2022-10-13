@@ -9,7 +9,7 @@ function AssignmentFilterButtonsActions() {
     const [active, setActive] = useState(0);
 
     return (
-        <Stack className="mb-2" direction="horizontal" gap={2}>
+        <Stack className="mb-2 p-3" direction="horizontal" gap={2}>
             {assignmentFilterActions.map(x => (
                 <Button
                     key={x.id}
