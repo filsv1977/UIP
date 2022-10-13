@@ -1,5 +1,5 @@
 import {DB} from '../../../index.js';
-import {isAdminByHeader} from '../../../strategies/isAdminByHeader.js';
+import {isAdminByHeader} from '../../../strategies/checkAdmin.js';
 
 const list = async (req, res) => {
     let {implemented} = req.query;
@@ -7,6 +7,10 @@ const list = async (req, res) => {
 
     try {
         const answer = DB.select();
+        if (!answer.success) {
+            res.json({...answer});
+            return;
+        }
 
         let filter = item => {
             if (implemented === undefined) return true;
