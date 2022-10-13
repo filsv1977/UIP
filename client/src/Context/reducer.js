@@ -148,7 +148,6 @@ export const taskReducer = (state, action) => {
             };
         }
 
-
         case actionTypes.TOKEN_ERROR: {
             return {
                 ...state,

@@ -9,5 +9,5 @@ export const actionTypes = {
     LOGOUT_ADMIN: create('LOGOUT_ADMIN'),
     SET_COST_VALUES: 'SET_COST_VALUES',
     SET_VISIBLE: 'SET_VISIBLE',
-    TOKEN_ERROR: 'SET_VISIBLE',
+    TOKEN_ERROR: 'TOKEN_ERROR',
 };
