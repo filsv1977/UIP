@@ -6,9 +6,9 @@ import './content.css';
 
 function Content({isAdmin}) {
     return (
-        <main role="main" className="pb-3 main">
+        <main role="main" className="main ">
             <AssignmentFilterButtonsActions />
-            <div className="text-center">{isAdmin ? <AdminTasksTable /> : <TasksTable />}</div>
+            <div className="text-center p-3">{isAdmin ? <AdminTasksTable /> : <TasksTable />}</div>
         </main>
     );
 }

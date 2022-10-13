@@ -7,7 +7,9 @@ import {addAuthorizationKey} from '../utils/localStorage';
 axiosRetry(axios, {retries: 3});
 
 export const logIn = (body, dispatch) => {
-        axios.post('/admin/auth/logon', body).then(result => {
+    axios
+        .post('/admin/auth/logon', body)
+        .then(result => {
             if (result.data.success) {
                 dispatch({
                     type: actionTypes.LOGIN_ADMIN.FULFILLED,
@@ -32,8 +34,11 @@ export const logIn = (body, dispatch) => {
                     payload: true
                 });
             }
-        }).catch(error => dispatch({
-            type: actionTypes.LOGIN_ADMIN.REJECTED,
-            payload: error.message
-        }))
+        })
+        .catch(error =>
+            dispatch({
+                type: actionTypes.LOGIN_ADMIN.REJECTED,
+                payload: error.message
+            })
+        );
 };

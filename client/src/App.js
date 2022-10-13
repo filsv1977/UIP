@@ -9,7 +9,7 @@ import Header from './components/Header';
 function App() {
     return (
         <TasksContextProvider>
-            <div className="d-flex flex-column min-vh-100 px-2 ">
+            <div className="d-flex flex-column min-vh-100 ">
                 <Header />
                 <Routes>
                     <Route path="/" exact element={<Navigate to="/open" replace />} />
