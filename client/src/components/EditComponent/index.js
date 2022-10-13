@@ -43,7 +43,7 @@ function EditComponent({
                         )
                     }
                     variant={x.variant}
-                    // style={x.style}
+                    style={x.style}
                     size={'sm'}
                 >
                     {x.text}
