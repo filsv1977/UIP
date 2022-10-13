@@ -16,18 +16,12 @@ class ExchangeUbx {
         return this;
     }
 
-    get success() {
-        return {success: this._success, message: this._error};
+    get error() {
+        return this._error;
     }
 
     get ubx2usdt() {
-        let result;
-        if (this._ubx2usdt === null) {
-            result = {success: false, message: this._error};
-        } else {
-            result = {success: true, data: this._ubx2usdt};
-        }
-        return result;
+        return this._ubx2usdt;
     }
 
     resetUbx2usdt() {
@@ -43,7 +37,7 @@ class ExchangeUbx {
             })
             .catch(error => {
                 this._error = error.message;
-                // console.log(error.message);
+                console.log(error.message);
             });
     }
 }
