@@ -2,7 +2,7 @@ import React from 'react';
 
 function Header() {
     return (
-        <>
+        <div className={'p-2'}>
             <div className="text-center">
                 <h4 className="display-4">Ubix network Improvement Proposal (UIP)</h4>
                 <p>
@@ -17,7 +17,7 @@ function Header() {
                     Interested developers can apply to implement certain UIPs.
                 </p>
             </div>
-        </>
+        </div>
     );
 }
 

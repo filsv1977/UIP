@@ -52,7 +52,7 @@ export default function useAssignmentActions(isAdmin = false) {
     const assignmentAdminActions = [
         {
             id: adminAction.ALL,
-            text: 'All tasks',
+            text: 'All',
             route: 'open',
             button: {
                 variant: active => (+active === +adminAction.ALL ? 'outline-danger' : 'outline-primary')

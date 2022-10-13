@@ -10,7 +10,7 @@ import {actionTypes} from '../../Context/actionTypes';
 import './loginModal.css';
 import md5 from 'md5';
 
-function LoginModal({show}) {
+function LoginModal() {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -33,7 +33,7 @@ function LoginModal({show}) {
     };
 
     return (
-        <Modal show={show} onHide={onHandleClose} className="modal">
+        <Modal show={state.showLogin} onHide={onHandleClose} className="modal">
             <Modal.Header closeButton>
                 <Modal.Title>Authorization</Modal.Title>
             </Modal.Header>

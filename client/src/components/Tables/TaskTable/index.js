@@ -36,7 +36,7 @@ function TasksTable() {
             <Table className="align-middle table-bordered " hover data-click-to-select="true">
                 <thead>
                     <tr>
-                        <th className="text-truncate" style={withStyle} scope="col">
+                        <th className="text-truncate w-25" style={withStyle} scope="col">
                             Task
                         </th>
                         <th className="text-truncate" style={withStyle} scope="col">
