@@ -3,7 +3,7 @@ import axios from 'axios';
 import * as cheerio from 'cheerio';
 import axiosRetry from 'axios-retry';
 
-const GIT_URL = 'https://github.com1/';
+const GIT_URL = 'https://github.com/';
 const TASKS_LIST_URL = `${GIT_URL}SilentNotaryEcosystem/UIPS/`;
 
 axiosRetry(axios, {retries: 3});
