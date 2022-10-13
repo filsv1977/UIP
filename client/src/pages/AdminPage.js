@@ -8,7 +8,7 @@ import {checkToken} from '../api/checkToken';
 
 function AdminPage() {
     const {
-        state: {isAdmin, showLogin},
+        state: {isAdmin},
         dispatch
     } = useTasks();
 
@@ -27,7 +27,7 @@ function AdminPage() {
     return (
         <>
             <Content isAdmin={isAdmin} />
-            <LoginModal show={showLogin} />
+            <LoginModal />
         </>
     );
 }

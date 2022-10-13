@@ -20,6 +20,14 @@ function AdminTasksTable() {
 
     const [teamBox, setTeam] = useState(false);
 
+    let spinnerTh = {
+        fontSize: '1px',
+        lineHeight: 0,
+        padding: 0
+    };
+
+    const withStyle = {minWidth: '50px'};
+
     const onEditTask = editData => {
         if (estimationHours < 0) return;
         let newData = {...editData};
@@ -78,14 +86,14 @@ function AdminTasksTable() {
 
     const generateTable = (state?.tasks || []).map(task => (
         <tr key={task.id}>
-            <td className="text-truncate">
+            <td>
                 {
                     <a href={task.url} target="_blank" rel="noreferrer">
                         {task.name}
                     </a>
                 }
             </td>
-            <td className="text-truncate" style={style}>
+            <td style={style}>
                 {editRow && +task.id === +rowId && !teamBox ? (
                     <>
                         <Form.Control
@@ -108,9 +116,9 @@ function AdminTasksTable() {
                     task.estimationHours || ''
                 )}
             </td>
-            <td className="text-truncate">{editRow && +task.id === +rowId && teamBox ? '-' : task.ubxPrice || ''}</td>
-            <td className="text-truncate">{editRow && +task.id === +rowId && teamBox ? '-' : task.usdtPrice || ''}</td>
-            <td className="text-truncate" style={style}>
+            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.ubxPrice || ''}</td>
+            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.usdtPrice || ''}</td>
+            <td style={style}>
                 {editRow && +task.id === +rowId && !teamBox ? (
                     <Form.Control
                         className="form-control form-control-sm"
@@ -126,7 +134,7 @@ function AdminTasksTable() {
                     task.performer.nickname || ''
                 )}
             </td>
-            <td className="text-truncate" style={style}>
+            <td style={style}>
                 {editRow && +task.id === +rowId && !teamBox ? (
                     <Form.Control
                         className="form-control form-control-sm"
@@ -142,7 +150,7 @@ function AdminTasksTable() {
                     task.performer.walletAddress || ''
                 )}
             </td>
-            <td className="text-truncate" style={style}>
+            <td style={style}>
                 <input
                     className="form-check-input"
                     type="checkbox"
@@ -175,26 +183,32 @@ function AdminTasksTable() {
         </tr>
     ));
 
-    let spinnerTh = {
-        fontSize: '1px',
-        lineHeight: 0,
-        padding: 0
-    };
-
     return (
         <div className={'table-responsive'}>
-            <Table className="align-middle" hover data-click-to-select="true">
+            <Table className="align-middle table-bordered " hover data-click-to-select="true">
                 <thead>
                     <tr>
                         <th className="text-truncate" scope="col">
                             Task
                         </th>
-                        <th className="text-truncate" scope="col">Estimation hours</th>
-                        <th className="text-truncate" scope="col">Cost in UBX</th>
-                        <th className="text-truncate" scope="col">Cost in USDT</th>
-                        <th className="text-truncate" scope="col">Nickname</th>
-                        <th className="text-truncate" scope="col">Wallet</th>
-                        <th className="text-truncate" scope="col">Implemented By Ubix Team</th>
+                        <th className="text-truncate" style={withStyle} scope="col">
+                            Estimation hours
+                        </th>
+                        <th className="text-truncate" style={withStyle} scope="col">
+                            Cost in UBX
+                        </th>
+                        <th className="text-truncate" style={withStyle} scope="col">
+                            Cost in USDT
+                        </th>
+                        <th className="text-truncate" style={withStyle} scope="col">
+                            Nickname
+                        </th>
+                        <th className="text-truncate" style={withStyle} scope="col">
+                            Wallet
+                        </th>
+                        <th className="text-truncate" style={withStyle} scope="col">
+                            Implemented By Ubix Team
+                        </th>
                         <th scope="col">Edit</th>
                     </tr>
                 </thead>
