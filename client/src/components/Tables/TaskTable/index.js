@@ -9,17 +9,17 @@ function TasksTable() {
 
     const generateTable = (state?.tasks || []).map(task => (
         <tr key={task.id}>
-            <td className="text-truncate">
+            <td>
                 {
                     <a href={task.url} target="_blank" rel="noreferrer">
                         {task.name}
                     </a>
                 }
             </td>
-            <td className="text-truncate">{task.estimationHours ? task.estimationHours : '-'}</td>
-            <td className="text-truncate">{task.ubxPrice ? task.ubxPrice : '-'}</td>
-            <td className="text-truncate">{task.usdtPrice ? task.ubxPrice : '-'}</td>
-            <td className="text-truncate">{task.performer.nickname}</td>
+            <td>{task.estimationHours ? task.estimationHours : '-'}</td>
+            <td>{task.ubxPrice ? task.ubxPrice : '-'}</td>
+            <td>{task.usdtPrice ? task.ubxPrice : '-'}</td>
+            <td>{task.performer.nickname}</td>
         </tr>
     ));
 
@@ -29,18 +29,28 @@ function TasksTable() {
         padding: 0
     };
 
+    const withStyle = {minWidth: '50px'};
+
     return (
         <div className={'table-responsive'}>
-            <Table className="align-middle" hover data-click-to-select="true">
+            <Table className="align-middle table-bordered " hover data-click-to-select="true">
                 <thead>
                     <tr>
-                        <th className="text-truncate" scope="col">
+                        <th className="text-truncate" style={withStyle} scope="col">
                             Task
                         </th>
-                        <th className="text-truncate" scope="col">Estimation hours</th>
-                        <th className="text-truncate" scope="col">Cost in UBX</th>
-                        <th className="text-truncate" scope="col">Cost in USDT</th>
-                        <th className="text-truncate" scope="col">Nickname</th>
+                        <th className="text-truncate" style={withStyle} scope="col">
+                            Estimation hours
+                        </th>
+                        <th className="text-truncate" style={withStyle} scope="col">
+                            Cost in UBX
+                        </th>
+                        <th className="text-truncate" style={withStyle} scope="col">
+                            Cost in USDT
+                        </th>
+                        <th className="text-truncate" style={withStyle} scope="col">
+                            Nickname
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
