@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import useAssignmentActions from '../../hooks/useAssignmentActions';
 import {Button, Stack} from 'react-bootstrap';
 import {useTasks} from '../../Context/reducer';
+import './index.css'
 
 function AssignmentFilterButtonsActions() {
     const {state} = useTasks();
@@ -9,7 +10,7 @@ function AssignmentFilterButtonsActions() {
     const [active, setActive] = useState(0);
 
     return (
-        <Stack className="mb-2 p-3" direction="horizontal" gap={2}>
+        <Stack id ={"FilterActions"} className="mb-2 p-3 FilterActions" direction="horizontal" gap={2}>
             {assignmentFilterActions.map(x => (
                 <Button
                     key={x.id}
