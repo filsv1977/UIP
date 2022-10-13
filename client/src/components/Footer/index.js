@@ -25,7 +25,7 @@ function Footer() {
                             @klowert
                         </a>
                         <div className="footer-copyright text-center py-3">
-                            Copyright © 2022 SilentNotary. All rights reserved.
+                            Copyright © 2022 Ubix.network. All rights reserved.
                         </div>
                     </div>
                 </div>
