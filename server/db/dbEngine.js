@@ -9,6 +9,7 @@ class DbEngine {
 
         DbEngine.instance = this;
         this._dbPath = path;
+        this._error = '';
         this._load();
         return this;
     }
@@ -30,11 +31,16 @@ class DbEngine {
             this._db.push({...TASK_TEMPLATE, ...elem, id: this._getNewId()});
         });
 
+        this._error = '';
         this._save();
     }
 
     select() {
-        return {success: true, data: this._db.filter(item => !item.deleted)};
+        let result = {success: false, message: this._error};
+        if (!this._error) {
+            result = {success: true, data: this._db.filter(item => !item.deleted)};
+        }
+        return result;
     }
 
     update(id, data) {
@@ -53,6 +59,10 @@ class DbEngine {
 
     _getIndex(id) {
         return this._db.findIndex(item => +item.id === +id);
+    }
+
+    setError(error) {
+        this._error = error;
     }
 
     _getIndexByTaskName(name) {
@@ -103,6 +113,7 @@ class DbEngine {
             })
             .catch(error => {
                 this._db = [];
+                this._error = 'Error loading database from file';
                 console.log(error);
             });
     }

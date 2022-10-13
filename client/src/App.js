@@ -4,11 +4,13 @@ import HomePage from './pages/HomePage';
 import AdminPage from './pages/AdminPage';
 import Footer from './components/Footer';
 import {TasksContextProvider} from './Context/reducer';
+import Header from './components/Header';
 
 function App() {
     return (
         <TasksContextProvider>
             <div className="d-flex flex-column min-vh-100 px-2 ">
+                <Header />
                 <Routes>
                     <Route path="/" exact element={<Navigate to="/open" replace />} />
                     <Route path="/open" element={<HomePage implemented={0} />} />

@@ -1,4 +1,4 @@
-import {isAdmin} from '../../../../strategies/isAdminByHeader.js';
+import {isAdmin} from '../../../../strategies/checkAdmin.js';
 
 const logon = async (req, res) => {
     const {login, password} = req.body;

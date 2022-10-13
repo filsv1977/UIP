@@ -3,14 +3,15 @@ import logo from '../../image/logo.png';
 import './footer.css';
 
 function Footer() {
+    //fixed-bottom
     return (
         <footer
-            className="page-footer font-small blue fixed-bottom footer text-center text-white"
+            className="page-footer font-small blue  footer text-center text-white"
             style={{backgroundColor: 'rgb(82, 86, 89)'}}
         >
             <div className="container-fluid text-center text-md-left">
                 <div className="row">
-                    <div className="col-md-3 d-flex align-items-center">
+                    <div className="col-md-3 d-flex align-items-center justify-content-center">
                         <a className="logo_footer" href="https://silentnotary.com/" target="_blank" rel="noreferrer">
                             <img src={logo} alt="UBIX" />
                         </a>
