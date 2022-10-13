@@ -188,7 +188,7 @@ function AdminTasksTable() {
             <Table className="align-middle table-bordered " hover data-click-to-select="true">
                 <thead>
                     <tr>
-                        <th className="text-truncate" scope="col">
+                        <th className="text-truncate w-25" scope="col">
                             Task
                         </th>
                         <th className="text-truncate" style={withStyle} scope="col">
@@ -209,7 +209,7 @@ function AdminTasksTable() {
                         <th className="text-truncate" style={withStyle} scope="col">
                             Implemented By Ubix Team
                         </th>
-                        <th style={{minWidth: '100px'}} scope="col">Edit</th>
+                        <th scope="col">Edit</th>
                     </tr>
                 </thead>
                 <tbody>

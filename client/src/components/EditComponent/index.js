@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
 import useEditButtonActions from '../../hooks/useEditButtonActions';
+import './index.css'
 
 function EditComponent({
     data,
@@ -23,11 +24,12 @@ function EditComponent({
             ? editButtonActions.filter(btn => +btn.id !== +filterAction.OPEN)
             : editButtonActions.filter(btn => +btn.id === +filterAction.OPEN);
     return (
-        <div className={'d-flex justify-content-between'}>
+        <div id="EditButton" className={'d-flex'}>
             {buttons.map(x => (
                 <Button
                     disabled={+x.id === +filterAction.SAVE ? !formSubmitted : false}
                     key={x.id}
+                    id={`EditButton${x.id}`}
                     onClick={e =>
                         x.onClick(
                             e,
@@ -43,7 +45,7 @@ function EditComponent({
                         )
                     }
                     variant={x.variant}
-                    style={x.style}
+                    // style={x.style}
                     size={'sm'}
                 >
                     {x.text}
