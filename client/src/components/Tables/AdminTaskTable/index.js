@@ -209,7 +209,7 @@ function AdminTasksTable() {
                         <th className="text-truncate" style={withStyle} scope="col">
                             Implemented By Ubix Team
                         </th>
-                        <th scope="col">Edit</th>
+                        <th style={{minWidth: '100px'}} scope="col">Edit</th>
                     </tr>
                 </thead>
                 <tbody>

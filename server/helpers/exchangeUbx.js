@@ -43,7 +43,6 @@ class ExchangeUbx {
             })
             .catch(error => {
                 this._error = error.message;
-                // console.log(error.message);
             });
     }
 }
