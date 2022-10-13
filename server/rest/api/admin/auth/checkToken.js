@@ -1,4 +1,4 @@
-import {isAdminByHeader} from '../../../../strategies/isAdminByHeader.js';
+import {isAdminByHeader} from '../../../../strategies/checkAdmin.js';
 
 const checkToken = (req, res) => {
     return res.json({success: isAdminByHeader(req.headers.authorization)});

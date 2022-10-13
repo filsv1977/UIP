@@ -1,4 +1,4 @@
-import {isAdminByHeader} from '../../../strategies/isAdminByHeader.js';
+import {isAdminByHeader} from '../../../strategies/checkAdmin.js';
 
 const exportTasks = async (req, res) => {
     if (isAdminByHeader(req.headers.authorization)) {
