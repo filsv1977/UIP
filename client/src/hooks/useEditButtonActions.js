@@ -39,7 +39,6 @@ export default function useEditButtonActions() {
                 });
             },
             variant: 'outline-primary',
-            style: {width: '100px'}
         },
         {
             id: filterAction.SAVE,
@@ -62,7 +61,6 @@ export default function useEditButtonActions() {
                 setTeam(false);
             },
             variant: 'outline-danger',
-            style: {marginRight: '2px', width: '50px'}
         },
         {
             id: filterAction.CLOSE,
@@ -90,7 +88,6 @@ export default function useEditButtonActions() {
                 setTeam(false);
             },
             variant: 'outline-primary',
-            style: {marginLeft: '2px', width: '50px'}
         }
     ];
 
