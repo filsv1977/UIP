@@ -22,8 +22,8 @@
         "ubxPrice": 0,
         "usdtPrice": 0,
         "performer": {
-            "nickname": "",
-            "walletAddress": "",
+            "nickname": "423",
+            "walletAddress": "4",
             "hasImplementedByUbixTeam": false
         },
         "implemented": true,
