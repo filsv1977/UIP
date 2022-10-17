@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(__dirname));
     app.use(express.static('client/build'));
     app.use('/admin', express.static('client/build'));
     app.use('/open', express.static('client/build'));
