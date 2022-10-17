@@ -8,7 +8,7 @@
         "usdtPrice": 0,
         "performer": {
             "nickname": "57575",
-            "walletAddress": "",
+            "walletAddress": "2",
             "hasImplementedByUbixTeam": false
         },
         "implemented": true,
@@ -22,7 +22,7 @@
         "ubxPrice": 0,
         "usdtPrice": 0,
         "performer": {
-            "nickname": "",
+            "nickname": "44",
             "walletAddress": "",
             "hasImplementedByUbixTeam": false
         },
