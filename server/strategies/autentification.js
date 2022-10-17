@@ -7,7 +7,6 @@ export function isAdminAuth(req, res, next) {
 
 export const isAdminByHeader = req => {
     const authheader = req.headers.authorization;
-    console.log('@@@@ authheader', authheader);
     if (authheader) {
         const {login, password} = JSON.parse(authheader);
 

@@ -2,7 +2,6 @@ import {DB} from '../index.js';
 
 export function getList(implemented, admin) {
     try {
-        console.log('@@@@ getList', implemented, admin);
         const answer = DB.select();
         if (!answer.success) {
             return {...answer};

@@ -20,7 +20,7 @@ export const checkToken = async dispatch => {
                 : {}
         )
         .then(result => {
-            if(result.data.success) {
+            if (result.data.success) {
                 dispatch({
                     type: actionTypes.LOGIN_ADMIN.FULFILLED,
                     payload: result.data.success
@@ -38,8 +38,6 @@ export const checkToken = async dispatch => {
                 type: actionTypes.SET_VISIBLE,
                 payload: !result.data.success
             });
-
-
         })
         .catch(e => {
             dispatch({

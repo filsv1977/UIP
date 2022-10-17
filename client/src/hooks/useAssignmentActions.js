@@ -81,8 +81,10 @@ export default function useAssignmentActions(isAdmin = false) {
             button: {
                 variant: active => (+active === +adminAction.CLOSED ? 'outline-danger' : 'outline-primary')
             },
-            onClick: (e, setActive) => fetchData(dispatch, 1).then(_ => {
-                setActive(adminAction.CLOSED)})
+            onClick: (e, setActive) =>
+                fetchData(dispatch, 1).then(_ => {
+                    setActive(adminAction.CLOSED);
+                })
         },
         {
             id: adminAction.EXPORT,

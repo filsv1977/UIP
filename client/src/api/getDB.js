@@ -3,7 +3,7 @@ import axiosRetry from 'axios-retry';
 import {actionTypes} from '../Context/actionTypes';
 import {saveToFile} from '../utils/saveToFile';
 import {getAuthorizationKey} from '../utils/localStorage';
-import {checkToken} from "./checkToken";
+import {checkToken} from './checkToken';
 
 axiosRetry(axios, {retries: 3});
 
@@ -19,14 +19,14 @@ export const exportDB = async dispatch => {
                 : {}
         )
         .then(result => {
-            if(result.data.success !== false) {
+            if (result.data.success !== false) {
                 saveToFile('db.json', result.data);
 
                 dispatch({
                     type: actionTypes.EXPORT_DB.FULFILLED
                 });
             } else {
-                checkToken(dispatch)
+                checkToken(dispatch);
             }
         })
         .catch(e => {

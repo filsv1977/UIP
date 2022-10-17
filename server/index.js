@@ -29,7 +29,7 @@ restRoutes(app);
 const serverPort = process.env.PORT || 4000;
 
 app.listen(serverPort, () => {
-    console.log(`Example app listening on port ${serverPort}!`);
+    console.log(`UIP listening on port ${serverPort}!`);
 });
 
 export default app;
