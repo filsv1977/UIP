@@ -33,10 +33,10 @@ export const checkToken = async dispatch => {
                 fetchData(dispatch, null);
             }
         })
-        .catch(e =>
+        .catch(e => {
             dispatch({
                 type: actionTypes.TOKEN_ERROR,
                 payload: e.message
-            })
-        );
+            });
+        });
 };

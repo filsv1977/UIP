@@ -27,7 +27,7 @@ export const exportDB = async dispatch => {
         .catch(e => {
             dispatch({
                 type: actionTypes.EXPORT_DB.REJECTED,
-                payload: 'You are not authenticated!'
+                payload: e.message
             });
         });
 };

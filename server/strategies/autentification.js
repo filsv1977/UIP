@@ -5,8 +5,6 @@ export function isAdminAuth(req, res, next) {
     if (!!authheader && auth.login === process.env.LOGIN && auth.password === process.env.PASSWORD) {
         next();
     } else {
-        const err = new Error('You are not authenticated!');
-        err.status = 401;
-        return next(err);
+        res.json({success: false, message: 'You are not authenticated!'});
     }
 }

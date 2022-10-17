@@ -29,7 +29,6 @@ export default function useEditButtonActions() {
                 setTeam
             ) => {
                 getCurrentExchange(dispatch).then(_ => {
-                    console.log('@@@@', _);
                     setRowId(data.id);
                     setEdit(true);
                     setEditRow(true);
