@@ -1,4 +1,4 @@
-@media (max-width: 960px) {
+@media (max-width: 1000px) {
     #EditButton {
         flex-direction: column;
         justify-content: center;
@@ -13,7 +13,7 @@
     }
 }
 
-@media (min-width: 961px) {
+@media (min-width: 1001px) {
     #EditButton {
         flex-direction: row;
         justify-content: space-between;
@@ -22,7 +22,7 @@
     #EditButton2,
     #EditButton3 {
         width: auto !important;
-        margin: 2px;
+        margin: 1px;
     }
 }
 

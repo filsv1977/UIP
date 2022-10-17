@@ -20,18 +20,26 @@ export const checkToken = async dispatch => {
                 : {}
         )
         .then(result => {
-            dispatch({
-                type: actionTypes.LOGIN_ADMIN.FULFILLED,
-                payload: result.data.success
-            });
+            if(result.data.success) {
+                dispatch({
+                    type: actionTypes.LOGIN_ADMIN.FULFILLED,
+                    payload: result.data.success
+                });
+
+                fetchData(dispatch, null);
+            } else {
+                dispatch({
+                    type: actionTypes.LOGIN_ADMIN.REJECTED,
+                    payload: result.data.success
+                });
+            }
 
             dispatch({
                 type: actionTypes.SET_VISIBLE,
                 payload: !result.data.success
             });
-            if (result.data.success) {
-                fetchData(dispatch, null);
-            }
+
+
         })
         .catch(e => {
             dispatch({

@@ -20,7 +20,7 @@ function EditComponent({
     const {editButtonActions, isEdit, filterAction} = useEditButtonActions();
 
     const buttons =
-        isEdit && taskId === +rowId
+        isEdit && +taskId === rowId
             ? editButtonActions.filter(btn => +btn.id !== +filterAction.OPEN)
             : editButtonActions.filter(btn => +btn.id === +filterAction.OPEN);
     return (
