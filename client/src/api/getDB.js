@@ -24,10 +24,10 @@ export const exportDB = async dispatch => {
                 type: actionTypes.EXPORT_DB.FULFILLED
             });
         })
-        .catch(e =>
+        .catch(e => {
             dispatch({
                 type: actionTypes.EXPORT_DB.REJECTED,
-                payload: e.message
-            })
-        );
+                payload: 'You are not authenticated!'
+            });
+        });
 };

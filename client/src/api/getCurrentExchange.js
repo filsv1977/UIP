@@ -29,7 +29,7 @@ export const getCurrentExchange = async dispatch => {
         .catch(e =>
             dispatch({
                 type: actionTypes.GET_EXCHANGE_RATE.REJECTED,
-                payload: e.message
+                payload: 'You are not authenticated!'
             })
         );
 };

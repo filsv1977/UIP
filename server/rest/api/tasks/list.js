@@ -1,9 +1,8 @@
 import {DB} from '../../../index.js';
-import {isAdminByHeader} from '../../../strategies/checkAdmin.js';
 
 const list = async (req, res) => {
     let {implemented} = req.query;
-    const authHeader = req.headers.authorization;
+    // const authHeader = req.headers.authorization;
 
     try {
         const answer = DB.select();
@@ -25,10 +24,10 @@ const list = async (req, res) => {
         answer.data.forEach(item => {
             if (filter(item)) {
                 let x = JSON.parse(JSON.stringify(item));
-                if (!isAdminByHeader(authHeader)) {
-                    delete x.performer.walletAddress;
-                    delete x.performer.hasImplementedByUbixTeam;
-                }
+                // if (!isAdminAuth(authHeader)) {
+                //     delete x.performer.walletAddress;
+                //     delete x.performer.hasImplementedByUbixTeam;
+                // }
                 data.push(x);
             }
         });

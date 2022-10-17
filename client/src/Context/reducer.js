@@ -155,6 +155,13 @@ export const taskReducer = (state, action) => {
             };
         }
 
+        case actionTypes.EXPORT_DB.REJECTED: {
+            return {
+                ...state,
+                error: action.payload
+            };
+        }
+
         default:
             return state;
     }
