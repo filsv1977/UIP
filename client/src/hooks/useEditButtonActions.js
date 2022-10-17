@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {getCurrentExchange} from '../api/getCurrentExchange';
 import {useTasks} from '../Context/reducer';
+import {checkToken} from "../api/checkToken";
 
 export default function useEditButtonActions() {
     const [isEdit, setEdit] = useState(false);
@@ -57,6 +58,7 @@ export default function useEditButtonActions() {
                 setFormSubmitted,
                 setTeam
             ) => {
+                checkToken(dispatch)
                 onEditTask(data);
                 setEdit(false);
                 setTeam(false);
@@ -80,6 +82,7 @@ export default function useEditButtonActions() {
                 setFormSubmitted,
                 setTeam
             ) => {
+                checkToken(dispatch)
                 setRowId(null);
                 setEdit(false);
                 setEditRow(false);
