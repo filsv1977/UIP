@@ -11,8 +11,8 @@ function HomePage({implemented}) {
     } = useTasks();
 
     useEffect(() => {
-        fetchData(dispatch, implemented);
         delAuthorizationKey();
+        fetchData(dispatch, implemented);
     }, []);
 
     return <Content isAdmin={isAdmin} />;

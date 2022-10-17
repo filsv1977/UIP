@@ -2,6 +2,7 @@ import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import {actionTypes} from '../Context/actionTypes';
 import {getAuthorizationKey} from '../utils/localStorage';
+import {checkToken} from './checkToken';
 
 axiosRetry(axios, {retries: 3});
 
@@ -19,7 +20,10 @@ export const getCurrentExchange = async dispatch => {
                 : {}
         )
         .then(result => {
-            if (!result.data.success) throw new Error(result.data.message);
+            if (!result.data.success) {
+                checkToken(dispatch);
+                throw new Error(result.data.message);
+            }
 
             dispatch({
                 type: actionTypes.GET_EXCHANGE_RATE.FULFILLED,
@@ -29,7 +33,7 @@ export const getCurrentExchange = async dispatch => {
         .catch(e =>
             dispatch({
                 type: actionTypes.GET_EXCHANGE_RATE.REJECTED,
-                payload: e.message
+                payload: 'You are not authenticated!'
             })
         );
 };

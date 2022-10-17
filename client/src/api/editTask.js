@@ -28,7 +28,7 @@ export const editTask = async (body, dispatch) => {
         .catch(e =>
             dispatch({
                 type: actionTypes.EDIT_TASK.REJECTED,
-                payload: e.message
+                payload: 'You are not authenticated!'
             })
         );
 };
