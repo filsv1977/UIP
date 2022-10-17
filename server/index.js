@@ -4,7 +4,6 @@ import restRoutes from './rest/index.js';
 import cors from 'cors';
 import {getTaskListFromWeb} from './helpers/uipsPageParser.js';
 import {startSchedulerGetTasks} from './utils/shedullerGetTask.js';
-// import {isAdminAuth} from './strategies/autentification.js';
 
 export const DB = new DbEngine(process.env.DB_FILE_NAME);
 
@@ -13,7 +12,6 @@ startSchedulerGetTasks();
 
 const app = express();
 app.use(cors());
-// app.use(isAdminAuth);
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
