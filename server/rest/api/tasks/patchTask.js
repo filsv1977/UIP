@@ -1,4 +1,4 @@
-import {DB} from '../../../../index.js';
+import {DB} from '../../../index.js';
 
 const patchTask = async (req, res) => {
     let {body, params} = req;

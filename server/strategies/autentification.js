@@ -1,10 +1,20 @@
 export function isAdminAuth(req, res, next) {
-    const authheader = req.headers.authorization;
-    const auth = JSON.parse(authheader);
-
-    if (!!authheader && auth.login === process.env.LOGIN && auth.password === process.env.PASSWORD) {
-        next();
-    } else {
-        res.json({success: false, message: 'You are not authenticated!'});
+    if (isAdminByHeader(req)) {
+        return next();
     }
+    res.json({success: false, message: 'You are not authenticated!'});
 }
+
+export const isAdminByHeader = req => {
+    const authheader = req.headers.authorization;
+    console.log('@@@@ authheader', authheader);
+    if (authheader) {
+        const {login, password} = JSON.parse(authheader);
+
+        return isAdmin(login, password);
+    }
+};
+
+export const isAdmin = (login, password) => {
+    return login === process.env.LOGIN && password === process.env.PASSWORD;
+};
