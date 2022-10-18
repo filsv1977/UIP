@@ -19,8 +19,7 @@ export const TasksContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(taskReducer, initialState);
 
     useEffect(() => {
-        const intervalId = setInterval(() => fetchData(dispatch,
-            state.activeFilterBtn, false, state.isAdmin), 300000);
+        const intervalId = setInterval(() => fetchData(dispatch, state.activeFilterBtn, false, state.isAdmin), 300000);
 
         return () => clearInterval(intervalId);
     }, [state]);
