@@ -16,6 +16,7 @@ function App() {
                     <Route path="/open" element={<HomePage implemented={0} />} />
                     <Route path="/implemented" exact element={<HomePage implemented={1} />} />
                     <Route path="/admin" element={<AdminPage />} />
+                    <Route path="*" exact element={<Navigate to="/open" replace />} />
                 </Routes>
                 <Footer />
             </div>
