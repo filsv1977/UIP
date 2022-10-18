@@ -18,9 +18,7 @@ app.use(express.urlencoded({extended: false}));
 
 if (process.env.NODE_ENV === 'production') {
     // app.use('*', serveIndex('client/build')); // shows you the file list
-    app.use('/*', express.static('client/build')); // serve the actual files
-    app.use('/*', express.static('client/build'), serveIndex('client/build', {'icons': true}))
-    console.log("here", __dirname)
+    app.use(express.static('client/build'), serveIndex('client/build', {'icons': true}))
     // app.use(express.static('client/build'));
     // app.use("*",express.static('client/build'))
     // app.use('/admin', express.static('client/build'));
