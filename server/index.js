@@ -16,10 +16,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-process.env.NODE_ENV ='production'
-
-
-
 if (process.env.NODE_ENV === 'production') {
     app.use('*', serveIndex('client/build')); // shows you the file list
     app.use('*', express.static('client/build')); // serve the actual files
