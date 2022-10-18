@@ -4,6 +4,7 @@ import restRoutes from './rest/index.js';
 import cors from 'cors';
 import {getTaskListFromWeb} from './helpers/uipsPageParser.js';
 import {startSchedulerGetTasks} from './utils/shedullerGetTask.js';
+import morgan from 'morgan';
 
 export const DB = new DbEngine(process.env.DB_FILE_NAME);
 
@@ -11,19 +12,21 @@ getTaskListFromWeb();
 startSchedulerGetTasks();
 
 const app = express();
+app.use(morgan('combined'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-process.env.NODE_ENV ='production'
+restRoutes(app);
 
-if (process.env.NODE_ENV === 'production') {
-    console.log("here")
-    // app.use(express.static('client/build'));
-    // app.use('/admin', express.static('client/build'));
-    // app.use('/open', express.static('client/build'));
-    // app.use('/implemented', express.static('client/build'));
-}
+// if (process.env.NODE_ENV === 'production') {
+console.log('here');
+// app.use(express.static('client/build'));
+// app.use('/admin', express.static('client/build'));
+// app.use('/open', express.static('client/build'));
+// app.use('/implemented', express.static('client/build'));
+app.use('/*', express.static('client/build'));
+// }
 
 restRoutes(app);
 
