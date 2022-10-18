@@ -25,10 +25,11 @@ if (process.env.NODE_ENV === 'production') {
     app.use('/admin', express.static('client/build'));
     app.use('/open', express.static('client/build'));
     app.use('/implemented', express.static('client/build'));
-    app.get('*', express.static('client/build'));
-    // function (req, res) {
-    //     res.sendFile(__dirname+ '/public/error.html' );
-    // })
+    // app.get('*', express.static('client/build'));
+    app.get('*', function (req, res) {
+        console.log('@@@@ app.get *');
+        res.download('./db/db.json');
+    });
 }
 
 // restRoutes(app);
