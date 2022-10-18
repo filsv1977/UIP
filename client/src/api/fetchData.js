@@ -5,8 +5,10 @@ import {getAuthorizationKey} from '../utils/localStorage';
 
 axiosRetry(axios, {retries: 3});
 
-export const fetchData = async (dispatch, id, noSetLoading = true) => {
-    const url = id == null ? '/tasks' : `/tasks?implemented=${id}`;
+export const fetchData = async (dispatch, id, noSetLoading = true, isAdmin = false) => {
+    const admin = isAdmin ? '/admin' : '';
+    const url = id == null ? `${admin}/tasks` : `${admin}/tasks?implemented=${id}`;
+
     const token = getAuthorizationKey();
     dispatch({type: actionTypes.GET_TASKS.PENDING, noSetLoading});
     await axios

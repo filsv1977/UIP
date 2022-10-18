@@ -26,7 +26,7 @@ export const checkToken = async dispatch => {
                     payload: result.data.success
                 });
 
-                fetchData(dispatch, null);
+                fetchData(dispatch, null, null, true);
             } else {
                 dispatch({
                     type: actionTypes.LOGIN_ADMIN.REJECTED,
