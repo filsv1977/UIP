@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'production') {
     app.get('*', express.static('client/build'));
 }
 
-restRoutes(app);
+// restRoutes(app);
 
 const serverPort = process.env.PORT || 4000;
 
