@@ -10,7 +10,7 @@ function AssignmentFilterButtonsActions({activeButton}) {
     const [active, setActive] = useState(0);
 
     useEffect(()=> {
-        setActive(activeButton)
+        activeButton && setActive(activeButton)
     },[])
 
     return (
