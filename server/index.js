@@ -4,6 +4,7 @@ import restRoutes from './rest/index.js';
 import cors from 'cors';
 import {getTaskListFromWeb} from './helpers/uipsPageParser.js';
 import {startSchedulerGetTasks} from './utils/shedullerGetTask.js';
+import serveIndex from 'serve-index';
 
 export const DB = new DbEngine(process.env.DB_FILE_NAME);
 
@@ -17,10 +18,15 @@ app.use(express.urlencoded({extended: false}));
 
 process.env.NODE_ENV ='production'
 
+
+
 if (process.env.NODE_ENV === 'production') {
+    app.use('*', serveIndex('client/build')); // shows you the file list
+    app.use('*', express.static('client/build')); // serve the actual files
+    app.use('*', express.static('client/build'), serveIndex('client/build', {'icons': true}))
     console.log("here", __dirname)
     // app.use(express.static('client/build'));
-    app.use("*",express.static('client/build'))
+    // app.use("*",express.static('client/build'))
     // app.use('/admin', express.static('client/build'));
     // app.use('/open', express.static('client/build'));
     // app.use('/implemented', express.static('client/build'));
