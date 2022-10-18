@@ -22,9 +22,9 @@ if (process.env.NODE_ENV === 'production') {
     app.use('/admin', express.static('client/build'));
     app.use('/open', express.static('client/build'));
     app.use('/implemented', express.static('client/build'));
-    app.use('/*', (req, res) => {
-        res.redirect('/open');
-    });
+    // app.use('/*', (req, res) => {
+    //     res.redirect('/open');
+    // });
 }
 
 const serverPort = process.env.PORT || 4000;
