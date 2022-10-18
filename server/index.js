@@ -31,7 +31,8 @@ if (process.env.NODE_ENV === 'production') {
     // })
 }
 
-restRoutes(app);
+// restRoutes(app);
+// restRoutes(app);
 
 const serverPort = process.env.PORT || 4000;
 
