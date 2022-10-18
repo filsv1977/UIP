@@ -4,10 +4,10 @@ import TasksTable from '../Tables/TaskTable';
 import AssignmentFilterButtonsActions from '../Button';
 import './content.css';
 
-function Content({isAdmin}) {
+function Content({isAdmin, activeButton}) {
     return (
         <main role="main" className="main ">
-            <AssignmentFilterButtonsActions />
+            <AssignmentFilterButtonsActions activeButton={activeButton}/>
             <div className="text-center p-3">{isAdmin ? <AdminTasksTable /> : <TasksTable />}</div>
         </main>
     );

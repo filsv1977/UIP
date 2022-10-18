@@ -15,7 +15,7 @@ function HomePage({implemented}) {
         fetchData(dispatch, implemented);
     }, []);
 
-    return <Content isAdmin={isAdmin} />;
+    return <Content isAdmin={isAdmin} activeButton={implemented} />;
 }
 
 export default HomePage;

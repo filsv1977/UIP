@@ -1,13 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import useAssignmentActions from '../../hooks/useAssignmentActions';
 import {Button, Stack} from 'react-bootstrap';
 import {useTasks} from '../../Context/reducer';
 import './index.css';
 
-function AssignmentFilterButtonsActions() {
+function AssignmentFilterButtonsActions({activeButton}) {
     const {state} = useTasks();
     const {assignmentFilterActions} = useAssignmentActions(state.isAdmin);
     const [active, setActive] = useState(0);
+
+    useEffect(()=> {
+        setActive(activeButton)
+    },[])
 
     return (
         <Stack id={'FilterActions'} className="mb-2 p-3 FilterActions" direction="horizontal" gap={2}>
