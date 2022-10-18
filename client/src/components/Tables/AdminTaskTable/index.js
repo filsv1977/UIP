@@ -113,11 +113,11 @@ function AdminTasksTable() {
                 ) : editRow && +task.id === +rowId && teamBox ? (
                     '-'
                 ) : (
-                    task.estimationHours || ''
+                    task.estimationHours || '-'
                 )}
             </td>
-            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.ubxPrice || ''}</td>
-            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.usdtPrice || ''}</td>
+            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.ubxPrice || '-'}</td>
+            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.usdtPrice || '-'}</td>
             <td style={style}>
                 {editRow && +task.id === +rowId && !teamBox ? (
                     <Form.Control
@@ -131,7 +131,7 @@ function AdminTasksTable() {
                 ) : editRow && +task.id === +rowId && teamBox ? (
                     nickname
                 ) : (
-                    task.performer.nickname || ''
+                    task.performer.nickname || '-'
                 )}
             </td>
             <td style={style}>
@@ -147,7 +147,7 @@ function AdminTasksTable() {
                 ) : editRow && +task.id === +rowId && teamBox ? (
                     '-'
                 ) : (
-                    task.performer.walletAddress || ''
+                    task.performer.walletAddress || '-'
                 )}
             </td>
             <td style={style}>
