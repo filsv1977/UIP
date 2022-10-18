@@ -12,7 +12,7 @@ export const getCurrentExchange = async dispatch => {
 
     await axios
         .get(
-            '/admin/ubx2usdt',
+            '/admin/service/ubx2usdt',
             token
                 ? {
                       headers: {Authorization: JSON.stringify(token)}
