@@ -1,21 +1,13 @@
 import {Router} from 'express';
-import logon from './auth/logon.js';
-import logoff from './auth/logoff.js';
-import exportTasks from './exportTasks.js';
-import ubx2usdt from './ubx2usdt.js';
-import checkToken from './auth/checkToken.js';
+import authRouter from './auth/index.js';
+import tasksRouter from './tasks/index.js';
+import serviceRouter from './service/index.js';
 import {isAdminAuth} from '../../../strategies/autentification.js';
-import patchTask from './tasks/patchTask.js';
-import list from '../tasks/list.js';
 
 const router = Router();
 
-router.get('/export', isAdminAuth, exportTasks);
-router.get('/ubx2usdt', isAdminAuth, ubx2usdt);
-router.post('/auth/logon', logon);
-router.get('/auth/logoff', isAdminAuth, logoff);
-router.get('/auth/checkToken', isAdminAuth, checkToken);
-router.get('/tasks', isAdminAuth, list);
-router.patch('/tasks/:id', isAdminAuth, patchTask);
+router.use('/auth', authRouter);
+router.use('/tasks', isAdminAuth, tasksRouter);
+router.use('/service', isAdminAuth, serviceRouter);
 
 export default router;

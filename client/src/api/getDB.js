@@ -11,7 +11,7 @@ export const exportDB = async dispatch => {
     const token = getAuthorizationKey();
     await axios
         .get(
-            '/admin/export',
+            '/admin/service/export',
             token
                 ? {
                       headers: {Authorization: JSON.stringify(token)}
