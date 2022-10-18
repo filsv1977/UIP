@@ -4,7 +4,6 @@ import restRoutes from './rest/index.js';
 import cors from 'cors';
 import {getTaskListFromWeb} from './helpers/uipsPageParser.js';
 import {startSchedulerGetTasks} from './utils/shedullerGetTask.js';
-import serveIndex from 'serve-index';
 
 export const DB = new DbEngine(process.env.DB_FILE_NAME);
 
@@ -20,15 +19,13 @@ restRoutes(app);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
-    app.use('/admin', express.static('client/build'));
-    app.use('/open', express.static('client/build'));
-    app.use('/implemented', express.static('client/build'));
+    // app.use('/admin', express.static('client/build'));
+    // app.use('/open', express.static('client/build'));
+    // app.use('/implemented', express.static('client/build'));
     app.use("/*", (request, response)=> {
         response.redirect("/open")
     });
 }
-
-
 
 const serverPort = process.env.PORT || 4000;
 
