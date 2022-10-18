@@ -38,7 +38,7 @@ export default function useEditButtonActions() {
                     setTeam(data.performer?.hasImplementedByUbixTeam || false);
                 });
             },
-            variant: 'outline-primary',
+            variant: 'outline-primary'
         },
         {
             id: filterAction.SAVE,
@@ -60,7 +60,7 @@ export default function useEditButtonActions() {
                 setEdit(false);
                 setTeam(false);
             },
-            variant: 'outline-danger',
+            variant: 'outline-danger'
         },
         {
             id: filterAction.CLOSE,
@@ -87,7 +87,7 @@ export default function useEditButtonActions() {
                 setFormSubmitted(true);
                 setTeam(false);
             },
-            variant: 'outline-primary',
+            variant: 'outline-primary'
         }
     ];
 

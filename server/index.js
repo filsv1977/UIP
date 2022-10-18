@@ -19,11 +19,11 @@ restRoutes(app);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
-    // app.use('/admin', express.static('client/build'));
-    // app.use('/open', express.static('client/build'));
-    // app.use('/implemented', express.static('client/build'));
-    app.use("/*", (request, response)=> {
-        response.redirect("/open")
+    app.use('/admin', express.static('client/build'));
+    app.use('/open', express.static('client/build'));
+    app.use('/implemented', express.static('client/build'));
+    app.use('/*', (req, res) => {
+        res.redirect('/open');
     });
 }
 
