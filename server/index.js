@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
     app.use('/implemented', express.static('client/build'));
     app.get('*', (res, req) => {
         console.log('*');
-        req.json('No page');
+        req.redirect('/open');
     });
 }
 
