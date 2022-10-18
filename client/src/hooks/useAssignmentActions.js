@@ -58,7 +58,7 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +adminAction.ALL ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                fetchData(dispatch, null).then(_ => {
+                fetchData(dispatch, null, null, true).then(_ => {
                     setActive(adminAction.ALL);
                 });
             }
@@ -71,7 +71,7 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +adminAction.OPEN ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                fetchData(dispatch, 0).then(_ => setActive(adminAction.OPEN));
+                fetchData(dispatch, 0, null, true).then(_ => setActive(adminAction.OPEN));
             }
         },
         {
@@ -82,7 +82,7 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +adminAction.CLOSED ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) =>
-                fetchData(dispatch, 1).then(_ => {
+                fetchData(dispatch, 1, null, true).then(_ => {
                     setActive(adminAction.CLOSED);
                 })
         },
