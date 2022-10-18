@@ -25,7 +25,10 @@ if (process.env.NODE_ENV === 'production') {
     app.use('/admin', express.static('client/build'));
     app.use('/open', express.static('client/build'));
     app.use('/implemented', express.static('client/build'));
-    app.get('*', () => console.log('*'));
+    app.get('*', (res, req) => {
+        console.log('*');
+        req.json('No page');
+    });
 }
 
 // restRoutes(app);
