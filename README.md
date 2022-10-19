@@ -17,3 +17,13 @@ HOURLY_RATE=431965
 
 UBX_USDT_URL='https://ubix.exchange/api/v1/tickers/UBX-USDT'
 ```
+
+Create .env file in `/client`:
+
+REACT_APP_BASENAME - application url  
+REACT_APP_API_BASE - API endpoint
+
+```
+REACT_APP_BASENAME=/uip-dev
+REACT_APP_API_BASE=https://uip-app.herokuapp.com/
+```
