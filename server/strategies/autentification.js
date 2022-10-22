@@ -8,7 +8,7 @@ export function isAdminAuth(req, res, next) {
                 return next();
             }
         }
-        res.json({success: false, message: 'You are not authenticated!'});
+        res.json({success: false, message: 'You are not authorized!'});
     } catch {
         res.json({success: false, message: 'Authentication error!'});
     }

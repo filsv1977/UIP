@@ -3,6 +3,7 @@ import {fetchData} from '../api/fetchData';
 import {useTasks} from '../Context/reducer';
 import {exportDB} from '../api/getDB';
 import {logOut} from '../api/logout';
+import {implementedText, openText} from "../constants";
 
 export default function useAssignmentActions(isAdmin = false) {
     const {dispatch} = useTasks();
@@ -23,7 +24,7 @@ export default function useAssignmentActions(isAdmin = false) {
     const assignmentUserActions = [
         {
             id: userAction.OPEN,
-            text: 'Open',
+            text: openText,
             button: {
                 variant: active => (+active === +userAction.OPEN ? 'outline-danger' : 'outline-primary')
             },
@@ -36,7 +37,7 @@ export default function useAssignmentActions(isAdmin = false) {
         },
         {
             id: userAction.CLOSED,
-            text: 'Closed',
+            text: implementedText,
             button: {
                 variant: active => (+active === +userAction.CLOSED ? 'outline-danger' : 'outline-primary')
             },
@@ -65,7 +66,7 @@ export default function useAssignmentActions(isAdmin = false) {
         },
         {
             id: adminAction.OPEN,
-            text: 'Open',
+            text: openText,
             route: 'open',
             button: {
                 variant: active => (+active === +adminAction.OPEN ? 'outline-danger' : 'outline-primary')
@@ -76,7 +77,7 @@ export default function useAssignmentActions(isAdmin = false) {
         },
         {
             id: adminAction.CLOSED,
-            text: 'Closed',
+            text: implementedText,
             route: 'implemented',
             button: {
                 variant: active => (+active === +adminAction.CLOSED ? 'outline-danger' : 'outline-primary')
