@@ -1,6 +1,6 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import {actionTypes} from '../Context/actionTypes';
+import {actionTypes} from '../сontext/actionTypes';
 import {getAuthorizationKey} from '../utils/localStorage';
 import {fetchData} from './fetchData';
 
@@ -15,7 +15,7 @@ export const checkToken = async dispatch => {
             url,
             token
                 ? {
-                      headers: {Authorization: JSON.stringify(token)}
+                      headers: {Authorization: JSON.stringify(token, null, 4)}
                   }
                 : {}
         )

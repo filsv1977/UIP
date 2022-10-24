@@ -1,8 +1,8 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import {actionTypes} from '../Context/actionTypes';
+import {actionTypes} from '../сontext/actionTypes';
 import {getAuthorizationKey} from '../utils/localStorage';
-import {authError} from "../constants";
+import {authError} from '../constants';
 
 axiosRetry(axios, {retries: 3});
 
@@ -14,7 +14,7 @@ export const editTask = async (body, dispatch) => {
             body,
             token
                 ? {
-                      headers: {Authorization: JSON.stringify(token)}
+                      headers: {Authorization: JSON.stringify(token, null, 4)}
                   }
                 : {}
         )

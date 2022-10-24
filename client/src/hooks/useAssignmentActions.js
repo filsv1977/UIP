@@ -1,22 +1,22 @@
 import {useNavigate} from 'react-router-dom';
 import {fetchData} from '../api/fetchData';
-import {useTasks} from '../Context/reducer';
+import {useTasks} from '../сontext/reducer';
 import {exportDB} from '../api/getDB';
 import {logOut} from '../api/logout';
-import {implementedText, openText} from "../constants";
+import {implementedText, openText} from '../constants';
 
 export default function useAssignmentActions(isAdmin = false) {
     const {dispatch} = useTasks();
     const navigate = useNavigate();
     const userAction = {
         OPEN: 0,
-        CLOSED: 1
+        IMPLEMENTED: 1
     };
 
     const adminAction = {
         ALL: 0,
         OPEN: 1,
-        CLOSED: 2,
+        IMPLEMENTED: 2,
         EXPORT: 3,
         LOGOUT: 4
     };
@@ -36,15 +36,15 @@ export default function useAssignmentActions(isAdmin = false) {
             }
         },
         {
-            id: userAction.CLOSED,
+            id: userAction.IMPLEMENTED,
             text: implementedText,
             button: {
-                variant: active => (+active === +userAction.CLOSED ? 'outline-danger' : 'outline-primary')
+                variant: active => (+active === +userAction.IMPLEMENTED ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                fetchData(dispatch, userAction.CLOSED).then(_ => {
+                fetchData(dispatch, userAction.IMPLEMENTED).then(_ => {
                     navigate('/implemented');
-                    setActive(userAction.CLOSED);
+                    setActive(userAction.IMPLEMENTED);
                 });
             }
         }
@@ -76,15 +76,15 @@ export default function useAssignmentActions(isAdmin = false) {
             }
         },
         {
-            id: adminAction.CLOSED,
+            id: adminAction.IMPLEMENTED,
             text: implementedText,
             route: 'implemented',
             button: {
-                variant: active => (+active === +adminAction.CLOSED ? 'outline-danger' : 'outline-primary')
+                variant: active => (+active === +adminAction.IMPLEMENTED ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) =>
                 fetchData(dispatch, 1, null, true).then(_ => {
-                    setActive(adminAction.CLOSED);
+                    setActive(adminAction.IMPLEMENTED);
                 })
         },
         {

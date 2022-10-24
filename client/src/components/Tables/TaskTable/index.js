@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
-import {useTasks} from '../../../Context/reducer';
+import {useTasks} from '../../../сontext/reducer';
 import Error from '../../Error';
 import SpinnerBtn from '../../Spinner';
 

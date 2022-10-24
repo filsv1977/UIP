@@ -1,4 +1,4 @@
-import {useTasks} from '../../Context/reducer';
+import {useTasks} from '../../сontext/reducer';
 import {useEffect, useRef, useState} from 'react';
 import {FadeLoader} from 'react-spinners';
 import './spinner.css';

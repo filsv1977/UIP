@@ -1,6 +1,6 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import {actionTypes} from '../Context/actionTypes';
+import {actionTypes} from '../сontext/actionTypes';
 import {saveToFile} from '../utils/saveToFile';
 import {getAuthorizationKey} from '../utils/localStorage';
 import {checkToken} from './checkToken';
@@ -14,7 +14,7 @@ export const exportDB = async dispatch => {
             '/admin/service/export',
             token
                 ? {
-                      headers: {Authorization: JSON.stringify(token)}
+                      headers: {Authorization: JSON.stringify(token, null, 4)}
                   }
                 : {}
         )

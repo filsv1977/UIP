@@ -3,10 +3,10 @@ import {Form} from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import React, {useState} from 'react';
 import {logIn} from '../../api/login';
-import {useTasks} from '../../Context/reducer';
+import {useTasks} from '../../сontext/reducer';
 import {useNavigate} from 'react-router-dom';
 import Error from '../Error';
-import {actionTypes} from '../../Context/actionTypes';
+import {actionTypes} from '../../сontext/actionTypes';
 import './loginModal.css';
 import md5 from 'md5';
 

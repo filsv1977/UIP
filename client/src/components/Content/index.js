@@ -7,7 +7,7 @@ import './content.css';
 function Content({isAdmin, activeButton}) {
     return (
         <main role="main" className="main ">
-            <AssignmentFilterButtonsActions activeButton={activeButton}/>
+            <AssignmentFilterButtonsActions activeButton={activeButton} />
             <div className="text-center p-3">{isAdmin ? <AdminTasksTable /> : <TasksTable />}</div>
         </main>
     );

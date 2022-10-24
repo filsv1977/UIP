@@ -1,6 +1,6 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import {actionTypes} from '../Context/actionTypes';
+import {actionTypes} from '../сontext/actionTypes';
 import {getAuthorizationKey} from '../utils/localStorage';
 
 axiosRetry(axios, {retries: 3});
@@ -15,7 +15,7 @@ export const fetchData = async (dispatch, id, noSetLoading = true, isAdmin = fal
             url,
             token
                 ? {
-                      headers: {Authorization: JSON.stringify(token)}
+                      headers: {Authorization: JSON.stringify(token, null, 4)}
                   }
                 : {}
         )
