@@ -1,4 +1,4 @@
-import {TASK_TEMPLATE} from './taskModel.js';
+import taskModel from './taskModel.js';
 import fs from 'fs';
 
 class DbEngine {
@@ -28,7 +28,7 @@ class DbEngine {
         });
 
         tasks.forEach(elem => {
-            this._db.push({...TASK_TEMPLATE, ...elem, id: this._getNewId()});
+            this._db.push({...taskModel, ...elem, id: this._getNewId()});
         });
 
         this._error = '';

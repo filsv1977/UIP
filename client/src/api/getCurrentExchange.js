@@ -3,7 +3,7 @@ import axiosRetry from 'axios-retry';
 import {actionTypes} from '../Context/actionTypes';
 import {getAuthorizationKey} from '../utils/localStorage';
 import {checkToken} from './checkToken';
-import {authError} from "../constants";
+import {authError} from '../constants';
 
 axiosRetry(axios, {retries: 3});
 

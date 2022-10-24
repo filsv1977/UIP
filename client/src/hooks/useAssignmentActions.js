@@ -3,7 +3,7 @@ import {fetchData} from '../api/fetchData';
 import {useTasks} from '../Context/reducer';
 import {exportDB} from '../api/getDB';
 import {logOut} from '../api/logout';
-import {implementedText, openText} from "../constants";
+import {implementedText, openText} from '../constants';
 
 export default function useAssignmentActions(isAdmin = false) {
     const {dispatch} = useTasks();
