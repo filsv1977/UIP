@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import Content from '../components/Content';
 import LoginModal from '../components/Modals/LoginModal';
-import {useTasks} from '../Context/reducer';
+import {useTasks} from '../сontext/reducer';
 import {getAuthorizationKey} from '../utils/localStorage';
-import {actionTypes} from '../Context/actionTypes';
+import {actionTypes} from '../сontext/actionTypes';
 import {checkToken} from '../api/checkToken';
 
 function AdminPage() {

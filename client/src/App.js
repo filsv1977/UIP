@@ -3,7 +3,7 @@ import {Routes, Route, Navigate} from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AdminPage from './pages/AdminPage';
 import Footer from './components/Footer';
-import {TasksContextProvider} from './Context/reducer';
+import {TasksContextProvider} from './сontext/reducer';
 import Header from './components/Header';
 
 function App() {

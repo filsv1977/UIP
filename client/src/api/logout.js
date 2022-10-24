@@ -1,6 +1,6 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import {actionTypes} from '../Context/actionTypes';
+import {actionTypes} from '../сontext/actionTypes';
 import {delAuthorizationKey} from '../utils/localStorage';
 
 axiosRetry(axios, {retries: 3});

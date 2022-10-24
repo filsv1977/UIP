@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import useAssignmentActions from '../../hooks/useAssignmentActions';
 import {Button, Stack} from 'react-bootstrap';
-import {useTasks} from '../../Context/reducer';
+import {useTasks} from '../../сontext/reducer';
 import './index.css';
 
 function AssignmentFilterButtonsActions({activeButton}) {
