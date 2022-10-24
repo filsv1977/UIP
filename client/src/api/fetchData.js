@@ -15,7 +15,7 @@ export const fetchData = async (dispatch, id, noSetLoading = true, isAdmin = fal
             url,
             token
                 ? {
-                      headers: {Authorization: JSON.stringify(token, null, 4)}
+                      headers: {Authorization: JSON.stringify(token)}
                   }
                 : {}
         )

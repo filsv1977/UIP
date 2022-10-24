@@ -15,7 +15,7 @@ export const checkToken = async dispatch => {
             url,
             token
                 ? {
-                      headers: {Authorization: JSON.stringify(token, null, 4)}
+                      headers: {Authorization: JSON.stringify(token)}
                   }
                 : {}
         )

@@ -14,7 +14,7 @@ export const exportDB = async dispatch => {
             '/admin/service/export',
             token
                 ? {
-                      headers: {Authorization: JSON.stringify(token, null, 4)}
+                      headers: {Authorization: JSON.stringify(token)}
                   }
                 : {}
         )

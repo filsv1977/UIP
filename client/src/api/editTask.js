@@ -14,7 +14,7 @@ export const editTask = async (body, dispatch) => {
             body,
             token
                 ? {
-                      headers: {Authorization: JSON.stringify(token, null, 4)}
+                      headers: {Authorization: JSON.stringify(token)}
                   }
                 : {}
         )

@@ -16,7 +16,7 @@ export const getCurrentExchange = async dispatch => {
             '/admin/service/ubx2usdt',
             token
                 ? {
-                      headers: {Authorization: JSON.stringify(token, null, 4)}
+                      headers: {Authorization: JSON.stringify(token)}
                   }
                 : {}
         )
