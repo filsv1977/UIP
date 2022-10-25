@@ -3,15 +3,19 @@ import fs from 'fs';
 
 class DbEngine {
     constructor(path) {
-        if (typeof DbEngine.instance === 'object') {
-            return DbEngine.instance;
-        }
+        try {
+            if (typeof DbEngine.instance === 'object') {
+                return DbEngine.instance;
+            }
 
-        DbEngine.instance = this;
-        this._dbPath = path;
-        this._error = '';
-        this._load();
-        return this;
+            DbEngine.instance = this;
+            this._dbPath = path;
+            this._error = '';
+            this._load();
+            return this;
+        } catch {
+            return null;
+        }
     }
 
     loadUips(tasksList) {

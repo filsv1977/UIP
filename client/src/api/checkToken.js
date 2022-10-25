@@ -11,7 +11,7 @@ export const checkToken = async dispatch => {
     const token = getAuthorizationKey();
     const timer = getUbiTimerKey();
 
-    if(Date.now() > timer){
+    if (Date.now() > timer) {
         dispatch({
             type: actionTypes.SET_VISIBLE,
             payload: true
