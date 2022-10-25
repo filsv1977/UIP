@@ -1,3 +1,4 @@
+import * as R from 'ramda';
 import {DB} from '../../../../index.js';
 
 const patchTask = async (req, res) => {
@@ -5,7 +6,13 @@ const patchTask = async (req, res) => {
 
     let result = false;
     if (params.id !== undefined) {
-        result = DB.update(+params.id, body);
+        const fields = ['estimationHours', 'ubxPrice', 'usdtPrice'];
+        const performerFields = ['nickname', 'walletAddress', 'hasImplementedByUbixTeam'];
+
+        let task = R.pick(fields, body);
+        let performer = R.pick(performerFields, body.performer);
+
+        result = await DB.update(+params.id, {...task, performer});
     }
 
     return res.json(result);

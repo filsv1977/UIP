@@ -1,3 +1,4 @@
+import * as R from 'ramda';
 import {DB} from '../index.js';
 
 export function getList(implemented, admin) {
@@ -18,11 +19,9 @@ export function getList(implemented, admin) {
         let filterData = answer.data.filter(filter);
 
         let data = filterData.map(item => {
-            let performer = {};
-            performer.nickname = item.performer.nickname;
-            if (admin) {
-                performer.walletAddress = item.performer.walletAddress;
-                performer.hasImplementedByUbixTeam = item.performer.hasImplementedByUbixTeam;
+            let {performer} = item;
+            if (!admin) {
+                performer = R.omit(['walletAddress', 'hasImplementedByUbixTeam'], item.performer);
             }
 
             return {...item, performer: {...performer}};

@@ -2,17 +2,17 @@
     {
         "id": 0,
         "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-1.mediawiki",
-        "name": "Drop Outdatet Transactions from MemPool",
-        "estimationHours": 1,
-        "ubxPrice": 431965,
-        "usdtPrice": 19.4,
+        "name": "Drop Outdated Transactions from MemPool",
+        "estimationHours": 0,
+        "ubxPrice": 0,
+        "usdtPrice": 0,
         "performer": {
-            "nickname": "1",
-            "walletAddress": "2",
+            "nickname": "",
+            "walletAddress": "",
             "hasImplementedByUbixTeam": false
         },
         "implemented": true,
-        "deleted": true
+        "deleted": false
     },
     {
         "id": 1,
@@ -20,9 +20,9 @@
         "name": "Node or running RPC reduces performance upon receiving transactions",
         "estimationHours": 1,
         "ubxPrice": 431965,
-        "usdtPrice": 17.32,
+        "usdtPrice": 17.71,
         "performer": {
-            "nickname": "",
+            "nickname": "UBIX Team",
             "walletAddress": "",
             "hasImplementedByUbixTeam": false
         },
@@ -34,8 +34,8 @@
         "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-3.mediawiki",
         "name": "Cleanup MemPool from transactions that are already added to blocks",
         "estimationHours": 1,
-        "ubxPrice": 431965,
-        "usdtPrice": 17.32,
+        "ubxPrice": 0,
+        "usdtPrice": 0,
         "performer": {
             "nickname": "",
             "walletAddress": "",
@@ -62,51 +62,6 @@
     {
         "id": 4,
         "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-5.mediawiki",
-        "name": "Fix protobuf exception in dev branch",
-        "estimationHours": 0,
-        "ubxPrice": 0,
-        "usdtPrice": 0,
-        "performer": {
-            "nickname": "",
-            "walletAddress": "",
-            "hasImplementedByUbixTeam": false
-        },
-        "implemented": false,
-        "deleted": true
-    },
-    {
-        "id": 5,
-        "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-6.mediawiki",
-        "name": "To find a workaraund for LevelDB size growing",
-        "estimationHours": 0,
-        "ubxPrice": 0,
-        "usdtPrice": 0,
-        "performer": {
-            "nickname": "",
-            "walletAddress": "",
-            "hasImplementedByUbixTeam": false
-        },
-        "implemented": false,
-        "deleted": true
-    },
-    {
-        "id": 6,
-        "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-1.mediawiki",
-        "name": "Drop Outdated Transactions from MemPool",
-        "estimationHours": 0,
-        "ubxPrice": 0,
-        "usdtPrice": 0,
-        "performer": {
-            "nickname": "",
-            "walletAddress": "",
-            "hasImplementedByUbixTeam": false
-        },
-        "implemented": true,
-        "deleted": false
-    },
-    {
-        "id": 7,
-        "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-5.mediawiki",
         "name": "Fix protobuf exception in the dev branch",
         "estimationHours": 0,
         "ubxPrice": 0,
@@ -120,7 +75,7 @@
         "deleted": false
     },
     {
-        "id": 8,
+        "id": 5,
         "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-6.mediawiki",
         "name": "Find a workaround for LevelDB size growing too big",
         "estimationHours": 0,
@@ -132,6 +87,6 @@
             "hasImplementedByUbixTeam": false
         },
         "implemented": false,
-        "deleted": false
+        "deleted": true
     }
 ]
