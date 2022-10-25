@@ -3,10 +3,11 @@ import axiosRetry from 'axios-retry';
 import {actionTypes} from '../сontext/actionTypes';
 import {fetchData} from './fetchData';
 import {addAuthorizationKey} from '../utils/localStorage';
+import {logonTimer} from "../utils/timer";
 
 axiosRetry(axios, {retries: 3});
 
-export const logIn = (body, dispatch) => {
+export const logIn = (body, dispatch, navigate) => {
     axios
         .post('/admin/auth/logon', body)
         .then(result => {
@@ -17,6 +18,8 @@ export const logIn = (body, dispatch) => {
                 });
 
                 addAuthorizationKey(body.login, body.password);
+
+                logonTimer(dispatch, navigate)
 
                 dispatch({
                     type: actionTypes.SET_VISIBLE,
