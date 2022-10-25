@@ -4,6 +4,7 @@ import {useTasks} from '../сontext/reducer';
 import {exportDB} from '../api/getDB';
 import {logOut} from '../api/logout';
 import {implementedText, openText} from '../constants';
+import {importDB, importProject} from "../api/importDB";
 
 export default function useAssignmentActions(isAdmin = false) {
     const {dispatch} = useTasks();
@@ -17,8 +18,9 @@ export default function useAssignmentActions(isAdmin = false) {
         ALL: 0,
         OPEN: 1,
         IMPLEMENTED: 2,
-        EXPORT: 3,
-        LOGOUT: 4
+        IMPORT: 3,
+        EXPORT: 4,
+        LOGOUT: 5
     };
 
     const assignmentUserActions = [
@@ -86,6 +88,15 @@ export default function useAssignmentActions(isAdmin = false) {
                 fetchData(dispatch, 1, null, true).then(_ => {
                     setActive(adminAction.IMPLEMENTED);
                 })
+        },
+        {
+            id: adminAction.IMPORT,
+            text: 'Import',
+            route: 'implemented',
+            button: {
+                variant: _ => 'btn btn-outline-secondary'
+            },
+            onClick: () => importDB(dispatch)
         },
         {
             id: adminAction.EXPORT,
