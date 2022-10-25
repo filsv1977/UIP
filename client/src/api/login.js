@@ -3,7 +3,7 @@ import axiosRetry from 'axios-retry';
 import {actionTypes} from '../сontext/actionTypes';
 import {fetchData} from './fetchData';
 import {addAuthorizationKey} from '../utils/localStorage';
-import {logonTimer} from "../utils/timer";
+import {logonTimer} from '../utils/timer';
 
 axiosRetry(axios, {retries: 3});
 
@@ -19,7 +19,7 @@ export const logIn = (body, dispatch, navigate) => {
 
                 addAuthorizationKey(body.login, body.password);
 
-                logonTimer(dispatch, navigate)
+                logonTimer(dispatch, navigate);
 
                 dispatch({
                     type: actionTypes.SET_VISIBLE,

@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useReducer} from 'react';
 import {actionTypes} from './actionTypes';
 import {fetchData} from '../api/fetchData';
+import {fetchError} from '../constants';
 
 export const initialState = {
     tasks: [],
@@ -44,9 +45,10 @@ export const taskReducer = (state, action) => {
             };
         }
         case actionTypes.GET_TASKS.REJECTED: {
+            const {isAdmin} = state;
             return {
                 ...state,
-                error: action.payload,
+                error: isAdmin ? action.payload : fetchError,
                 isLoading: false
             };
         }
