@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import Content from '../components/Content';
-import {useTasks} from '../Context/reducer';
+import {useTasks} from '../сontext/reducer';
 import {fetchData} from '../api/fetchData';
 import {delAuthorizationKey} from '../utils/localStorage';
 

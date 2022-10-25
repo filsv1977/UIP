@@ -1,38 +1,46 @@
-import {TASK_TEMPLATE} from './taskModel.js';
+import taskModel from './taskModel.js';
 import fs from 'fs';
 
 class DbEngine {
     constructor(path) {
-        if (typeof DbEngine.instance === 'object') {
-            return DbEngine.instance;
-        }
+        try {
+            if (typeof DbEngine.instance === 'object') {
+                return DbEngine.instance;
+            }
 
-        DbEngine.instance = this;
-        this._dbPath = path;
-        this._error = '';
-        this._load();
-        return this;
+            DbEngine.instance = this;
+            this._dbPath = path;
+            this._error = '';
+            this._load();
+            return this;
+        } catch (error) {
+            this._error = error.message;
+        }
     }
 
     loadUips(tasksList) {
-        const tasks = [...tasksList];
+        try {
+            const tasks = [...tasksList];
 
-        this._db.forEach(elem => {
-            const index = tasks.findIndex(item => elem.name === item.name);
-            if (index > -1) {
-                elem = {...elem, ...tasks[index]};
-                tasks.splice(index, 1);
-            } else {
-                elem.deleted = true;
-            }
-        });
+            this._db.forEach(elem => {
+                const index = tasks.findIndex(item => elem.name === item.name);
+                if (index > -1) {
+                    elem = {...elem, ...tasks[index]};
+                    tasks.splice(index, 1);
+                } else {
+                    elem.deleted = true;
+                }
+            });
 
-        tasks.forEach(elem => {
-            this._db.push({...TASK_TEMPLATE, ...elem, id: this._getNewId()});
-        });
+            tasks.forEach(elem => {
+                this._db.push({...taskModel, ...elem, id: this._getNewId()});
+            });
 
-        this._error = '';
-        this._save();
+            this._error = '';
+            this._save();
+        } catch (error) {
+            return {success: false, message: error.message};
+        }
     }
 
     select() {
@@ -43,14 +51,18 @@ class DbEngine {
         return result;
     }
 
-    update(id, data) {
-        let index = this._getIndex(id);
-        if (index > -1) {
-            this._db[index] = {...this._db[index], ...data};
-            this._save();
-            return {success: true, data: this._db[index]};
+    async update(id, data) {
+        try {
+            const index = this._getIndex(id);
+            if (index > -1) {
+                this._db[index] = {...this._db[index], ...data};
+                await this._save();
+                return {success: true, data: this._db[index]};
+            }
+            return {success: false, message: `Task with id=${id} not found`};
+        } catch (error) {
+            return {success: false, message: error.message};
         }
-        return {success: false, message: `Task with id=${id} not found`};
     }
 
     _getNewId() {
@@ -76,7 +88,6 @@ class DbEngine {
             this._save();
             return true;
         } catch (error) {
-            console.error(error);
             return {success: false, message: `Task not added`};
         }
     }
@@ -99,11 +110,11 @@ class DbEngine {
         return {success: false, message: `Task with id=${id} not found`};
     }
 
-    _save() {
-        fs.promises.writeFile(this._dbPath, JSON.stringify(this._db, null, 4)).catch(error => {
-            console.log(error);
+    _save = () => {
+        return fs.promises.writeFile(this._dbPath, JSON.stringify(this._db, null, 4)).catch(() => {
+            throw new Error('Error writing database to file');
         });
-    }
+    };
 
     _load() {
         fs.promises
@@ -111,10 +122,9 @@ class DbEngine {
             .then(result => {
                 this._db = JSON.parse(result);
             })
-            .catch(error => {
+            .catch(() => {
                 this._db = [];
-                this._error = 'Error loading database from file';
-                console.log(error);
+                throw new Error('Error loading database from file');
             });
     }
 }

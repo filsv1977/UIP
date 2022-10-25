@@ -1,4 +1,4 @@
-export const TASK_TEMPLATE = {
+export default {
     id: 0,
     url: '',
     name: '',

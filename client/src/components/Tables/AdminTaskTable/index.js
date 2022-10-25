@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {Table, Form} from 'react-bootstrap';
-import {useTasks} from '../../../Context/reducer';
+import {useTasks} from '../../../сontext/reducer';
 import {editTask} from '../../../api/editTask';
 import Error from '../../Error';
 import SpinnerBtn from '../../Spinner';
 import EditComponent from '../../EditComponent';
-import {actionTypes} from '../../../Context/actionTypes';
+import {actionTypes} from '../../../сontext/actionTypes';
 
 function AdminTasksTable() {
     const style = {width: '15vw'};
@@ -59,6 +59,8 @@ function AdminTasksTable() {
         setHours(+e.target.value);
 
         const {rate, ubx2usdt} = state.currentExchange;
+
+        console.log(rate, ubx2usdt);
 
         dispatch({
             type: actionTypes.SET_COST_VALUES,
