@@ -23,7 +23,7 @@ function LoginModal() {
     const handleSubmit = e => {
         e.preventDefault();
 
-        logIn({login, password: md5(password)}, dispatch, navigate);
+        logIn({login, password: md5(password)}, dispatch);
     };
 
     const onHandleClose = () => {

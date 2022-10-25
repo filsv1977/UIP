@@ -1,13 +1,10 @@
 import {useState} from 'react';
 import {getCurrentExchange} from '../api/getCurrentExchange';
 import {useTasks} from '../сontext/reducer';
-import {useNavigate} from 'react-router-dom';
-import {logonTimer} from '../utils/timer';
 
 export default function useEditButtonActions() {
     const [isEdit, setEdit] = useState(false);
     const {dispatch} = useTasks();
-    const navigate = useNavigate();
 
     const filterAction = {
         OPEN: 0,
@@ -62,7 +59,6 @@ export default function useEditButtonActions() {
                 onEditTask(data);
                 setEdit(false);
                 setTeam(false);
-                logonTimer(dispatch, navigate);
             },
             variant: 'outline-danger'
         },
@@ -90,7 +86,6 @@ export default function useEditButtonActions() {
                 setWallet('');
                 setFormSubmitted(true);
                 setTeam(false);
-                logonTimer(dispatch, navigate);
             },
             variant: 'outline-primary'
         }
