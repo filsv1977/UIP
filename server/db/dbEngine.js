@@ -13,8 +13,8 @@ class DbEngine {
             this._error = '';
             this._load();
             return this;
-        } catch {
-            return null;
+        } catch (error) {
+            this._error = error.message;
         }
     }
 
@@ -124,7 +124,7 @@ class DbEngine {
             })
             .catch(() => {
                 this._db = [];
-                this._error = 'Error loading database from file';
+                throw new Error('Error loading database from file');
             });
     }
 }
