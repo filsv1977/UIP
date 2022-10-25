@@ -3,7 +3,7 @@ import {hexDecode, hexEncode} from './convertHex';
 export const addAuthorizationKey = (login, password) => {
     localStorage.setItem('login', login);
     localStorage.setItem('password', hexEncode(password));
-    localStorage.setItem('ubiTimer', String(Date.now()+3600000));
+    localStorage.setItem('ubiTimer', String(Date.now() + 3600000));
 };
 
 export const getAuthorizationKey = () => {

@@ -1,4 +1,4 @@
-import exchangeUbx from '../../../../helpers/exchangeUbx.js';
+import {exchangeUbx} from '../../../../index.js';
 
 const ubx2usdt = async (req, res) => {
     let ubx2usdt = exchangeUbx.ubx2usdt;
