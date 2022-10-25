@@ -27,3 +27,11 @@ REACT_APP_API_BASE - API endpoint
 REACT_APP_BASENAME=/uip-dev
 REACT_APP_API_BASE=https://uip-app.herokuapp.com/
 ```
+
+## package.json
+
+set `"homepage"` to be the location of the app, example:
+
+```
+"homepage": "https://ubix.network/uip-dev/"
+```
