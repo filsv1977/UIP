@@ -9,9 +9,9 @@ function AssignmentFilterButtonsActions({activeButton}) {
     const {assignmentFilterActions} = useAssignmentActions(state.isAdmin);
     const [active, setActive] = useState(0);
 
-    useEffect(()=> {
-        activeButton && setActive(activeButton)
-    },[])
+    useEffect(() => {
+        activeButton && setActive(activeButton);
+    }, []);
 
     return (
         <Stack id={'FilterActions'} className="mb-2 p-3 FilterActions" direction="horizontal" gap={2}>
