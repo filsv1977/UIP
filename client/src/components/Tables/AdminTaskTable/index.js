@@ -60,8 +60,6 @@ function AdminTasksTable() {
 
         const {rate, ubx2usdt} = state.currentExchange;
 
-        console.log(rate, ubx2usdt);
-
         dispatch({
             type: actionTypes.SET_COST_VALUES,
             payload: {

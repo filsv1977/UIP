@@ -172,10 +172,8 @@ export const taskReducer = (state, action) => {
         }
 
         case actionTypes.IMPORT_DB.REJECTED: {
-            console.log('IMPORT_DB.REJECTED', action.payload);
             return {
                 ...state,
-                // tasks: [],
                 error: action.payload
             };
         }

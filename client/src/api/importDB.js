@@ -15,7 +15,6 @@ export function selectFiles(callbackFn, accept = '', multiple = false, readType 
     fileInput.accept = accept;
     fileInput.multiple = multiple;
     fileInput.onchange = evt => {
-        console.log(evt);
         readFiles(evt, readType);
     };
     fileInput.click();
@@ -45,7 +44,6 @@ function readFiles(evt, readType) {
         };
 
         reader.onerror = () => {
-            console.log(reader.error);
             fileInput = '';
         };
     }
@@ -53,11 +51,8 @@ function readFiles(evt, readType) {
 
 export async function importDB(dispatch) {
     const token = getAuthorizationKey();
-    console.log(dispatch);
 
     let sendToServer = file => {
-        console.log('file', file.file?.type, importFileType);
-
         if (file.file?.type !== importFileType) {
             dispatch({
                 type: actionTypes.IMPORT_DB.REJECTED,
