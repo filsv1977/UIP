@@ -40,8 +40,11 @@ export const getTaskStatuses = async tasks => {
                 tasksList[i].implemented = $('#user-content-status').parent().next().text().trim() === 'Implemented';
 
                 let title = $('pre').text();
+                let uipId = title.match(/(?<=UIP:).*/);
                 let name = title.match(/(?<=Title:).*/);
+
                 if (name !== null) {
+                    tasksList[i].uipId = +uipId[0].trim();
                     tasksList[i].name = name[0].trim();
                 }
             })
