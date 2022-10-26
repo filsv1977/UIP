@@ -2,6 +2,7 @@ import create from '../utils/createPromiseActionType';
 
 export const actionTypes = {
     EDIT_TASK: create('EDIT_TASK'),
+    IMPORT_DB: create('IMPORT_DB'),
     EXPORT_DB: create('EXPORT_DB'),
     GET_EXCHANGE_RATE: create('GET_EXCHANGE_RATE'),
     GET_TASKS: create('GET_TASKS'),

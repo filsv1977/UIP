@@ -18,7 +18,7 @@ function TasksTable() {
             </td>
             <td>{task.estimationHours ? task.estimationHours : '-'}</td>
             <td>{task.ubxPrice ? task.ubxPrice : '-'}</td>
-            <td>{task.usdtPrice ? task.ubxPrice : '-'}</td>
+            <td>{task.usdtPrice ? task.usdtPrice : '-'}</td>
             <td>{task.performer.nickname}</td>
         </tr>
     ));

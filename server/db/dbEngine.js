@@ -92,6 +92,17 @@ class DbEngine {
         }
     }
 
+    insertAll(data) {
+        try {
+            data.id = this._getNewId();
+            this._db = data;
+            this._save();
+            return {success: true, data: this._db};
+        } catch (error) {
+            return {success: false, message: `Tasks not added`};
+        }
+    }
+
     _selectById(id) {
         let index = this._getIndex(id);
         if (index > -1) {

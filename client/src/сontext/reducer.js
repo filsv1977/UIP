@@ -164,6 +164,20 @@ export const taskReducer = (state, action) => {
             };
         }
 
+        case actionTypes.IMPORT_DB.FULFILLED: {
+            return {
+                ...state,
+                tasks: action.payload
+            };
+        }
+
+        case actionTypes.IMPORT_DB.REJECTED: {
+            return {
+                ...state,
+                error: action.payload
+            };
+        }
+
         default:
             return state;
     }
