@@ -4,7 +4,7 @@ import {useTasks} from '../сontext/reducer';
 import {exportDB} from '../api/getDB';
 import {logOut} from '../api/logout';
 import {implementedText, openText} from '../constants';
-import {importDB, importProject} from "../api/importDB";
+import {importDB} from '../api/importDB';
 
 export default function useAssignmentActions(isAdmin = false) {
     const {dispatch} = useTasks();

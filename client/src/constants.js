@@ -6,4 +6,4 @@ export const implementedText = 'Implemented';
 
 export const fetchError = 'Data loading error';
 
-export const importFileType = "application/json"
+export const importFileType = 'application/json';
