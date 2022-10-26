@@ -14,6 +14,7 @@ function AdminPage() {
 
     useEffect(() => {
         const token = getAuthorizationKey();
+
         if (token) {
             checkToken(dispatch);
         } else {

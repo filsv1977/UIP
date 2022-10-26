@@ -23,7 +23,7 @@ export const logIn = (body, dispatch) => {
                     payload: false
                 });
 
-                fetchData(dispatch, null, null, true);
+                // fetchData(dispatch, null, null, true);
             } else {
                 dispatch({
                     type: actionTypes.LOGIN_ADMIN.REJECTED,

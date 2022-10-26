@@ -5,22 +5,23 @@ import {exportDB} from '../api/getDB';
 import {logOut} from '../api/logout';
 import {implementedText, openText} from '../constants';
 import {importDB} from '../api/importDB';
+import {actionTypes} from "../сontext/actionTypes";
 
 export default function useAssignmentActions(isAdmin = false) {
     const {dispatch} = useTasks();
     const navigate = useNavigate();
     const userAction = {
-        OPEN: 0,
-        IMPLEMENTED: 1
+        OPEN: 1,
+        IMPLEMENTED: 2
     };
 
     const adminAction = {
-        ALL: 0,
+        ALL: 3,
         OPEN: 1,
         IMPLEMENTED: 2,
-        IMPORT: 3,
-        EXPORT: 4,
-        LOGOUT: 5
+        IMPORT: 4,
+        EXPORT: 5,
+        LOGOUT: 6
     };
 
     const assignmentUserActions = [
@@ -30,10 +31,11 @@ export default function useAssignmentActions(isAdmin = false) {
             button: {
                 variant: active => (+active === +userAction.OPEN ? 'outline-danger' : 'outline-primary')
             },
-            onClick: (e, setActive) => {
-                fetchData(dispatch, userAction.OPEN).then(_ => {
+            onClick: (e) => {
                     navigate('/open');
-                    setActive(userAction.OPEN);
+                     dispatch({
+                    type: actionTypes.SET_ACTIVE_BUTTON,
+                    payload: userAction.OPEN
                 });
             }
         },
@@ -44,9 +46,10 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +userAction.IMPLEMENTED ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                fetchData(dispatch, userAction.IMPLEMENTED).then(_ => {
                     navigate('/implemented');
-                    setActive(userAction.IMPLEMENTED);
+                dispatch({
+                    type: actionTypes.SET_ACTIVE_BUTTON,
+                    payload: userAction.IMPLEMENTED
                 });
             }
         }
@@ -60,9 +63,11 @@ export default function useAssignmentActions(isAdmin = false) {
             button: {
                 variant: active => (+active === +adminAction.ALL ? 'outline-danger' : 'outline-primary')
             },
-            onClick: (e, setActive) => {
-                fetchData(dispatch, null, null, true).then(_ => {
-                    setActive(adminAction.ALL);
+            onClick: (e) => {
+
+                dispatch({
+                    type: actionTypes.SET_ACTIVE_BUTTON,
+                    payload: adminAction.ALL
                 });
             }
         },
@@ -73,8 +78,11 @@ export default function useAssignmentActions(isAdmin = false) {
             button: {
                 variant: active => (+active === +adminAction.OPEN ? 'outline-danger' : 'outline-primary')
             },
-            onClick: (e, setActive) => {
-                fetchData(dispatch, 0, null, true).then(_ => setActive(adminAction.OPEN));
+            onClick: (e) => {
+                dispatch({
+                    type: actionTypes.SET_ACTIVE_BUTTON,
+                    payload: adminAction.OPEN
+                });
             }
         },
         {
@@ -84,10 +92,12 @@ export default function useAssignmentActions(isAdmin = false) {
             button: {
                 variant: active => (+active === +adminAction.IMPLEMENTED ? 'outline-danger' : 'outline-primary')
             },
-            onClick: (e, setActive) =>
-                fetchData(dispatch, 1, null, true).then(_ => {
-                    setActive(adminAction.IMPLEMENTED);
-                })
+            onClick: (e) => {
+                dispatch({
+                    type: actionTypes.SET_ACTIVE_BUTTON,
+                    payload: adminAction.IMPLEMENTED
+                });
+            }
         },
         {
             id: adminAction.IMPORT,

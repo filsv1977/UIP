@@ -3,11 +3,13 @@ import Table from 'react-bootstrap/Table';
 import {useTasks} from '../../../сontext/reducer';
 import Error from '../../Error';
 import SpinnerBtn from '../../Spinner';
+import useDataAvailability from "../../../hooks/useDataAvailability";
 
 function TasksTable() {
+    const {tasks} = useDataAvailability()
     const {state} = useTasks();
-
-    const generateTable = (state?.tasks || []).map(task => (
+    console.log('task table', tasks)
+    const generateTable = (tasks || []).map(task => (
         <tr key={task.id}>
             <td>
                 {
@@ -33,7 +35,7 @@ function TasksTable() {
 
     return (
         <div className={'table-responsive'}>
-            <Table className="align-middle table-bordered " hover data-click-to-select="true">
+            <Table className="align-middle table-bordered" hover data-click-to-select="true">
                 <thead>
                     <tr>
                         <th className="text-truncate w-25" style={withStyle} scope="col">

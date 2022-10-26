@@ -8,10 +8,11 @@ export const initialState = {
     isAdmin: false,
     isLoading: false,
     error: '',
-    activeFilterBtn: 0,
+    activeFilterBtn: 1,
     currentExchange: {rate: 0, ubx2usdt: 0},
     showLogin: false,
-    signedIn: false
+    signedIn: false,
+    isTasksUploaded: 0,
 };
 
 export const ContextApp = React.createContext();
@@ -20,9 +21,9 @@ export const TasksContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(taskReducer, initialState);
 
     useEffect(() => {
-        const intervalId = setInterval(() => fetchData(dispatch, state.activeFilterBtn, false, state.isAdmin), 300000);
+        // const intervalId = setInterval(() => fetchData(dispatch, state.activeFilterBtn, false, state.isAdmin), 300000);
 
-        return () => clearInterval(intervalId);
+        // return () => clearInterval(intervalId);
     }, [state]);
 
     return <ContextApp.Provider value={{state, dispatch}}>{children}</ContextApp.Provider>;
@@ -30,18 +31,32 @@ export const TasksContextProvider = ({children}) => {
 
 export const taskReducer = (state, action) => {
     switch (action.type) {
-        case actionTypes.GET_TASKS.PENDING:
+        case actionTypes.GET_TASKS.PENDING:{
             return {
                 ...state,
                 isLoading: action.noSetLoading
             };
-        case actionTypes.GET_TASKS.FULFILLED: {
+        }
+
+        case actionTypes.SET_ACTIVE_BUTTON: {
+            console.log('@@@@@ ', action.payload)
             return {
                 ...state,
-                tasks: action.payload.data,
-                activeFilterBtn: action.payload.activeFilterBtn,
+                activeFilterBtn: action.payload
+            };
+        }
+
+        case actionTypes.GET_TASKS.FULFILLED: {
+            const isTasksUploaded = state.isTasksUploaded;
+            const upload = isTasksUploaded ? action.payload.activeFilterBtn !==isTasksUploaded ? 3 : action.payload.activeFilterBtn : action.payload.activeFilterBtn;
+            console.log('upload', isTasksUploaded, upload, [...state.tasks,...action.payload.data])
+
+            return {
+                ...state,
+                tasks: [...state.tasks,...action.payload.data],
                 isLoading: false,
-                error: false
+                error: false,
+                isTasksUploaded: upload
             };
         }
         case actionTypes.GET_TASKS.REJECTED: {
@@ -175,6 +190,13 @@ export const taskReducer = (state, action) => {
             return {
                 ...state,
                 error: action.payload
+            };
+        }
+
+        case actionTypes.CLEAR_TASKS: {
+            return {
+                ...state,
+                tasks: action.payload
             };
         }
 

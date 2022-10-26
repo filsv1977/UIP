@@ -1,7 +1,7 @@
 import Modal from 'react-bootstrap/Modal';
 import {Form} from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {logIn} from '../../api/login';
 import {useTasks} from '../../сontext/reducer';
 import {useNavigate} from 'react-router-dom';
@@ -15,6 +15,13 @@ function LoginModal() {
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
     const {state, dispatch} = useTasks();
+
+    useEffect(()=> {
+        dispatch({
+            type: actionTypes.CLEAR_TASKS,
+            payload: []
+        });
+    },[])
 
     const onChangeLogin = ({target: {value}}) => setLogin(value);
 
