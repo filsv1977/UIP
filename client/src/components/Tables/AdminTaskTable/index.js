@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Table, Form} from 'react-bootstrap';
 import {useTasks} from '../../../сontext/reducer';
 import {editTask} from '../../../api/editTask';
-import Error from '../../Error';
 import SpinnerBtn from '../../Spinner';
 import EditComponent from '../../EditComponent';
 
@@ -58,7 +57,7 @@ function AdminTasksTable() {
         });
     };
 
-    const onSetHours = (e) => {
+    const onSetHours = e => {
         const isValid = e.target.value >= 0;
         setFormSubmitted(isValid);
         setHours(+e.target.value);
@@ -232,7 +231,6 @@ function AdminTasksTable() {
                     {generateTable}
                 </tbody>
             </Table>
-            {state.error && <Error message={state.error} />}
         </div>
     );
 }

@@ -11,7 +11,8 @@ export const initialState = {
     activeFilterBtn: 0,
     currentExchange: {rate: 0, ubx2usdt: 0},
     showLogin: false,
-    signedIn: false
+    signedIn: false,
+    showError: false
 };
 
 export const ContextApp = React.createContext();
@@ -49,7 +50,8 @@ export const taskReducer = (state, action) => {
             return {
                 ...state,
                 error: isAdmin ? action.payload : fetchError,
-                isLoading: false
+                isLoading: false,
+                showError: true
             };
         }
         case actionTypes.GET_EXCHANGE_RATE:
@@ -69,7 +71,8 @@ export const taskReducer = (state, action) => {
             return {
                 ...state,
                 error: action.payload,
-                isLoading: false
+                isLoading: false,
+                showError: true
             };
         }
 
@@ -82,7 +85,7 @@ export const taskReducer = (state, action) => {
             const {activeFilterBtn, tasks} = state;
 
             let newData =
-                (activeFilterBtn === 0 && nickname) || (activeFilterBtn === 1  && !nickname && !implemented )
+                (activeFilterBtn === 0 && nickname) || (activeFilterBtn === 1 && !nickname && !implemented)
                     ? tasks.filter(task => +task.id !== +id)
                     : tasks.map(task => (+task.id === +id ? action.payload : task));
 
@@ -95,7 +98,8 @@ export const taskReducer = (state, action) => {
         case actionTypes.EDIT_TASK.REJECTED: {
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                showError: true
             };
         }
 
@@ -126,7 +130,8 @@ export const taskReducer = (state, action) => {
             return {
                 ...state,
                 isAdmin: false,
-                error: action.payload
+                error: action.payload,
+                showError: true
             };
         }
 
@@ -154,14 +159,16 @@ export const taskReducer = (state, action) => {
         case actionTypes.TOKEN_ERROR: {
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                showError: true
             };
         }
 
         case actionTypes.EXPORT_DB.REJECTED: {
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                showError: true
             };
         }
 
@@ -176,6 +183,13 @@ export const taskReducer = (state, action) => {
             return {
                 ...state,
                 error: action.payload
+            };
+        }
+
+        case actionTypes.SHOW_ERROR: {
+            return {
+                ...state,
+                showError: action.payload
             };
         }
 

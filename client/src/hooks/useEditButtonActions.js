@@ -58,7 +58,7 @@ export default function useEditButtonActions() {
                 setNickname,
                 setWallet,
                 setFormSubmitted,
-                setTeam,
+                setTeam
             ) => {
                 onEditTask(data);
                 setEdit(false);
