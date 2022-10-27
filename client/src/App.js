@@ -5,6 +5,7 @@ import AdminPage from './pages/AdminPage';
 import Footer from './components/Footer';
 import {TasksContextProvider} from './сontext/reducer';
 import Header from './components/Header';
+import ErrorCanvas from './components/ErrorOffCanvas';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/admin" element={<AdminPage />} />
                     <Route path="/*" exact element={<Navigate to="/open" replace />} />
                 </Routes>
+                <ErrorCanvas />
                 <Footer />
             </div>
         </TasksContextProvider>

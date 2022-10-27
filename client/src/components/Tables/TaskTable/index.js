@@ -1,7 +1,6 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import {useTasks} from '../../../сontext/reducer';
-import Error from '../../Error';
 import SpinnerBtn from '../../Spinner';
 
 function TasksTable() {
@@ -62,7 +61,6 @@ function TasksTable() {
                     {generateTable}
                 </tbody>
             </Table>
-            {state.error && <Error message={state.error} />}
         </div>
     );
 }
