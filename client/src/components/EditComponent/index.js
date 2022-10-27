@@ -15,7 +15,9 @@ function EditComponent({
     setNickname,
     setWallet,
     setFormSubmitted,
-    setTeam
+    setTeam,
+    setUbxPrice,
+    setUsdtPrice
 }) {
     const {editButtonActions, isEdit, filterAction} = useEditButtonActions();
 
@@ -41,7 +43,9 @@ function EditComponent({
                             setNickname,
                             setWallet,
                             setFormSubmitted,
-                            setTeam
+                            setTeam,
+                            setUbxPrice,
+                            setUsdtPrice
                         )
                     }
                     variant={x.variant}
