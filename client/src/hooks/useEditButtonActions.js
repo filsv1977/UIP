@@ -26,13 +26,17 @@ export default function useEditButtonActions() {
                 setNickname,
                 setWallet,
                 setFormSubmitted,
-                setTeam
+                setTeam,
+                setUbxPrice,
+                setUsdtPrice
             ) => {
                 getCurrentExchange(dispatch).then(_ => {
                     setRowId(data.id);
                     setEdit(true);
                     setEditRow(true);
                     setHours(data.estimationHours || 0);
+                    setUbxPrice(data.ubxPrice || 0);
+                    setUsdtPrice(data.usdtPrice || 0);
                     setNickname(data.performer?.nickname || '');
                     setWallet(data.performer?.walletAddress || '');
                     setTeam(data.performer?.hasImplementedByUbixTeam || false);
@@ -54,7 +58,7 @@ export default function useEditButtonActions() {
                 setNickname,
                 setWallet,
                 setFormSubmitted,
-                setTeam
+                setTeam,
             ) => {
                 onEditTask(data);
                 setEdit(false);
@@ -76,12 +80,16 @@ export default function useEditButtonActions() {
                 setNickname,
                 setWallet,
                 setFormSubmitted,
-                setTeam
+                setTeam,
+                setUbxPrice,
+                setUsdtPrice
             ) => {
                 setRowId(null);
                 setEdit(false);
                 setEditRow(false);
                 setHours(0);
+                setUbxPrice(0);
+                setUsdtPrice(0);
                 setNickname('');
                 setWallet('');
                 setFormSubmitted(true);
