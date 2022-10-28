@@ -232,7 +232,6 @@ function AdminTasksTable() {
                     {generateTable}
                 </tbody>
             </Table>
-            {state.error && <Error message={state.error} />}
         </div>
     );
 }
