@@ -13,7 +13,7 @@ export const fetchData = async (dispatch, id, noSetLoading = true, isAdmin = fal
     const token = getAuthorizationKey();
     dispatch({type: actionTypes.GET_TASKS.PENDING, noSetLoading});
 
-    if (cache[id]) {
+    if (!isAdmin && cache[id]) {
         return dispatch({
             type: actionTypes.GET_TASKS.FULFILLED,
             payload: {data: cache[id], activeFilterBtn: id}
@@ -32,7 +32,10 @@ export const fetchData = async (dispatch, id, noSetLoading = true, isAdmin = fal
         .then(result => {
             if (!result.data.success) throw new Error(result.data.message);
 
+          if (!isAdmin) {
             cache[id] = result.data.data;
+          }
+
 
             dispatch({
                 type: actionTypes.GET_TASKS.FULFILLED,
