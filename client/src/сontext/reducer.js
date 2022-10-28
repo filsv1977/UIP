@@ -196,7 +196,7 @@ export const taskReducer = (state, action) => {
         }
 
         case actionTypes.GET_OPEN_TASKS.FULFILLED: {
-            console.log('@@@@@ GET_OPEN_TASKS',action.payload)
+            console.log('@@@@@ GET_OPEN_TASKS', action.payload);
             return {
                 ...state,
                 openTasks: action.payload.data,
@@ -206,7 +206,7 @@ export const taskReducer = (state, action) => {
         }
 
         case actionTypes.GET_IMPLEMENTED_TASKS.FULFILLED: {
-            console.log('@@@@@ GET_IMPLEMENTED_TASKS',action.payload)
+            console.log('@@@@@ GET_IMPLEMENTED_TASKS', action.payload);
             return {
                 ...state,
                 implementedTasks: action.payload.data,
@@ -215,11 +215,10 @@ export const taskReducer = (state, action) => {
             };
         }
 
-
         case actionTypes.SET_ACTIVE_FILTER_BUTTON: {
             return {
                 ...state,
-                activeFilterBtn: action.payload,
+                activeFilterBtn: action.payload
             };
         }
 
