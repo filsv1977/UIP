@@ -11,7 +11,7 @@ function AdminPage() {
         state: {isAdmin},
         dispatch
     } = useTasks();
-
+    console.log('@@@@@ ', 'admin');
     useEffect(() => {
         const token = getAuthorizationKey();
         if (token) {

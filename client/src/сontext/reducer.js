@@ -5,6 +5,8 @@ import {fetchError} from '../constants';
 
 export const initialState = {
     tasks: [],
+    openTasks: [],
+    implementedTasks: [],
     isAdmin: false,
     isLoading: false,
     error: '',
@@ -190,6 +192,33 @@ export const taskReducer = (state, action) => {
             return {
                 ...state,
                 showError: action.payload
+            };
+        }
+
+        case actionTypes.GET_OPEN_TASKS.FULFILLED: {
+            console.log('@@@@@ GET_OPEN_TASKS', action.payload);
+            return {
+                ...state,
+                openTasks: action.payload.data,
+                isLoading: false,
+                error: false
+            };
+        }
+
+        case actionTypes.GET_IMPLEMENTED_TASKS.FULFILLED: {
+            console.log('@@@@@ GET_IMPLEMENTED_TASKS', action.payload);
+            return {
+                ...state,
+                implementedTasks: action.payload.data,
+                isLoading: false,
+                error: false
+            };
+        }
+
+        case actionTypes.SET_ACTIVE_FILTER_BUTTON: {
+            return {
+                ...state,
+                activeFilterBtn: action.payload
             };
         }
 
