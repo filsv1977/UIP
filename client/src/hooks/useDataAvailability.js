@@ -20,7 +20,7 @@ export default function useDataAvailability() {
         let prevOpen;
         return async (openTasks, dispatch) => {
             if (openTasks.length) {
-                // navigate('/open');
+                navigate('/open');
                 return;
             }
 
@@ -34,14 +34,12 @@ export default function useDataAvailability() {
         let prevImplemented;
         return async (implementedTasks, dispatch) => {
             if (implementedTasks.length) {
-                // navigate('/implemented');
+                navigate('/implemented');
                 return;
             }
 
             fetchImplemented(dispatch, 1).then(_ => {
-                // prevImplemented = implementedTasks;
-                console.log('@@@@@ then ', state);
-                // navigate('/implemented');
+                navigate('/implemented');
             });
         };
     }, []);
