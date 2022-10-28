@@ -1,12 +1,12 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 import SpinnerBtn from '../../Spinner';
-import useDataAvailability from '../../../hooks/useDataAvailability';
+import {useTasks} from "../../../сontext/reducer";
 
 function TasksTable() {
-    const {tasks} = useDataAvailability();
+    const {state} = useTasks();
 
-    const generateTable = (tasks || []).map(task => (
+    const generateTable = (state.tasks || []).map(task => (
         <tr key={task.id}>
             <td>
                 {
