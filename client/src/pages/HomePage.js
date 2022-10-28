@@ -5,10 +5,7 @@ import {delAuthorizationKey} from '../utils/localStorage';
 import {actionTypes} from '../сontext/actionTypes';
 
 function HomePage({implemented}) {
-    const {
-        state: {isAdmin = false},
-        dispatch
-    } = useTasks();
+    const {dispatch} = useTasks();
 
     useEffect(() => {
         dispatch({
@@ -18,7 +15,7 @@ function HomePage({implemented}) {
         delAuthorizationKey();
     }, []);
 
-    return <Content isAdmin={isAdmin} activeButton={implemented} />;
+    return <Content activeButton={implemented} />;
 }
 
 export default HomePage;

@@ -5,13 +5,14 @@ import {useTasks} from '../сontext/reducer';
 import {getAuthorizationKey} from '../utils/localStorage';
 import {actionTypes} from '../сontext/actionTypes';
 import {checkToken} from '../api/checkToken';
+import ContentAdmin from "../components/ContentAdmin";
 
 function AdminPage() {
     const {
         state: {isAdmin},
         dispatch
     } = useTasks();
-    console.log('@@@@@ ', 'admin');
+
     useEffect(() => {
         const token = getAuthorizationKey();
         if (token) {
@@ -26,7 +27,7 @@ function AdminPage() {
 
     return (
         <>
-            <Content isAdmin={isAdmin} />
+            <ContentAdmin/>
             <LoginModal />
         </>
     );

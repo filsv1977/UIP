@@ -196,7 +196,6 @@ export const taskReducer = (state, action) => {
         }
 
         case actionTypes.GET_OPEN_TASKS.FULFILLED: {
-            console.log('@@@@@ GET_OPEN_TASKS', action.payload);
             return {
                 ...state,
                 openTasks: action.payload.data,
@@ -206,7 +205,6 @@ export const taskReducer = (state, action) => {
         }
 
         case actionTypes.GET_IMPLEMENTED_TASKS.FULFILLED: {
-            console.log('@@@@@ GET_IMPLEMENTED_TASKS', action.payload);
             return {
                 ...state,
                 implementedTasks: action.payload.data,
