@@ -4,10 +4,16 @@ import {useTasks} from '../сontext/reducer';
 import {exportDB} from '../api/getDB';
 import {logOut} from '../api/logout';
 import {implementedText, openText} from '../constants';
+import {importDB} from '../api/importDB';
+import {actionTypes} from "../сontext/actionTypes";
 
 export default function useAssignmentActions(isAdmin = false) {
-    const {dispatch} = useTasks();
+    const {
+        dispatch,
+        state: {activeFilterBtn}
+    } = useTasks();
     const navigate = useNavigate();
+
     const userAction = {
         OPEN: 0,
         IMPLEMENTED: 1
@@ -17,8 +23,9 @@ export default function useAssignmentActions(isAdmin = false) {
         ALL: 0,
         OPEN: 1,
         IMPLEMENTED: 2,
-        EXPORT: 3,
-        LOGOUT: 4
+        IMPORT: 3,
+        EXPORT: 4,
+        LOGOUT: 5
     };
 
     const assignmentUserActions = [
@@ -29,10 +36,11 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +userAction.OPEN ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                fetchData(dispatch, userAction.OPEN).then(_ => {
-                    navigate('/open');
-                    setActive(userAction.OPEN);
+                dispatch({
+                    type: actionTypes.SET_ACTIVE_FILTER_BUTTON,
+                    payload: userAction.OPEN
                 });
+                setActive(userAction.OPEN);
             }
         },
         {
@@ -42,9 +50,10 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +userAction.IMPLEMENTED ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                fetchData(dispatch, userAction.IMPLEMENTED).then(_ => {
-                    navigate('/implemented');
-                    setActive(userAction.IMPLEMENTED);
+                setActive(userAction.IMPLEMENTED);
+                dispatch({
+                    type: actionTypes.SET_ACTIVE_FILTER_BUTTON,
+                    payload: userAction.IMPLEMENTED
                 });
             }
         }
@@ -86,6 +95,15 @@ export default function useAssignmentActions(isAdmin = false) {
                 fetchData(dispatch, 1, null, true).then(_ => {
                     setActive(adminAction.IMPLEMENTED);
                 })
+        },
+        {
+            id: adminAction.IMPORT,
+            text: 'Import',
+            route: 'implemented',
+            button: {
+                variant: _ => 'btn btn-outline-secondary'
+            },
+            onClick: () => importDB(dispatch)
         },
         {
             id: adminAction.EXPORT,

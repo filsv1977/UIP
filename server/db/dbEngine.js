@@ -3,25 +3,29 @@ import fs from 'fs';
 
 class DbEngine {
     constructor(path) {
-        if (typeof DbEngine.instance === 'object') {
-            return DbEngine.instance;
-        }
+        try {
+            if (typeof DbEngine.instance === 'object') {
+                return DbEngine.instance;
+            }
 
-        DbEngine.instance = this;
-        this._dbPath = path;
-        this._error = '';
-        this._load();
-        return this;
+            DbEngine.instance = this;
+            this._dbPath = path;
+            this._error = '';
+            this._load();
+            return this;
+        } catch (error) {
+            this._error = error.message;
+        }
     }
 
     loadUips(tasksList) {
         try {
             const tasks = [...tasksList];
 
-            this._db.forEach(elem => {
+            this._db.forEach((elem, i) => {
                 const index = tasks.findIndex(item => elem.name === item.name);
                 if (index > -1) {
-                    elem = {...elem, ...tasks[index]};
+                    this._db[i] = {...elem, ...tasks[index]};
                     tasks.splice(index, 1);
                 } else {
                     elem.deleted = true;
@@ -31,6 +35,8 @@ class DbEngine {
             tasks.forEach(elem => {
                 this._db.push({...taskModel, ...elem, id: this._getNewId()});
             });
+
+            this._sortBase();
 
             this._error = '';
             this._save();
@@ -69,6 +75,10 @@ class DbEngine {
         return this._db.findIndex(item => +item.id === +id);
     }
 
+    _sortBase() {
+        return this._db.sort((a, b) => a.uipId - b.uipId);
+    }
+
     setError(error) {
         this._error = error;
     }
@@ -85,6 +95,17 @@ class DbEngine {
             return true;
         } catch (error) {
             return {success: false, message: `Task not added`};
+        }
+    }
+
+    insertAll(data) {
+        try {
+            this._db = data;
+            this._sortBase();
+            this._save();
+            return {success: true, data: this._db};
+        } catch (error) {
+            return {success: false, message: `Tasks not added`};
         }
     }
 
@@ -120,7 +141,7 @@ class DbEngine {
             })
             .catch(() => {
                 this._db = [];
-                this._error = 'Error loading database from file';
+                throw new Error('Error loading database from file');
             });
     }
 }
