@@ -58,7 +58,7 @@ function AdminTasksTable() {
         });
     };
 
-    const onSetHours = (e) => {
+    const onSetHours = e => {
         const isValid = e.target.value >= 0;
         setFormSubmitted(isValid);
         setHours(+e.target.value);
