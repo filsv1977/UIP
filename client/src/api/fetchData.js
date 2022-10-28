@@ -13,12 +13,12 @@ export const fetchData = async (dispatch, id, noSetLoading = true, isAdmin = fal
     const token = getAuthorizationKey();
     dispatch({type: actionTypes.GET_TASKS.PENDING, noSetLoading});
 
-  if (cache[id]) {
-    return dispatch({
-      type: actionTypes.GET_TASKS.FULFILLED,
-      payload: {data: cache[id], activeFilterBtn: id}
-    });
-  }
+    if (cache[id]) {
+        return dispatch({
+            type: actionTypes.GET_TASKS.FULFILLED,
+            payload: {data: cache[id], activeFilterBtn: id}
+        });
+    }
 
     await axios
         .get(
@@ -32,7 +32,7 @@ export const fetchData = async (dispatch, id, noSetLoading = true, isAdmin = fal
         .then(result => {
             if (!result.data.success) throw new Error(result.data.message);
 
-          cache[id] = result.data.data;
+            cache[id] = result.data.data;
 
             dispatch({
                 type: actionTypes.GET_TASKS.FULFILLED,
