@@ -5,7 +5,6 @@ import {exportDB} from '../api/getDB';
 import {logOut} from '../api/logout';
 import {implementedText, openText} from '../constants';
 import {importDB} from '../api/importDB';
-import {useMemo} from 'react';
 
 export default function useAssignmentActions(isAdmin = false) {
     const {
