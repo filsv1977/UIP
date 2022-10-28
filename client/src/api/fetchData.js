@@ -32,10 +32,9 @@ export const fetchData = async (dispatch, id, noSetLoading = true, isAdmin = fal
         .then(result => {
             if (!result.data.success) throw new Error(result.data.message);
 
-          if (!isAdmin) {
-            cache[id] = result.data.data;
-          }
-
+            if (!isAdmin) {
+                cache[id] = result.data.data;
+            }
 
             dispatch({
                 type: actionTypes.GET_TASKS.FULFILLED,
