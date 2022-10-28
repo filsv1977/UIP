@@ -14,20 +14,6 @@ export default function useAssignmentActions(isAdmin = false) {
     } = useTasks();
     const navigate = useNavigate();
 
-    const loadData = useMemo(() => {
-        let prevButton = activeFilterBtn;
-        return async (activeButton, setActive, dispatch) => {
-            if (+activeButton === +prevButton) {
-                return;
-            }
-            prevButton = activeButton;
-            let path = activeButton ? '/implemented' : '/open';
-            fetchData(dispatch, activeButton).then(_ => {
-                navigate(path);
-                setActive(activeButton);
-            });
-        };
-    }, []);
     const userAction = {
         OPEN: 0,
         IMPLEMENTED: 1
@@ -50,7 +36,9 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +userAction.OPEN ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                loadData(userAction.OPEN, setActive, dispatch);
+                fetchData(dispatch, 0, null, false).then(_ => {
+                    setActive(userAction.OPEN);
+                });
             }
         },
         {
@@ -60,7 +48,9 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +userAction.IMPLEMENTED ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                loadData(userAction.IMPLEMENTED, setActive, dispatch);
+                fetchData(dispatch, 1, null, false).then(_ => {
+                    setActive(userAction.IMPLEMENTED);
+                });
             }
         }
     ];
