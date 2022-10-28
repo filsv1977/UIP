@@ -5,7 +5,7 @@ import {exportDB} from '../api/getDB';
 import {logOut} from '../api/logout';
 import {implementedText, openText} from '../constants';
 import {importDB} from '../api/importDB';
-import {actionTypes} from "../сontext/actionTypes";
+import {actionTypes} from '../сontext/actionTypes';
 
 export default function useAssignmentActions(isAdmin = false) {
     const {

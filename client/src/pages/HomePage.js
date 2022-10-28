@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Content from '../components/Content';
 import {useTasks} from '../сontext/reducer';
 import {delAuthorizationKey} from '../utils/localStorage';
-import {actionTypes} from "../сontext/actionTypes";
+import {actionTypes} from '../сontext/actionTypes';
 
 function HomePage({implemented}) {
     const {
