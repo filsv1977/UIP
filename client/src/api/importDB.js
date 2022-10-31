@@ -49,7 +49,7 @@ function readFiles(evt, readType) {
     }
 }
 
-export async function importDB(dispatch) {
+export function importDB(dispatch, cb, activeFilterButton) {
     const token = getAuthorizationKey();
 
     let sendToServer = file => {
@@ -84,6 +84,7 @@ export async function importDB(dispatch) {
                         type: actionTypes.IMPORT_DB.FULFILLED,
                         payload: result.data.data
                     });
+                    cb(activeFilterButton)
                 } else {
                     dispatch({
                         type: actionTypes.IMPORT_DB.REJECTED,

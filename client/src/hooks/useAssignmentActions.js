@@ -95,7 +95,7 @@ export default function useAssignmentActions(isAdmin = false) {
             button: {
                 variant: _ => 'btn btn-outline-secondary'
             },
-            onClick: () => importDB(dispatch)
+            onClick: (e, setActive) => importDB(dispatch, setActive, adminAction.ALL)
         },
         {
             id: adminAction.EXPORT,
@@ -113,10 +113,10 @@ export default function useAssignmentActions(isAdmin = false) {
             button: {
                 variant: _ => 'btn btn-outline-secondary'
             },
-            onClick: () =>
-                logOut(dispatch).then(() => {
-                    navigate('/');
-                })
+            onClick: () =>{
+                logOut(dispatch)
+                navigate('/');
+            }
         }
     ];
     const assignmentFilterActions = isAdmin ? assignmentAdminActions : assignmentUserActions;

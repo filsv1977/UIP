@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Table, Form} from 'react-bootstrap';
 import {useTasks} from '../../../сontext/reducer';
 import {editTask} from '../../../api/editTask';
-import Error from '../../Error';
 import SpinnerBtn from '../../Spinner';
 import EditComponent from '../../EditComponent';
 
@@ -47,15 +46,14 @@ function AdminTasksTable() {
             newData.usdtPrice = 0;
         }
 
-        editTask(newData, dispatch).then(_ => {
-            setRowId(null);
-            setEditRow(false);
-            setHours(0);
-            setUbxPrice(0);
-            setUsdtPrice(0);
-            setNickname('');
-            setWallet('');
-        });
+        editTask(newData, dispatch)
+        setRowId(null);
+        setEditRow(false);
+        setHours(0);
+        setUbxPrice(0);
+        setUsdtPrice(0);
+        setNickname('');
+        setWallet('');
     };
 
     const onSetHours = e => {
