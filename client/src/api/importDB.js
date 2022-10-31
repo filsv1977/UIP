@@ -49,7 +49,7 @@ function readFiles(evt, readType) {
     }
 }
 
-export function importDB(dispatch, cb, activeFilterButton) {
+export const importDB =(dispatch, cb, activeFilterButton) => {
     const token = getAuthorizationKey();
 
     let sendToServer = file => {

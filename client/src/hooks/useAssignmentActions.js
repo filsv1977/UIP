@@ -116,8 +116,7 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: _ => 'btn btn-outline-secondary'
             },
             onClick: () =>{
-                logOut(dispatch)
-                navigate('/');
+                logOut(dispatch).then(_=>navigate('/'))
             }
         }
     ];
