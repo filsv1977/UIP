@@ -20,6 +20,15 @@ export const importDB = (dispatch, setActive) => {
                 let file = evt.target.files[0];
                 let reader = new FileReader();
                 const blob = new Blob([file], {type: importFileType});
+                const {type} = evt.target.files[0]
+
+                if(type !== importFileType){
+                    dispatch({
+                        type: actionTypes.IMPORT_DB.REJECTED,
+                        payload: 'Incorrect import file format selected'
+                    });
+                    return;
+                }
 
                 reader.onload = () => {
                     return axios
