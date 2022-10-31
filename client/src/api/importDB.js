@@ -49,7 +49,7 @@ function readFiles(evt, readType) {
     }
 }
 
-export async function importDB(dispatch) {
+export const importDB= async dispatch => {
     const token = getAuthorizationKey();
 
     let sendToServer = file => {
@@ -98,5 +98,5 @@ export async function importDB(dispatch) {
                 })
             );
     };
-    selectFiles(sendToServer, '.json', false);
+   await selectFiles(sendToServer, '.json', false);
 }
