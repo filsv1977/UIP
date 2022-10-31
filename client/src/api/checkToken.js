@@ -6,7 +6,7 @@ import {fetchData} from './fetchData';
 
 axiosRetry(axios, {retries: 3});
 
-export const checkToken = async dispatch => {
+export const checkToken = dispatch => {
     const url = `/admin/auth/checkToken`;
     const token = getAuthorizationKey();
     const timer = getUbiTimerKey();
@@ -19,7 +19,7 @@ export const checkToken = async dispatch => {
         return;
     }
 
-    await axios
+    axios
         .get(
             url,
             token

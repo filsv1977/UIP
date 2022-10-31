@@ -34,6 +34,7 @@ export default function useAssignmentActions(isAdmin = false) {
             onClick: (e, setActive) => {
                 fetchData(dispatch, 0, null, false).then(_ => {
                     setActive(userAction.OPEN);
+                    navigate('/');
                 });
             }
         },
@@ -46,6 +47,7 @@ export default function useAssignmentActions(isAdmin = false) {
             onClick: (e, setActive) => {
                 fetchData(dispatch, 1, null, false).then(_ => {
                     setActive(userAction.IMPLEMENTED);
+                    navigate('/implemented');
                 });
             }
         }
@@ -91,7 +93,7 @@ export default function useAssignmentActions(isAdmin = false) {
         {
             id: adminAction.IMPORT,
             text: 'Import',
-            route: 'implemented',
+            route: 'import',
             button: {
                 variant: _ => 'btn btn-outline-secondary'
             },
@@ -100,7 +102,7 @@ export default function useAssignmentActions(isAdmin = false) {
         {
             id: adminAction.EXPORT,
             text: 'Export',
-            route: 'implemented',
+            route: 'export',
             button: {
                 variant: _ => 'btn btn-outline-secondary'
             },
@@ -109,14 +111,11 @@ export default function useAssignmentActions(isAdmin = false) {
         {
             id: adminAction.LOGOUT,
             text: 'Logout',
-            route: 'implemented',
+            route: 'logout',
             button: {
                 variant: _ => 'btn btn-outline-secondary'
             },
-            onClick: () =>
-                logOut(dispatch).then(() => {
-                    navigate('/');
-                })
+            onClick: () => logOut(dispatch).then(() => navigate('/'))
         }
     ];
     const assignmentFilterActions = isAdmin ? assignmentAdminActions : assignmentUserActions;

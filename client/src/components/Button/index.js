@@ -4,14 +4,14 @@ import {Button, Stack} from 'react-bootstrap';
 import {useTasks} from '../../сontext/reducer';
 import './index.css';
 
-function AssignmentFilterButtonsActions({activeButton}) {
+function AssignmentFilterButtonsActions() {
     const {state} = useTasks();
     const {assignmentFilterActions} = useAssignmentActions(state.isAdmin);
     const [active, setActive] = useState(0);
 
     useEffect(() => {
-        activeButton && setActive(activeButton);
-    }, []);
+        if(state.activeFilterBtn == null) setActive(0);
+    }, [state.activeFilterBtn]);
 
     return (
         <Stack id={'FilterActions'} className="mb-2 p-3 FilterActions" direction="horizontal" gap={2}>

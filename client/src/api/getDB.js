@@ -7,9 +7,9 @@ import {checkToken} from './checkToken';
 
 axiosRetry(axios, {retries: 3});
 
-export const exportDB = async dispatch => {
+export const exportDB = dispatch => {
     const token = getAuthorizationKey();
-    await axios
+    axios
         .get(
             '/admin/service/export',
             token
