@@ -173,10 +173,10 @@ export const taskReducer = (state, action) => {
         }
 
         case actionTypes.IMPORT_DB.FULFILLED: {
-            console.log('@@@@@ red' )
             return {
                 ...state,
                 tasks: action.payload,
+                activeFilterBtn: 0
             };
         }
 
