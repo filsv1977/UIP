@@ -32,7 +32,7 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +userAction.OPEN ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                fetchData(dispatch, 0, null, true).then(_ => {
+                fetchData(dispatch, 0, null, false).then(_ => {
                     setActive(userAction.OPEN);
                 });
             }
@@ -44,7 +44,7 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +userAction.IMPLEMENTED ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                fetchData(dispatch, 1, null, true).then(_ => {
+                fetchData(dispatch, 1, null, false).then(_ => {
                     setActive(userAction.IMPLEMENTED);
                 });
             }
