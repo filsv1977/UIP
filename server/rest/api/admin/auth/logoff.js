@@ -1,4 +1,4 @@
-const logoff = async (req, res) => {
+const logoff = (req, res) => {
     return res.json({success: true});
 };
 

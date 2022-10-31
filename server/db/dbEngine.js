@@ -110,7 +110,7 @@ class DbEngine {
     }
 
     _selectById(id) {
-        let index = this._getIndex(id);
+        const index = this._getIndex(id);
         if (index > -1) {
             return {success: true, data: this._db[index]};
         }
@@ -118,7 +118,7 @@ class DbEngine {
     }
 
     _delete(id) {
-        let index = this._getIndex(id);
+        const index = this._getIndex(id);
         if (index > -1) {
             this._db.splice(index, 1);
             this._save();
