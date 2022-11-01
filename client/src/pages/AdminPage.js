@@ -1,16 +1,13 @@
 import React, {useEffect} from 'react';
-import Content from '../components/Content';
 import LoginModal from '../components/Modals/LoginModal';
 import {useTasks} from '../сontext/reducer';
 import {getAuthorizationKey} from '../utils/localStorage';
 import {actionTypes} from '../сontext/actionTypes';
 import {checkToken} from '../api/checkToken';
+import ContentAdmin from '../components/ContentAdmin';
 
 function AdminPage() {
-    const {
-        state: {isAdmin},
-        dispatch
-    } = useTasks();
+    const {dispatch} = useTasks();
 
     useEffect(() => {
         const token = getAuthorizationKey();
@@ -26,7 +23,7 @@ function AdminPage() {
 
     return (
         <>
-            <Content isAdmin={isAdmin} />
+            <ContentAdmin />
             <LoginModal />
         </>
     );
