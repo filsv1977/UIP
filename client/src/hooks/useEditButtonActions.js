@@ -1,16 +1,11 @@
 import {useState} from 'react';
 import {getCurrentExchange} from '../api/getCurrentExchange';
 import {useTasks} from '../сontext/reducer';
+import {filterAction} from '../constants';
 
 export default function useEditButtonActions() {
     const [isEdit, setEdit] = useState(false);
     const {dispatch} = useTasks();
-
-    const filterAction = {
-        OPEN: 0,
-        SAVE: 1,
-        CLOSE: 2
-    };
 
     const editButtonActions = [
         {
