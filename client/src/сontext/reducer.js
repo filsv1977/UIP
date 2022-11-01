@@ -175,7 +175,7 @@ export const taskReducer = (state, action) => {
         case actionTypes.IMPORT_DB.FULFILLED: {
             return {
                 ...state,
-                tasks: action.payload,
+                tasks: action.payload
             };
         }
 
