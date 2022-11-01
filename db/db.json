@@ -13,7 +13,7 @@
         },
         "implemented": true,
         "deleted": false,
-         "uipId": 1
+        "uipId": 1
     },
     {
         "id": 1,
@@ -45,7 +45,7 @@
         },
         "implemented": false,
         "deleted": false,
-         "uipId": 3
+        "uipId": 3
     },
     {
         "id": 3,
@@ -61,7 +61,7 @@
         },
         "implemented": false,
         "deleted": false,
-         "uipId": 4
+        "uipId": 4
     },
     {
         "id": 4,
@@ -77,6 +77,6 @@
         },
         "implemented": false,
         "deleted": false,
-         "uipId": 5
+        "uipId": 5
     }
 ]

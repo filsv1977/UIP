@@ -80,7 +80,6 @@ export async function importDB(dispatch) {
             )
             .then(result => {
                 if (result.data.success) {
-
                     dispatch({
                         type: actionTypes.IMPORT_DB.FULFILLED,
                         payload: result.data.data
