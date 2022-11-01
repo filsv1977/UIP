@@ -176,7 +176,7 @@ export const taskReducer = (state, action) => {
             return {
                 ...state,
                 tasks: action.payload,
-                activeFilterBtn: 0
+                activeFilterBtn: null
             };
         }
 
