@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "nodemonConfig": {
-    "ignore": ["db/*"],
+    "ignore": ["db/*", "client"],
     "delay": 2500,
-    "watch": ["client", "server"]
+    "watch": ["server"]
   },
   "type": "module",
   "engines": {
@@ -22,7 +22,8 @@
     "lint": "./node_modules/.bin/eslint './**/*.js'",
     "check": "npx prettier --check .",
     "fix": "npx prettier --write .",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "init-all": "npm install && cd client && npm install "
   },
   "author": "",
   "license": "ISC",
