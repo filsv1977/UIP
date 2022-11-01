@@ -26,7 +26,7 @@ function AdminPage() {
 
     return (
         <>
-            <Content isAdmin={isAdmin}/>
+            <Content isAdmin={isAdmin} />
             <LoginModal />
         </>
     );
