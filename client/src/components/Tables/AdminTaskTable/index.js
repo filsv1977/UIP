@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Table, Form} from 'react-bootstrap';
 import {useTasks} from '../../../сontext/reducer';
 import {editTask} from '../../../api/editTask';
-import Error from '../../Error';
 import SpinnerBtn from '../../Spinner';
 import EditComponent from '../../EditComponent';
 
