@@ -69,34 +69,34 @@ export async function importDB(dispatch) {
         fd.append(fileKey, file.file);
 
         axios
-          .post(
-            '/admin/service/import',
-            JSON.parse(file.data),
-            token
-              ? {
-                  headers: {Authorization: JSON.stringify(token)}
-              }
-              : {}
-          )
-          .then(result => {
-              if (result.data.success) {
-                  dispatch({
-                      type: actionTypes.IMPORT_DB.FULFILLED,
-                      payload: result.data.data
-                  });
-              } else {
-                  dispatch({
-                      type: actionTypes.IMPORT_DB.REJECTED,
-                      payload: result.data.error
-                  });
-              }
-          })
-          .catch(error =>
-            dispatch({
-                type: actionTypes.IMPORT_DB.REJECTED,
-                payload: error.message
+            .post(
+                '/admin/service/import',
+                JSON.parse(file.data),
+                token
+                    ? {
+                          headers: {Authorization: JSON.stringify(token)}
+                      }
+                    : {}
+            )
+            .then(result => {
+                if (result.data.success) {
+                    dispatch({
+                        type: actionTypes.IMPORT_DB.FULFILLED,
+                        payload: result.data.data
+                    });
+                } else {
+                    dispatch({
+                        type: actionTypes.IMPORT_DB.REJECTED,
+                        payload: result.data.error
+                    });
+                }
             })
-          );
+            .catch(error =>
+                dispatch({
+                    type: actionTypes.IMPORT_DB.REJECTED,
+                    payload: error.message
+                })
+            );
     };
     selectFiles(sendToServer, '.json', false);
 }
