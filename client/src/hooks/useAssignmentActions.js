@@ -3,26 +3,12 @@ import {fetchData} from '../api/fetchData';
 import {useTasks} from '../сontext/reducer';
 import {exportDB} from '../api/getDB';
 import {logOut} from '../api/logout';
-import {implementedText, openText} from '../constants';
+import {adminAction, implementedText, openText, userAction} from '../constants';
 import {importDB} from '../api/importDB';
 
 export default function useAssignmentActions(isAdmin = false) {
     const {dispatch} = useTasks();
     const navigate = useNavigate();
-
-    const userAction = {
-        OPEN: 0,
-        IMPLEMENTED: 1
-    };
-
-    const adminAction = {
-        ALL: 0,
-        OPEN: 1,
-        IMPLEMENTED: 2,
-        IMPORT: 3,
-        EXPORT: 4,
-        LOGOUT: 5
-    };
 
     const assignmentUserActions = [
         {
@@ -57,7 +43,6 @@ export default function useAssignmentActions(isAdmin = false) {
         {
             id: adminAction.ALL,
             text: 'All',
-            route: 'open',
             button: {
                 variant: active => (+active === +adminAction.ALL ? 'outline-danger' : 'outline-primary')
             },
@@ -70,7 +55,6 @@ export default function useAssignmentActions(isAdmin = false) {
         {
             id: adminAction.OPEN,
             text: openText,
-            route: 'open',
             button: {
                 variant: active => (+active === +adminAction.OPEN ? 'outline-danger' : 'outline-primary')
             },
@@ -81,7 +65,6 @@ export default function useAssignmentActions(isAdmin = false) {
         {
             id: adminAction.IMPLEMENTED,
             text: implementedText,
-            route: 'implemented',
             button: {
                 variant: active => (+active === +adminAction.IMPLEMENTED ? 'outline-danger' : 'outline-primary')
             },
@@ -93,7 +76,6 @@ export default function useAssignmentActions(isAdmin = false) {
         {
             id: adminAction.IMPORT,
             text: 'Import',
-            route: 'implemented',
             button: {
                 variant: _ => 'btn btn-outline-secondary'
             },
@@ -102,7 +84,6 @@ export default function useAssignmentActions(isAdmin = false) {
         {
             id: adminAction.EXPORT,
             text: 'Export',
-            route: 'implemented',
             button: {
                 variant: _ => 'btn btn-outline-secondary'
             },
@@ -111,7 +92,6 @@ export default function useAssignmentActions(isAdmin = false) {
         {
             id: adminAction.LOGOUT,
             text: 'Logout',
-            route: 'implemented',
             button: {
                 variant: _ => 'btn btn-outline-secondary'
             },
