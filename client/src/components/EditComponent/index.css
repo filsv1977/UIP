@@ -1,0 +1,39 @@
+@media (max-width: 1000px) {
+    #EditButton {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #EditButton1,
+    #EditButton2,
+    #EditButton3 {
+        width: auto !important;
+        margin: 2px;
+    }
+}
+
+@media (min-width: 1001px) {
+    #EditButton {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    #EditButton1,
+    #EditButton2,
+    #EditButton3 {
+        width: auto !important;
+        margin: 1px;
+    }
+}
+
+@media (max-width: 576px) {
+    #EditButton1,
+    #EditButton2,
+    #EditButton3 {
+        padding-left: 1px;
+        padding-right: 1px;
+        margin-right: 0;
+        margin-left: 0;
+        font-size: 10px;
+    }
+}

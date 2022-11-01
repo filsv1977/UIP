@@ -1,22 +1,21 @@
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-// import {increment, decrement} from "./redux/tasksReducers"
-// import {increment, decrement, addTask, removeTask} from './redux/tasks/tasksSlice'
-import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
 import Content from '../components/Content';
-import '../App.css';
-import {fetchData} from '../redux/tasks/fetchData';
+import {useTasks} from '../сontext/reducer';
+import {delAuthorizationKey} from '../utils/localStorage';
+import {actionTypes} from '../сontext/actionTypes';
 
-function HomePage() {
-    const dispatch = useDispatch();
+function HomePage({implemented}) {
+    const {dispatch} = useTasks();
+
     useEffect(() => {
-        console.log('here');
-        dispatch(fetchData());
+        dispatch({
+            type: actionTypes.SET_ACTIVE_FILTER_BUTTON,
+            payload: implemented
+        });
+        delAuthorizationKey();
     }, []);
-    const count = useSelector(state => state.tasks.count);
-    const tasks = useSelector(state => state.tasks.tasks);
-    return <Content />;
+
+    return <Content activeButton={implemented} />;
 }
 
 export default HomePage;

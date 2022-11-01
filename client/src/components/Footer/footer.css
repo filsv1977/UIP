@@ -1,0 +1,17 @@
+.footer {
+    z-index: 3;
+    width: 100%;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.footer a:hover {
+    color: #a6a4a4;
+}
+
+.icon {
+    margin-top: 5px;
+}

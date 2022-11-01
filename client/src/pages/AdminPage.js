@@ -1,17 +1,32 @@
-import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-// import {increment, decrement} from "./redux/tasksReducers"
-// import {increment, decrement, addTask, removeTask} from './redux/tasks/tasksSlice'
-import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
-import Content from '../components/Content';
-import '../App.css';
+import React, {useEffect} from 'react';
+import LoginModal from '../components/Modals/LoginModal';
+import {useTasks} from '../сontext/reducer';
+import {getAuthorizationKey} from '../utils/localStorage';
+import {actionTypes} from '../сontext/actionTypes';
+import {checkToken} from '../api/checkToken';
+import ContentAdmin from '../components/ContentAdmin';
 
 function AdminPage() {
-    // const count = useSelector(state=> state.tasks.count)
-    // const tasks = useSelector(state=> state.tasks.tasks)
-    // // const dispatch = useDispatch()
-    return <Content />;
+    const {dispatch} = useTasks();
+
+    useEffect(() => {
+        const token = getAuthorizationKey();
+        if (token) {
+            checkToken(dispatch);
+        } else {
+            dispatch({
+                type: actionTypes.SET_VISIBLE,
+                payload: true
+            });
+        }
+    }, []);
+
+    return (
+        <>
+            <ContentAdmin />
+            <LoginModal />
+        </>
+    );
 }
 
 export default AdminPage;

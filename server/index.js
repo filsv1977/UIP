@@ -1,27 +1,38 @@
 import express from 'express';
-import config from 'config';
-import logger from 'morgan';
-import DbEngine from './db/dbEngine.js';
 import restRoutes from './rest/index.js';
-import {readDB} from './utils/readDB.js';
-import {getTaskListFromWeb} from './utils/scraping.js';
+import cors from 'cors';
+import {getTaskListFromWeb} from './helpers/uipsPageParser.js';
+import {startSchedulerGetTasks} from './utils/shedullerGetTask.js';
+import DbEngine from './db/dbEngine.js';
+import ExchangeUbx from './helpers/exchangeUbx.js';
 
-export const DB = new DbEngine();
+export const exchangeUbx = new ExchangeUbx();
+export const DB = new DbEngine(process.env.DB_FILE_NAME);
 
-readDB('db');
 getTaskListFromWeb();
+startSchedulerGetTasks();
 
 const app = express();
-app.use(logger('dev'));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 restRoutes(app);
 
-const serverPort = config.get('server.port');
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+    app.use('/admin', express.static('client/build'));
+    app.use('/open', express.static('client/build'));
+    app.use('/implemented', express.static('client/build'));
+    app.use('/*', (req, res) => {
+        res.redirect('/open');
+    });
+}
+
+const serverPort = process.env.PORT || 4000;
 
 app.listen(serverPort, () => {
-    console.log(`Example app listening on port ${serverPort}!`);
+    console.log(`UIP listening on port ${serverPort}!`);
 });
 
 export default app;
