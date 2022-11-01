@@ -5,8 +5,8 @@ import {delAuthorizationKey} from '../utils/localStorage';
 
 axiosRetry(axios, {retries: 3});
 
-export const logOut = async dispatch => {
-    await axios
+export const logOut = dispatch => {
+    return axios
         .get('/admin/auth/logoff')
         .then(result => {
             dispatch({

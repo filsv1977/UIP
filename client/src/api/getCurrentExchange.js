@@ -7,11 +7,11 @@ import {authError} from '../constants';
 
 axiosRetry(axios, {retries: 3});
 
-export const getCurrentExchange = async dispatch => {
+export const getCurrentExchange = dispatch => {
     const token = getAuthorizationKey();
     dispatch({type: actionTypes.GET_EXCHANGE_RATE});
 
-    await axios
+    return axios
         .get(
             '/admin/service/ubx2usdt',
             token

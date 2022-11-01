@@ -97,7 +97,7 @@ export default function useAssignmentActions(isAdmin = false) {
             },
             onClick: () =>
                 logOut(dispatch).then(() => {
-                    navigate('/');
+                    navigate('/open');
                 })
         }
     ];
