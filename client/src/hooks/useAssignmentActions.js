@@ -3,12 +3,26 @@ import {fetchData} from '../api/fetchData';
 import {useTasks} from '../сontext/reducer';
 import {exportDB} from '../api/getDB';
 import {logOut} from '../api/logout';
-import {adminAction, implementedText, openText, userAction} from '../constants';
+import {implementedText, openText} from '../constants';
 import {importDB} from '../api/importDB';
 
 export default function useAssignmentActions(isAdmin = false) {
     const {dispatch} = useTasks();
     const navigate = useNavigate();
+
+    const userAction = {
+        OPEN: 0,
+        IMPLEMENTED: 1
+    };
+
+    const adminAction = {
+        ALL: 0,
+        OPEN: 1,
+        IMPLEMENTED: 2,
+        IMPORT: 3,
+        EXPORT: 4,
+        LOGOUT: 5
+    };
 
     const assignmentUserActions = [
         {
