@@ -1,7 +1,7 @@
 import {exchangeUbx} from '../../../../index.js';
 
-const ubx2usdt = async (req, res) => {
-    let ubx2usdt = exchangeUbx.ubx2usdt;
+const ubx2usdt = (req, res) => {
+    const ubx2usdt = exchangeUbx.ubx2usdt;
     let result;
     if (ubx2usdt === null) {
         result = {success: false, message: exchangeUbx.error};

@@ -1,15 +1,15 @@
 import React from 'react';
-import TasksTable from '../Tables/TaskTable';
+import AdminTasksTable from '../Tables/AdminTaskTable';
 import AssignmentFilterButtonsActions from '../Button';
 import './content.css';
 
-function Content({activeButton}) {
+function ContentAdmin({activeButton}) {
     return (
         <main role="main" className="main ">
             <AssignmentFilterButtonsActions activeButton={activeButton} />
-            <div className="text-center p-3">{<TasksTable />}</div>
+            <div className="text-center p-3">{<AdminTasksTable />}</div>
         </main>
     );
 }
 
-export default Content;
+export default ContentAdmin;

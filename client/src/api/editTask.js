@@ -6,9 +6,9 @@ import {authError} from '../constants';
 
 axiosRetry(axios, {retries: 3});
 
-export const editTask = async (body, dispatch) => {
+export const editTask = (body, dispatch) => {
     const token = getAuthorizationKey();
-    await axios
+    return axios
         .patch(
             `/admin/tasks/${body.id}`,
             body,

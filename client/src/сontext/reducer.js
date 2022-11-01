@@ -85,7 +85,7 @@ export const taskReducer = (state, action) => {
             const {activeFilterBtn, tasks} = state;
 
             let newData =
-                (activeFilterBtn === 0 && nickname) || (activeFilterBtn === 1 && !nickname && !implemented)
+                (activeFilterBtn === 0 && nickname) || (activeFilterBtn === 1  && !nickname && !implemented )
                     ? tasks.filter(task => +task.id !== +id)
                     : tasks.map(task => (+task.id === +id ? action.payload : task));
 
