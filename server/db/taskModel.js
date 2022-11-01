@@ -1,4 +1,4 @@
-export const TASK_TEMPLATE = {
+export default {
     id: 0,
     url: '',
     name: '',
@@ -11,5 +11,6 @@ export const TASK_TEMPLATE = {
         hasImplementedByUbixTeam: false
     },
     implemented: false,
-    deleted: false
+    deleted: false,
+    uipId: 0
 };

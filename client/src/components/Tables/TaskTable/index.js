@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
-import {useTasks} from '../../../Context/reducer';
+import {useTasks} from '../../../сontext/reducer';
 import Error from '../../Error';
 import SpinnerBtn from '../../Spinner';
 
@@ -18,7 +18,7 @@ function TasksTable() {
             </td>
             <td>{task.estimationHours ? task.estimationHours : '-'}</td>
             <td>{task.ubxPrice ? task.ubxPrice : '-'}</td>
-            <td>{task.usdtPrice ? task.ubxPrice : '-'}</td>
+            <td>{task.usdtPrice ? task.usdtPrice : '-'}</td>
             <td>{task.performer.nickname}</td>
         </tr>
     ));
@@ -62,7 +62,6 @@ function TasksTable() {
                     {generateTable}
                 </tbody>
             </Table>
-            {state.error && <Error message={state.error} />}
         </div>
     );
 }

@@ -1,7 +1,7 @@
-import {DB} from '../index.js';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import axiosRetry from 'axios-retry';
+import {DB} from '../index.js';
 
 const GIT_URL = 'https://github.com/';
 const TASKS_LIST_URL = `${GIT_URL}SilentNotaryEcosystem/UIPS/`;
@@ -25,7 +25,6 @@ export const getTaskListFromWeb = () => {
             DB.loadUips(tasks);
         })
         .catch(error => {
-            DB.select(error.message);
             console.error(error.message);
         });
 };
@@ -41,8 +40,11 @@ export const getTaskStatuses = async tasks => {
                 tasksList[i].implemented = $('#user-content-status').parent().next().text().trim() === 'Implemented';
 
                 let title = $('pre').text();
+                let uipId = title.match(/(?<=UIP:).*/);
                 let name = title.match(/(?<=Title:).*/);
+
                 if (name !== null) {
+                    tasksList[i].uipId = +uipId[0].trim();
                     tasksList[i].name = name[0].trim();
                 }
             })

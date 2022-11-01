@@ -41,5 +41,4 @@ class ExchangeUbx {
     }
 }
 
-let exchangeUbx = new ExchangeUbx();
-export default exchangeUbx;
+export default ExchangeUbx;

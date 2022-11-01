@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useReducer} from 'react';
 import {actionTypes} from './actionTypes';
 import {fetchData} from '../api/fetchData';
+import {fetchError} from '../constants';
 
 export const initialState = {
     tasks: [],
@@ -10,6 +11,7 @@ export const initialState = {
     activeFilterBtn: 0,
     currentExchange: {rate: 0, ubx2usdt: 0},
     showLogin: false,
+    showError: false,
     signedIn: false
 };
 
@@ -44,10 +46,12 @@ export const taskReducer = (state, action) => {
             };
         }
         case actionTypes.GET_TASKS.REJECTED: {
+            const {isAdmin} = state;
             return {
                 ...state,
-                error: action.payload,
-                isLoading: false
+                error: isAdmin ? action.payload : fetchError,
+                isLoading: false,
+                showError: true
             };
         }
         case actionTypes.GET_EXCHANGE_RATE:
@@ -67,19 +71,21 @@ export const taskReducer = (state, action) => {
             return {
                 ...state,
                 error: action.payload,
-                isLoading: false
+                isLoading: false,
+                showError: true
             };
         }
 
         case actionTypes.EDIT_TASK.FULFILLED: {
             const {
                 id,
+                implemented,
                 performer: {nickname}
             } = action.payload;
             const {activeFilterBtn, tasks} = state;
 
             let newData =
-                (activeFilterBtn === 0 && nickname) || (activeFilterBtn === 1 && !nickname)
+                (activeFilterBtn === 0 && nickname) || (activeFilterBtn === 1 && !nickname && !implemented)
                     ? tasks.filter(task => +task.id !== +id)
                     : tasks.map(task => (+task.id === +id ? action.payload : task));
 
@@ -92,7 +98,8 @@ export const taskReducer = (state, action) => {
         case actionTypes.EDIT_TASK.REJECTED: {
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                showError: true
             };
         }
 
@@ -123,7 +130,8 @@ export const taskReducer = (state, action) => {
             return {
                 ...state,
                 isAdmin: false,
-                error: action.payload
+                error: action.payload,
+                showError: true
             };
         }
 
@@ -151,14 +159,38 @@ export const taskReducer = (state, action) => {
         case actionTypes.TOKEN_ERROR: {
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                showError: true
             };
         }
 
         case actionTypes.EXPORT_DB.REJECTED: {
             return {
                 ...state,
-                error: action.payload
+                error: action.payload,
+                showError: true
+            };
+        }
+
+        case actionTypes.IMPORT_DB.FULFILLED: {
+            return {
+                ...state,
+                tasks: action.payload
+            };
+        }
+
+        case actionTypes.IMPORT_DB.REJECTED: {
+            return {
+                ...state,
+                error: action.payload,
+                showError: true
+            };
+        }
+
+        case actionTypes.SHOW_ERROR: {
+            return {
+                ...state,
+                showError: action.payload
             };
         }
 

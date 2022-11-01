@@ -1,10 +1,12 @@
 import express from 'express';
-import DbEngine from './db/dbEngine.js';
 import restRoutes from './rest/index.js';
 import cors from 'cors';
 import {getTaskListFromWeb} from './helpers/uipsPageParser.js';
 import {startSchedulerGetTasks} from './utils/shedullerGetTask.js';
+import DbEngine from './db/dbEngine.js';
+import ExchangeUbx from './helpers/exchangeUbx.js';
 
+export const exchangeUbx = new ExchangeUbx();
 export const DB = new DbEngine(process.env.DB_FILE_NAME);
 
 getTaskListFromWeb();

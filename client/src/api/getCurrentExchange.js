@@ -1,8 +1,9 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
-import {actionTypes} from '../Context/actionTypes';
+import {actionTypes} from '../сontext/actionTypes';
 import {getAuthorizationKey} from '../utils/localStorage';
 import {checkToken} from './checkToken';
+import {authError} from '../constants';
 
 axiosRetry(axios, {retries: 3});
 
@@ -33,7 +34,7 @@ export const getCurrentExchange = async dispatch => {
         .catch(e =>
             dispatch({
                 type: actionTypes.GET_EXCHANGE_RATE.REJECTED,
-                payload: 'You are not authenticated!'
+                payload: authError
             })
         );
 };

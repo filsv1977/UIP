@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {getCurrentExchange} from '../api/getCurrentExchange';
-import {useTasks} from '../Context/reducer';
+import {useTasks} from '../сontext/reducer';
 
 export default function useEditButtonActions() {
     const [isEdit, setEdit] = useState(false);
@@ -26,13 +26,17 @@ export default function useEditButtonActions() {
                 setNickname,
                 setWallet,
                 setFormSubmitted,
-                setTeam
+                setTeam,
+                setUbxPrice,
+                setUsdtPrice
             ) => {
                 getCurrentExchange(dispatch).then(_ => {
                     setRowId(data.id);
                     setEdit(true);
                     setEditRow(true);
                     setHours(data.estimationHours || 0);
+                    setUbxPrice(data.ubxPrice || 0);
+                    setUsdtPrice(data.usdtPrice || 0);
                     setNickname(data.performer?.nickname || '');
                     setWallet(data.performer?.walletAddress || '');
                     setTeam(data.performer?.hasImplementedByUbixTeam || false);
@@ -64,7 +68,7 @@ export default function useEditButtonActions() {
         },
         {
             id: filterAction.CLOSE,
-            text: 'Close',
+            text: 'Cancel',
             width: '50px',
             onClick: (
                 e,
@@ -76,12 +80,16 @@ export default function useEditButtonActions() {
                 setNickname,
                 setWallet,
                 setFormSubmitted,
-                setTeam
+                setTeam,
+                setUbxPrice,
+                setUsdtPrice
             ) => {
                 setRowId(null);
                 setEdit(false);
                 setEditRow(false);
                 setHours(0);
+                setUbxPrice(0);
+                setUsdtPrice(0);
                 setNickname('');
                 setWallet('');
                 setFormSubmitted(true);
