@@ -97,7 +97,7 @@ export default function useAssignmentActions(isAdmin = false) {
             button: {
                 variant: _ => 'btn btn-outline-secondary'
             },
-            onClick: (e, setActive) => importDB(dispatch, setActive)
+            onClick: () => importDB(dispatch)
         },
         {
             id: adminAction.EXPORT,
