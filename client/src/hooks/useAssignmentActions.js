@@ -7,10 +7,7 @@ import {implementedText, openText} from '../constants';
 import {importDB} from '../api/importDB';
 
 export default function useAssignmentActions(isAdmin = false) {
-    const {
-        dispatch,
-        state: {activeFilterBtn}
-    } = useTasks();
+    const {dispatch} = useTasks();
     const navigate = useNavigate();
 
     const userAction = {
@@ -37,6 +34,7 @@ export default function useAssignmentActions(isAdmin = false) {
             onClick: (e, setActive) => {
                 fetchData(dispatch, 0, null, false).then(_ => {
                     setActive(userAction.OPEN);
+                    navigate('/');
                 });
             }
         },
@@ -49,6 +47,7 @@ export default function useAssignmentActions(isAdmin = false) {
             onClick: (e, setActive) => {
                 fetchData(dispatch, 1, null, false).then(_ => {
                     setActive(userAction.IMPLEMENTED);
+                    navigate('/implemented');
                 });
             }
         }
