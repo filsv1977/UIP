@@ -6,97 +6,70 @@ import {importFileType} from '../constants';
 
 axiosRetry(axios, {retries: 3});
 let fileInput;
-let callbackFunction;
 
-export function selectFiles(callbackFn, accept = '', multiple = false, readType = 'text') {
-    callbackFunction = callbackFn;
-    fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = accept;
-    fileInput.multiple = multiple;
-    fileInput.onchange = evt => {
-        readFiles(evt, readType);
-    };
-    fileInput.click();
-}
+export const importDB = (dispatch, setActive) => {
+    const token = getAuthorizationKey();
+    if (token) {
+        fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = importFileType;
+        fileInput.multiple = false;
+        fileInput.click();
+        fileInput.onchange = evt => {
+            try {
+                let file = evt.target.files[0];
+                let reader = new FileReader();
+                const blob = new Blob([file], {type: importFileType});
+                const {type} = evt.target.files[0]
 
-function readFiles(evt, readType) {
-    let input = evt.target;
-    let files = input.files;
-    fileInput = '';
+                if(type !== importFileType){
+                    dispatch({
+                        type: actionTypes.IMPORT_DB.REJECTED,
+                        payload: 'Incorrect import file format selected'
+                    });
+                    return;
+                }
 
-    for (let i = 0; i < files.length; i++) {
-        let reader = new FileReader();
-        if (readType === 'arrayBuffer') {
-            reader.readAsArrayBuffer(files[i]);
-        } else {
-            reader.readAsText(files[i]);
-        }
+                reader.onload = () => {
+                    return axios
+                      .post(
+                        '/admin/service/import',
+                        JSON.parse(reader.result),
+                        token
+                          ? {
+                              headers: {Authorization: JSON.stringify(token)}
+                          }
+                          : {}
+                      )
+                      .then(result => {
+                          if (result.data.success) {
+                              dispatch({
+                                  type: actionTypes.IMPORT_DB.FULFILLED,
+                                  payload: result.data.data
+                              });
+                              setActive(0);
+                          } else {
+                              dispatch({
+                                  type: actionTypes.IMPORT_DB.REJECTED,
+                                  payload: result.data.error
+                              });
+                          }
+                      });
+                };
+                reader.onerror = error => {
+                    dispatch({
+                        type: actionTypes.IMPORT_DB.REJECTED,
+                        payload: error
+                    });
+                };
 
-        reader.onload = () => {
-            if (typeof callbackFunction === 'function') {
-                callbackFunction({
-                    name: files[i].name,
-                    data: reader.result,
-                    file: files[i]
+                reader.readAsText(blob);
+            } catch (err) {
+                dispatch({
+                    type: actionTypes.IMPORT_DB.REJECTED,
+                    payload: err
                 });
             }
         };
-
-        reader.onerror = () => {
-            fileInput = '';
-        };
     }
-}
-
-export async function importDB(dispatch) {
-    const token = getAuthorizationKey();
-
-    let sendToServer = file => {
-        if (file.file?.type !== importFileType) {
-            dispatch({
-                type: actionTypes.IMPORT_DB.REJECTED,
-                payload: 'Incorrect import file format selected'
-            });
-            return;
-        }
-
-        if (!file.data) return;
-
-        let fd = new FormData();
-
-        let fileKey = 'import-db-main';
-        fd.append(fileKey, file.file);
-
-        axios
-            .post(
-                '/admin/service/import',
-                JSON.parse(file.data),
-                token
-                    ? {
-                          headers: {Authorization: JSON.stringify(token)}
-                      }
-                    : {}
-            )
-            .then(result => {
-                if (result.data.success) {
-                    dispatch({
-                        type: actionTypes.IMPORT_DB.FULFILLED,
-                        payload: result.data.data
-                    });
-                } else {
-                    dispatch({
-                        type: actionTypes.IMPORT_DB.REJECTED,
-                        payload: result.data.message
-                    });
-                }
-            })
-            .catch(error =>
-                dispatch({
-                    type: actionTypes.IMPORT_DB.REJECTED,
-                    payload: error.message
-                })
-            );
-    };
-    selectFiles(sendToServer, '.json', false);
-}
+};
