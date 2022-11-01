@@ -1,1 +1,82 @@
-[]
+[
+    {
+        "id": 0,
+        "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-1.mediawiki",
+        "name": "Drop Outdated Transactions from MemPool",
+        "estimationHours": 0,
+        "ubxPrice": 0,
+        "usdtPrice": 0,
+        "performer": {
+            "nickname": "UBIX Team",
+            "walletAddress": "",
+            "hasImplementedByUbixTeam": true
+        },
+        "implemented": true,
+        "deleted": false,
+        "uipId": 1
+    },
+    {
+        "id": 1,
+        "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-2.mediawiki",
+        "name": "Node or running RPC reduces performance upon receiving transactions",
+        "estimationHours": 0,
+        "ubxPrice": 0,
+        "usdtPrice": 0,
+        "performer": {
+            "nickname": "UBIX Team",
+            "walletAddress": "",
+            "hasImplementedByUbixTeam": true
+        },
+        "implemented": true,
+        "deleted": false,
+        "uipId": 2
+    },
+    {
+        "id": 2,
+        "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-3.mediawiki",
+        "name": "Cleanup MemPool from transactions that are already added to blocks",
+        "estimationHours": 4,
+        "ubxPrice": 3892944,
+        "usdtPrice": 158.44,
+        "performer": {
+            "nickname": "",
+            "walletAddress": "",
+            "hasImplementedByUbixTeam": false
+        },
+        "implemented": false,
+        "deleted": false,
+        "uipId": 3
+    },
+    {
+        "id": 3,
+        "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-4.mediawiki",
+        "name": "Check whether RPC transaction execution can interfere with block execution",
+        "estimationHours": 40,
+        "ubxPrice": 38929440,
+        "usdtPrice": 1584.43,
+        "performer": {
+            "nickname": "",
+            "walletAddress": "",
+            "hasImplementedByUbixTeam": false
+        },
+        "implemented": false,
+        "deleted": false,
+        "uipId": 4
+    },
+    {
+        "id": 4,
+        "url": "https://github.com/SilentNotaryEcosystem/UIPS/blob/main/uip-5.mediawiki",
+        "name": "Fix protobuf exception in the dev branch",
+        "estimationHours": 32,
+        "ubxPrice": 31143552,
+        "usdtPrice": 1267.54,
+        "performer": {
+            "nickname": "",
+            "walletAddress": "",
+            "hasImplementedByUbixTeam": false
+        },
+        "implemented": false,
+        "deleted": false,
+        "uipId": 5
+    }
+]

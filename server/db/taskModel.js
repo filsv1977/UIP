@@ -11,5 +11,6 @@ export default {
         hasImplementedByUbixTeam: false
     },
     implemented: false,
-    deleted: false
+    deleted: false,
+    uipId: 0
 };

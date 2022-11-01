@@ -5,7 +5,6 @@ import {editTask} from '../../../api/editTask';
 import Error from '../../Error';
 import SpinnerBtn from '../../Spinner';
 import EditComponent from '../../EditComponent';
-import {actionTypes} from '../../../сontext/actionTypes';
 
 function AdminTasksTable() {
     const style = {width: '15vw'};
@@ -15,6 +14,8 @@ function AdminTasksTable() {
     const [formSubmitted, setFormSubmitted] = useState(true);
 
     const [estimationHours, setHours] = useState(0);
+    const [ubxPrice, setUbxPrice] = useState(0);
+    const [usdtPrice, setUsdtPrice] = useState(0);
     const [nickname, setNickname] = useState('');
     const [wallet, setWallet] = useState('');
 
@@ -32,6 +33,8 @@ function AdminTasksTable() {
         if (estimationHours < 0) return;
         let newData = {...editData};
         newData.estimationHours = Number(estimationHours);
+        newData.ubxPrice = Number(ubxPrice);
+        newData.usdtPrice = Number(usdtPrice);
         newData.performer = {
             nickname: nickname,
             walletAddress: wallet,
@@ -48,28 +51,22 @@ function AdminTasksTable() {
             setRowId(null);
             setEditRow(false);
             setHours(0);
+            setUbxPrice(0);
+            setUsdtPrice(0);
             setNickname('');
             setWallet('');
         });
     };
 
-    const onSetHours = (e, id) => {
+    const onSetHours = e => {
         const isValid = e.target.value >= 0;
         setFormSubmitted(isValid);
         setHours(+e.target.value);
 
         const {rate, ubx2usdt} = state.currentExchange;
 
-        dispatch({
-            type: actionTypes.SET_COST_VALUES,
-            payload: {
-                id,
-                data: {
-                    rate: rate * +e.target.value,
-                    ubx2usdt: +(ubx2usdt * rate * +e.target.value).toFixed(2)
-                }
-            }
-        });
+        setUbxPrice(rate * +e.target.value);
+        setUsdtPrice(+(ubx2usdt * rate * +e.target.value).toFixed(2));
     };
 
     const setTeamWork = (e, task) => {
@@ -104,7 +101,7 @@ function AdminTasksTable() {
                             min="0"
                             aria-describedby="basic-addon1"
                             defaultValue={task.estimationHours}
-                            onChange={e => onSetHours(e, task.id)}
+                            onChange={onSetHours}
                             type={'number'}
                             isInvalid={+estimationHours < 0}
                         />
@@ -116,8 +113,20 @@ function AdminTasksTable() {
                     task.estimationHours || '-'
                 )}
             </td>
-            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.ubxPrice || '-'}</td>
-            <td>{editRow && +task.id === +rowId && teamBox ? '-' : task.usdtPrice || '-'}</td>
+            <td>
+                {editRow && +task.id === +rowId && !teamBox
+                    ? ubxPrice || '-'
+                    : editRow && +task.id === +rowId && teamBox
+                    ? '-'
+                    : task.ubxPrice || '-'}
+            </td>
+            <td>
+                {editRow && +task.id === +rowId && !teamBox
+                    ? usdtPrice || '-'
+                    : editRow && +task.id === +rowId && teamBox
+                    ? '-'
+                    : task.usdtPrice || '-'}
+            </td>
             <td style={style}>
                 {editRow && +task.id === +rowId && !teamBox ? (
                     <Form.Control
@@ -176,6 +185,8 @@ function AdminTasksTable() {
                             setWallet={setWallet}
                             setFormSubmitted={setFormSubmitted}
                             setTeam={setTeam}
+                            setUbxPrice={setUbxPrice}
+                            setUsdtPrice={setUsdtPrice}
                         />
                     </div>
                 }
@@ -221,7 +232,6 @@ function AdminTasksTable() {
                     {generateTable}
                 </tbody>
             </Table>
-            {state.error && <Error message={state.error} />}
         </div>
     );
 }

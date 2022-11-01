@@ -87,7 +87,7 @@ export async function importDB(dispatch) {
                 } else {
                     dispatch({
                         type: actionTypes.IMPORT_DB.REJECTED,
-                        payload: result.data.error
+                        payload: result.data.message
                     });
                 }
             })

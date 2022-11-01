@@ -22,10 +22,10 @@ class DbEngine {
         try {
             const tasks = [...tasksList];
 
-            this._db.forEach(elem => {
+            this._db.forEach((elem, i) => {
                 const index = tasks.findIndex(item => elem.name === item.name);
                 if (index > -1) {
-                    elem = {...elem, ...tasks[index]};
+                    this._db[i] = {...elem, ...tasks[index]};
                     tasks.splice(index, 1);
                 } else {
                     elem.deleted = true;
@@ -35,6 +35,8 @@ class DbEngine {
             tasks.forEach(elem => {
                 this._db.push({...taskModel, ...elem, id: this._getNewId()});
             });
+
+            this._sortBase();
 
             this._error = '';
             this._save();
@@ -73,6 +75,10 @@ class DbEngine {
         return this._db.findIndex(item => +item.id === +id);
     }
 
+    _sortBase() {
+        return this._db.sort((a, b) => a.uipId - b.uipId);
+    }
+
     setError(error) {
         this._error = error;
     }
@@ -94,8 +100,8 @@ class DbEngine {
 
     insertAll(data) {
         try {
-            data.id = this._getNewId();
             this._db = data;
+            this._sortBase();
             this._save();
             return {success: true, data: this._db};
         } catch (error) {
