@@ -2,7 +2,7 @@ import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import {actionTypes} from '../сontext/actionTypes';
 import {getAuthorizationKey} from '../utils/localStorage';
-import {importFileType} from '../constants';
+import {importFileType, incorrectFormat} from '../constants';
 
 axiosRetry(axios, {retries: 3});
 let fileInput;
@@ -25,7 +25,7 @@ export const importDB = (dispatch, setActive) => {
                 if(type !== importFileType){
                     dispatch({
                         type: actionTypes.IMPORT_DB.REJECTED,
-                        payload: 'Incorrect import file format selected'
+                        payload: incorrectFormat
                     });
                     return;
                 }
@@ -51,15 +51,15 @@ export const importDB = (dispatch, setActive) => {
                           } else {
                               dispatch({
                                   type: actionTypes.IMPORT_DB.REJECTED,
-                                  payload: result.data.error
+                                  payload: result.data.message
                               });
                           }
                       });
                 };
-                reader.onerror = error => {
+                reader.onerror = err=> {
                     dispatch({
                         type: actionTypes.IMPORT_DB.REJECTED,
-                        payload: error
+                        payload: err
                     });
                 };
 
