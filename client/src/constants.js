@@ -1,6 +1,6 @@
 export const authError = 'You are not authorized!';
 
-export const incorrectFormat ='Incorrect import file format selected'
+export const incorrectFormat = 'Incorrect import file format selected';
 
 export const openText = 'Open';
 

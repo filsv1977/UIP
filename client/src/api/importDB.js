@@ -20,9 +20,9 @@ export const importDB = (dispatch, setActive) => {
                 let file = evt.target.files[0];
                 let reader = new FileReader();
                 const blob = new Blob([file], {type: importFileType});
-                const {type} = evt.target.files[0]
+                const {type} = evt.target.files[0];
 
-                if(type !== importFileType){
+                if (type !== importFileType) {
                     dispatch({
                         type: actionTypes.IMPORT_DB.REJECTED,
                         payload: incorrectFormat
@@ -32,31 +32,31 @@ export const importDB = (dispatch, setActive) => {
 
                 reader.onload = () => {
                     return axios
-                      .post(
-                        '/admin/service/import',
-                        JSON.parse(reader.result),
-                        token
-                          ? {
-                              headers: {Authorization: JSON.stringify(token)}
-                          }
-                          : {}
-                      )
-                      .then(result => {
-                          if (result.data.success) {
-                              dispatch({
-                                  type: actionTypes.IMPORT_DB.FULFILLED,
-                                  payload: result.data.data
-                              });
-                              setActive(0);
-                          } else {
-                              dispatch({
-                                  type: actionTypes.IMPORT_DB.REJECTED,
-                                  payload: result.data.message
-                              });
-                          }
-                      });
+                        .post(
+                            '/admin/service/import',
+                            JSON.parse(reader.result),
+                            token
+                                ? {
+                                      headers: {Authorization: JSON.stringify(token)}
+                                  }
+                                : {}
+                        )
+                        .then(result => {
+                            if (result.data.success) {
+                                dispatch({
+                                    type: actionTypes.IMPORT_DB.FULFILLED,
+                                    payload: result.data.data
+                                });
+                                setActive(0);
+                            } else {
+                                dispatch({
+                                    type: actionTypes.IMPORT_DB.REJECTED,
+                                    payload: result.data.message
+                                });
+                            }
+                        });
                 };
-                reader.onerror = err=> {
+                reader.onerror = err => {
                     dispatch({
                         type: actionTypes.IMPORT_DB.REJECTED,
                         payload: err
