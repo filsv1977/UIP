@@ -18,14 +18,11 @@ export function getList(implemented, admin) {
 
         let filterData = answer.data.filter(filter);
 
-        let data = filterData.map(item => {
-            let {performer} = item;
-            if (!admin) {
-                performer = R.omit(['walletAddress', 'hasImplementedByUbixTeam'], item.performer);
-            }
-
-            return {...item, performer: {...performer}};
-        });
+        const delField = ['walletAddress', 'hasImplementedByUbixTeam'];
+        let data = filterData.map(({performer, ...item}) => ({
+            ...item,
+            performer: admin ? performer : R.omit(delField, performer)
+        }));
 
         return {success: answer.success, data};
     } catch (error) {
