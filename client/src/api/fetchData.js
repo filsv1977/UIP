@@ -7,7 +7,7 @@ axiosRetry(axios, {retries: 3});
 
 const cache = [];
 
-export const fetchData = async (dispatch, id, noSetLoading = true, isAdmin = false) => {
+export const fetchData = (dispatch, id, noSetLoading = true, isAdmin = false) => {
     const admin = isAdmin ? '/admin' : '';
     const url = id == null ? `${admin}/tasks` : `${admin}/tasks?implemented=${id}`;
     const token = getAuthorizationKey();
@@ -20,7 +20,7 @@ export const fetchData = async (dispatch, id, noSetLoading = true, isAdmin = fal
         });
     }
 
-    await axios
+    return axios
         .get(
             url,
             token
