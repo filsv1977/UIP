@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "nodemonConfig": {
+    "ignore": ["db/*", "client"],
+    "delay": 2500
+  },
   "type": "module",
   "engines": {
     "node": "18.x",
@@ -13,11 +17,12 @@
     "client": "cd client && npm start",
     "dev": "concurrently \"npm run start:dev\" \"cd client && npm start\"",
     "start": "node ./server/index.js",
-    "start:dev": "node -r dotenv/config ./server/index.js dotenv_config_path=.env",
+    "start:dev": "nodemon -r dotenv/config ./server/index.js dotenv_config_path=.env",
     "lint": "./node_modules/.bin/eslint './**/*.js'",
     "check": "npx prettier --check .",
     "fix": "npx prettier --write .",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build",
+    "init-all": "npm install && cd client && npm install "
   },
   "author": "",
   "license": "ISC",
@@ -43,6 +48,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "nodemon": "^2.0.20",
     "prettier": "^2.7.1"
   }
 }
