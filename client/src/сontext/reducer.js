@@ -11,8 +11,7 @@ export const initialState = {
     activeFilterBtn: 0,
     currentExchange: {rate: 0, ubx2usdt: 0},
     showLogin: false,
-    showError: false,
-    signedIn: false
+    showError: false
 };
 
 export const ContextApp = React.createContext();
@@ -107,7 +106,8 @@ export const taskReducer = (state, action) => {
             return {
                 ...state,
                 isAdmin: true,
-                error: false
+                error: false,
+                showError: false
             };
         }
         case actionTypes.LOGIN_ADMIN.REJECTED: {

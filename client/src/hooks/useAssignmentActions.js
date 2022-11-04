@@ -5,6 +5,7 @@ import {exportDB} from '../api/getDB';
 import {logOut} from '../api/logout';
 import {adminAction, implementedText, openText, userAction} from '../constants';
 import {importDB} from '../api/importDB';
+import {setUbiTimerKey} from '../utils/localStorage';
 
 export default function useAssignmentActions(isAdmin = false) {
     const {dispatch} = useTasks();
@@ -49,6 +50,7 @@ export default function useAssignmentActions(isAdmin = false) {
             onClick: (e, setActive) => {
                 fetchData(dispatch, null, null, true).then(_ => {
                     setActive(adminAction.ALL);
+                    setUbiTimerKey();
                 });
             }
         },
@@ -59,7 +61,10 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +adminAction.OPEN ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                fetchData(dispatch, 0, null, true).then(_ => setActive(adminAction.OPEN));
+                fetchData(dispatch, 0, null, true).then(_ => {
+                    setActive(adminAction.OPEN);
+                    setUbiTimerKey();
+                });
             }
         },
         {
@@ -71,6 +76,7 @@ export default function useAssignmentActions(isAdmin = false) {
             onClick: (e, setActive) =>
                 fetchData(dispatch, 1, null, true).then(_ => {
                     setActive(adminAction.IMPLEMENTED);
+                    setUbiTimerKey();
                 })
         },
         {

@@ -10,14 +10,24 @@ export const getAuthorizationKey = () => {
     let token;
     const login = localStorage.getItem('login');
     const password = hexDecode(localStorage.getItem('password'));
-    if (login && password) {
+    const timer = localStorage.getItem('ubiTimer');
+    const stillLogin = Date.now() < +timer;
+
+    if (login && password && stillLogin) {
         token = {login, password};
     }
     return token;
 };
 
 export const getUbiTimerKey = () => {
-    return localStorage.getItem('ubiTimer');
+    return +localStorage.getItem('ubiTimer');
+};
+
+export const setUbiTimerKey = () => {
+    const token = getAuthorizationKey();
+    if (token) {
+        localStorage.setItem('ubiTimer', String(Date.now() + 3600000));
+    }
 };
 
 export const delAuthorizationKey = () => {

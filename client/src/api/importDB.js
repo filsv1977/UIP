@@ -1,14 +1,16 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import {actionTypes} from '../сontext/actionTypes';
-import {getAuthorizationKey} from '../utils/localStorage';
+import {getAuthorizationKey, setUbiTimerKey} from '../utils/localStorage';
 import {importFileType, incorrectFormat} from '../constants';
+import {checkToken} from './checkToken';
 
 axiosRetry(axios, {retries: 3});
 let fileInput;
 
 export const importDB = (dispatch, setActive) => {
     const token = getAuthorizationKey();
+
     if (token) {
         fileInput = document.createElement('input');
         fileInput.type = 'file';
@@ -48,6 +50,7 @@ export const importDB = (dispatch, setActive) => {
                                     payload: result.data.data
                                 });
                                 setActive(0);
+                                setUbiTimerKey();
                             } else {
                                 dispatch({
                                     type: actionTypes.IMPORT_DB.REJECTED,
@@ -71,5 +74,7 @@ export const importDB = (dispatch, setActive) => {
                 });
             }
         };
+    } else {
+        checkToken(dispatch);
     }
 };
