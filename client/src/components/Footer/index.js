@@ -21,7 +21,7 @@ function Footer() {
                             uip@ubix.network
                         </a>{' '}
                         or send a message on telegram to{' '}
-                        <a target="_blank" rel="noreferrer" href="https://t.me/clxibot">
+                        <a target="_blank" rel="noreferrer" href="http://t.me/UBIXTestBot">
                             UBIXBot
                         </a>
                         <div className="footer-copyright text-center py-3">
