@@ -8,18 +8,18 @@ export function getList(implemented, admin) {
             return {...answer};
         }
 
-        let filter = item => {
+        const filter = item => {
             if (implemented === undefined) return true;
 
-            let closed = item.performer.nickname !== '' || item.implemented;
+            const closed = item.performer.nickname !== '' || item.implemented;
             if (+implemented) return closed;
             return !closed;
         };
 
-        let filterData = answer.data.filter(filter);
+        const filterData = answer.data.filter(filter);
 
         const delField = ['walletAddress', 'hasImplementedByUbixTeam'];
-        let data = filterData.map(({performer, ...item}) => ({
+        const data = filterData.map(({performer, ...item}) => ({
             ...item,
             performer: admin ? performer : R.omit(delField, performer)
         }));
