@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "nodemonConfig": {
-    "ignore": ["db/*", "client"],
-    "watch": ["server"],
-    "delay": 10
+    "ignore": ["db", "client"]
   },
   "type": "module",
   "engines": {
