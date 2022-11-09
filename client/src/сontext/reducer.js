@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useReducer} from 'react';
 import {actionTypes} from './actionTypes';
-import {fetchData} from '../api/fetchData';
+import fetchData from '../api/fetchData';
 import {fetchError} from '../constants';
 
 export const initialState = {

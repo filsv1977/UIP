@@ -6,7 +6,7 @@ import {authError} from '../constants';
 
 axiosRetry(axios, {retries: 3});
 
-export const editTask = (body, dispatch) => {
+export default (body, dispatch) => {
     const token = getAuthorizationKey();
     return axios
         .patch(

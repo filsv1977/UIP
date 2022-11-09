@@ -2,11 +2,11 @@ import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import {actionTypes} from '../сontext/actionTypes';
 import {getAuthorizationKey, getUbiTimerKey} from '../utils/localStorage';
-import {fetchData} from './fetchData';
+import fetchData from './fetchData';
 
 axiosRetry(axios, {retries: 3});
 
-export const checkToken = dispatch => {
+export default dispatch => {
     const url = `/admin/auth/checkToken`;
     const token = getAuthorizationKey();
     const timer = getUbiTimerKey();

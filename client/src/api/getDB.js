@@ -3,11 +3,11 @@ import axiosRetry from 'axios-retry';
 import {actionTypes} from '../сontext/actionTypes';
 import {saveToFile} from '../utils/saveToFile';
 import {getAuthorizationKey, setUbiTimerKey} from '../utils/localStorage';
-import {checkToken} from './checkToken';
+import checkToken from './checkToken';
 
 axiosRetry(axios, {retries: 3});
 
-export const exportDB = dispatch => {
+export default dispatch => {
     const token = getAuthorizationKey();
     axios
         .get(

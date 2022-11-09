@@ -7,20 +7,22 @@ axiosRetry(axios, {retries: 3});
 
 const cache = [];
 
-export const fetchData = async (dispatch, id, noSetLoading = true, isAdmin = false) => {
+export default (dispatch, id, noSetLoading = true, isAdmin = false) => {
     const admin = isAdmin ? '/admin' : '';
     const url = id == null ? `${admin}/tasks` : `${admin}/tasks?implemented=${id}`;
     const token = getAuthorizationKey();
     dispatch({type: actionTypes.GET_TASKS.PENDING, noSetLoading});
 
     if (!isAdmin && cache[id]) {
-        return dispatch({
-            type: actionTypes.GET_TASKS.FULFILLED,
-            payload: {data: cache[id], activeFilterBtn: id}
-        });
+        return Promise.resolve(
+            dispatch({
+                type: actionTypes.GET_TASKS.FULFILLED,
+                payload: {data: cache[id], activeFilterBtn: id}
+            })
+        );
     }
 
-    await axios
+    return axios
         .get(
             url,
             token

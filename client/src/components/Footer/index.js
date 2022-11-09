@@ -21,8 +21,8 @@ function Footer() {
                             uip@ubix.network
                         </a>{' '}
                         or send a message on telegram to{' '}
-                        <a target="_blank" rel="noreferrer" href="https://t.me/klowert">
-                            @klowert
+                        <a target="_blank" rel="noreferrer" href="https://t.me/clxibot">
+                            @UBIXbot
                         </a>
                         <div className="footer-copyright text-center py-3">
                             Copyright © 2022 Ubix.network. All rights reserved.

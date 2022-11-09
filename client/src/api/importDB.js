@@ -3,12 +3,12 @@ import axiosRetry from 'axios-retry';
 import {actionTypes} from '../сontext/actionTypes';
 import {getAuthorizationKey, setUbiTimerKey} from '../utils/localStorage';
 import {importFileType, incorrectFormat} from '../constants';
-import {checkToken} from './checkToken';
+import checkToken from './checkToken';
 
 axiosRetry(axios, {retries: 3});
 let fileInput;
 
-export const importDB = (dispatch, setActive) => {
+export default (dispatch, setActive) => {
     const token = getAuthorizationKey();
 
     if (token) {

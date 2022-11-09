@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {getCurrentExchange} from '../api/getCurrentExchange';
+import getCurrentExchange from '../api/getCurrentExchange';
 import {useTasks} from '../сontext/reducer';
 import {filterAction} from '../constants';
 import {setUbiTimerKey} from '../utils/localStorage';

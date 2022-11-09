@@ -1,10 +1,10 @@
 import {useNavigate} from 'react-router-dom';
-import {fetchData} from '../api/fetchData';
+import fetchData from '../api/fetchData';
 import {useTasks} from '../сontext/reducer';
-import {exportDB} from '../api/getDB';
-import {logOut} from '../api/logout';
+import exportDB from '../api/getDB';
+import logOut from '../api/logout';
 import {adminAction, implementedText, openText, userAction} from '../constants';
-import {importDB} from '../api/importDB';
+import importDB from '../api/importDB';
 import {setUbiTimerKey} from '../utils/localStorage';
 
 export default function useAssignmentActions(isAdmin = false) {
