@@ -22,7 +22,7 @@ function Footer() {
                         </a>{' '}
                         or send a message on telegram to{' '}
                         <a target="_blank" rel="noreferrer" href="https://t.me/clxibot">
-                            @UBIXbot
+                            UBIXBot
                         </a>
                         <div className="footer-copyright text-center py-3">
                             Copyright © 2022 Ubix.network. All rights reserved.
