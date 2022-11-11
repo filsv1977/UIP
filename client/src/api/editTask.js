@@ -26,7 +26,7 @@ export default (body, dispatch) => {
                 payload: result.data.data
             });
         })
-        .catch(e =>
+        .catch(() =>
             dispatch({
                 type: actionTypes.EDIT_TASK.REJECTED,
                 payload: authError

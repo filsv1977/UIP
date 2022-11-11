@@ -29,10 +29,10 @@ export default dispatch => {
                 checkToken(dispatch);
             }
         })
-        .catch(e => {
+        .catch(error => {
             dispatch({
                 type: actionTypes.EXPORT_DB.REJECTED,
-                payload: e.message
+                payload: error.message
             });
             return false;
         });

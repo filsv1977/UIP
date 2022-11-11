@@ -67,10 +67,10 @@ export default (dispatch, setActive) => {
                 };
 
                 reader.readAsText(blob);
-            } catch (err) {
+            } catch (error) {
                 dispatch({
                     type: actionTypes.IMPORT_DB.REJECTED,
-                    payload: err
+                    payload: error
                 });
             }
         };

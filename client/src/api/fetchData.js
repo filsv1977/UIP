@@ -43,10 +43,10 @@ export default (dispatch, id, noSetLoading = true, isAdmin = false) => {
                 payload: {data: result.data.data, activeFilterBtn: id}
             });
         })
-        .catch(e =>
+        .catch(error =>
             dispatch({
                 type: actionTypes.GET_TASKS.REJECTED,
-                payload: e.message
+                payload: error.message
             })
         );
 };

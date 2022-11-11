@@ -12,11 +12,10 @@ export default dispatch => {
     const timer = getUbiTimerKey();
 
     if (Date.now() > timer) {
-        dispatch({
+        return dispatch({
             type: actionTypes.SET_VISIBLE,
             payload: true
         });
-        return;
     }
 
     axios
@@ -48,10 +47,10 @@ export default dispatch => {
                 payload: !result.data.success
             });
         })
-        .catch(e => {
+        .catch(error => {
             dispatch({
                 type: actionTypes.TOKEN_ERROR,
-                payload: e.message
+                payload: error.message
             });
         });
 };
