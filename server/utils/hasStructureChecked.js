@@ -1,4 +1,5 @@
 import {length, isEmpty, symmetricDifference} from 'ramda';
+
 import taskModel from '../db/taskModel.js';
 
 export default tasks => {

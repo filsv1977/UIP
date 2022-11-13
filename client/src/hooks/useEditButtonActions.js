@@ -26,7 +26,7 @@ export default function useEditButtonActions() {
                 setUbxPrice,
                 setUsdtPrice
             ) => {
-                getCurrentExchange(dispatch).then(_ => {
+                getCurrentExchange(dispatch).then(() => {
                     setRowId(data.id);
                     setEdit(true);
                     setEditRow(true);

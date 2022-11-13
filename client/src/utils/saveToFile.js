@@ -1,4 +1,4 @@
-export function saveToFile(fileName, data) {
+export const saveToFile = (fileName, data) => {
     const blob = new Blob([JSON.stringify(data, null, 4)], {type: 'text/json'});
     const anchor = document.createElement('a');
 
@@ -6,4 +6,4 @@ export function saveToFile(fileName, data) {
     anchor.href = (window.webkitURL || window.URL).createObjectURL(blob);
     anchor.dataset.downloadurl = ['text/json', anchor.download, anchor.href].join(':');
     anchor.click();
-}
+};
