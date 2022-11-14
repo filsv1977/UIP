@@ -10,8 +10,8 @@ function SpinnerBtn() {
 
     const refBg = useRef(null);
 
-    let [show, setShow] = useState(false);
-    let [isEndTimer, setIsEndTimer] = useState(false);
+    const [show, setShow] = useState(false);
+    const [isEndTimer, setIsEndTimer] = useState(false);
     const [pos, setPos] = useState(0);
     const [bgHeight, setBgHeight] = useState(0);
 

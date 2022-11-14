@@ -83,7 +83,7 @@ export const taskReducer = (state, action) => {
             } = action.payload;
             const {activeFilterBtn, tasks} = state;
 
-            let newData =
+            const newData =
                 (activeFilterBtn === 0 && nickname) || (activeFilterBtn === 1 && !nickname && !implemented)
                     ? tasks.filter(task => +task.id !== +id)
                     : tasks.map(task => (+task.id === +id ? action.payload : task));
@@ -140,7 +140,7 @@ export const taskReducer = (state, action) => {
                 id,
                 data: {rate, ubx2usdt}
             } = action.payload;
-            let newData = (state.tasks || []).map(task =>
+            const newData = (state.tasks || []).map(task =>
                 task.id === id ? {...task, ubxPrice: rate, usdtPrice: ubx2usdt} : task
             );
             return {
