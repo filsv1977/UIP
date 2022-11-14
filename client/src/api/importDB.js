@@ -19,8 +19,8 @@ export default (dispatch, setActive) => {
         fileInput.click();
         fileInput.onchange = evt => {
             try {
-                let file = evt.target.files[0];
-                let reader = new FileReader();
+                const file = evt.target.files[0];
+                const reader = new FileReader();
                 const blob = new Blob([file], {type: importFileType});
                 const {type} = evt.target.files[0];
 

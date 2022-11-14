@@ -17,7 +17,7 @@ export const getTaskListFromWeb = () => {
         .then(async result => {
             const tasksData = result.data.match(/Sil.*mediawiki(?=<)/g);
             let tasks = tasksData.map(e => {
-                let urlAndName = e.split('">');
+                const urlAndName = e.split('">');
                 return {
                     url: GIT_URL + urlAndName[0],
                     name: urlAndName[1]
@@ -33,7 +33,7 @@ export const getTaskListFromWeb = () => {
 };
 
 export const getTaskStatuses = async tasks => {
-    let tasksList = [...tasks];
+    const tasksList = [...tasks];
 
     for (let i = 0; i < tasksList.length; i++) {
         await axios
@@ -42,9 +42,9 @@ export const getTaskStatuses = async tasks => {
                 const $ = load(result.data);
                 tasksList[i].implemented = $('#user-content-status').parent().next().text().trim() === 'Implemented';
 
-                let title = $('pre').text();
-                let uipId = title.match(/(?<=UIP:).*/);
-                let name = title.match(/(?<=Title:).*/);
+                const title = $('pre').text();
+                const uipId = title.match(/(?<=UIP:).*/);
+                const name = title.match(/(?<=Title:).*/);
 
                 if (name !== null) {
                     tasksList[i].uipId = +uipId[0].trim();

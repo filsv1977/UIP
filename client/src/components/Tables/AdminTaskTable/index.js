@@ -20,7 +20,7 @@ function AdminTasksTable() {
 
     const [teamBox, setTeam] = useState(false);
 
-    let spinnerTh = {
+    const spinnerTh = {
         fontSize: '1px',
         lineHeight: 0,
         padding: 0
@@ -30,7 +30,7 @@ function AdminTasksTable() {
 
     const onEditTask = editData => {
         if (estimationHours < 0) return;
-        let newData = {...editData};
+        const newData = {...editData};
         newData.estimationHours = Number(estimationHours);
         newData.ubxPrice = Number(ubxPrice);
         newData.usdtPrice = Number(usdtPrice);
