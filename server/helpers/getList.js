@@ -1,4 +1,4 @@
-import * as R from 'ramda';
+import {omit} from 'ramda';
 import {DB} from '../index.js';
 
 export function getList(implemented, admin) {
@@ -21,7 +21,7 @@ export function getList(implemented, admin) {
         const delField = ['walletAddress', 'hasImplementedByUbixTeam'];
         const data = filterData.map(({performer, ...item}) => ({
             ...item,
-            performer: admin ? performer : R.omit(delField, performer)
+            performer: admin ? performer : omit(delField, performer)
         }));
 
         return {success: answer.success, data};

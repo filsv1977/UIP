@@ -1,12 +1,12 @@
 import {DB} from '../../../../index.js';
-import {isCorrectImport} from '../../../../utils/isCorrectImport.js';
+import hasStructureChecked from '../../../../utils/hasStructureChecked.js';
 
 export default async (req, res) => {
     const tasks = req.body;
 
-    if (isCorrectImport(tasks)) {
+    if (hasStructureChecked(tasks)) {
         return res.json(await DB.insertAll(tasks));
     }
 
-    return res.json({success: false, message: 'Import file format is wrong'});
+    return res.json({success: false, message: 'The input file has a wrong structure'});
 };
