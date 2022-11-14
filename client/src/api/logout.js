@@ -15,10 +15,10 @@ export default dispatch => {
             });
             delAuthorizationKey();
         })
-        .catch(e =>
+        .catch(error =>
             dispatch({
                 type: actionTypes.LOGOUT_ADMIN.REJECTED,
-                payload: e.message
+                payload: error.message
             })
         );
 };

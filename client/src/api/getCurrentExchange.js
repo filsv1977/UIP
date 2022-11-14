@@ -31,7 +31,7 @@ export default dispatch => {
                 payload: result.data.data
             });
         })
-        .catch(e =>
+        .catch(() =>
             dispatch({
                 type: actionTypes.GET_EXCHANGE_RATE.REJECTED,
                 payload: authError
