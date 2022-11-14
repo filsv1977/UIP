@@ -13,7 +13,7 @@ USER=admin
 PASSWORD=21232f297a57a5a743894a0e4a801fc3
 
 DB_FILE_NAME='./db/db.json'
-HOURLY_RATE=431965
+HOURLY_RATE=973236
 
 UBX_USDT_URL='https://ubix.exchange/api/v1/tickers/UBX-USDT'
 ```
