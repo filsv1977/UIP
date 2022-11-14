@@ -46,7 +46,7 @@ function AdminTasksTable() {
             newData.usdtPrice = 0;
         }
 
-        editTask(newData, dispatch).then(_ => {
+        editTask(newData, dispatch).then(() => {
             setRowId(null);
             setEditRow(false);
             setHours(0);

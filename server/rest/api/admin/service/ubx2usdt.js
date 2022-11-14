@@ -1,7 +1,9 @@
-import {exchangeUbx} from '../../../../index.js';
+import ExchangeUbx from '../../../../helpers/exchangeUbx.js';
 
 export default async (req, res) => {
-    const ubx2usdt = await exchangeUbx.ubx2usdt;
+    const exchangeUbx = new ExchangeUbx();
+    const ubx2usdt = exchangeUbx.ubx2usdt;
+
     let result;
     if (ubx2usdt === null) {
         result = {success: false, message: exchangeUbx.error};

@@ -1,4 +1,4 @@
-export function isAdminAuth(req, res, next) {
+export const isAdminAuth = (req, res, next) => {
     try {
         const authheader = req.headers.authorization;
         if (authheader) {
@@ -12,7 +12,7 @@ export function isAdminAuth(req, res, next) {
     } catch {
         res.json({success: false, message: 'Authentication error!'});
     }
-}
+};
 
 export const isAdmin = (login, password) => {
     return login === process.env.LOGIN && password === process.env.PASSWORD;

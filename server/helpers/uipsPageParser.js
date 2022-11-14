@@ -1,7 +1,8 @@
 import axios from 'axios';
-import * as cheerio from 'cheerio';
+import {load} from 'cheerio';
 import axiosRetry from 'axios-retry';
-import {DB} from '../index.js';
+
+import DbEngine from '../db/dbEngine.js';
 
 const GIT_URL = 'https://github.com/';
 const TASKS_LIST_URL = `${GIT_URL}SilentNotaryEcosystem/UIPS/`;
@@ -9,6 +10,8 @@ const TASKS_LIST_URL = `${GIT_URL}SilentNotaryEcosystem/UIPS/`;
 axiosRetry(axios, {retries: 3});
 
 export const getTaskListFromWeb = () => {
+    const db = new DbEngine(process.env.DB_FILE_NAME);
+
     axios
         .get(TASKS_LIST_URL)
         .then(async result => {
@@ -22,7 +25,7 @@ export const getTaskListFromWeb = () => {
             });
 
             tasks = await getTaskStatuses(tasks);
-            DB.loadUips(tasks);
+            db.loadUips(tasks);
         })
         .catch(error => {
             console.error(error.message);
@@ -36,7 +39,7 @@ export const getTaskStatuses = async tasks => {
         await axios
             .get(tasksList[i].url)
             .then(result => {
-                const $ = cheerio.load(result.data);
+                const $ = load(result.data);
                 tasksList[i].implemented = $('#user-content-status').parent().next().text().trim() === 'Implemented';
 
                 let title = $('pre').text();

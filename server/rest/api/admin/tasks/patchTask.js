@@ -1,8 +1,10 @@
 import {pick} from 'ramda';
-import {DB} from '../../../../index.js';
+
+import DbEngine from '../../../../db/dbEngine.js';
 
 export default async (req, res) => {
-    let {body, params} = req;
+    const {body, params} = req;
+    const db = new DbEngine(process.env.DB_FILE_NAME);
 
     if (params.id !== undefined) {
         const fields = ['estimationHours', 'ubxPrice', 'usdtPrice'];
@@ -11,7 +13,7 @@ export default async (req, res) => {
         const task = pick(fields, body);
         const performer = pick(performerFields, body.performer);
 
-        const result = await DB.update(+params.id, {...task, performer});
+        const result = await db.update(+params.id, {...task, performer});
         return res.json(result);
     }
 

@@ -1,9 +1,11 @@
 import {omit} from 'ramda';
-import {DB} from '../index.js';
+import DbEngine from '../db/dbEngine.js';
 
-export function getList(implemented, admin) {
+export const getList = (implemented, admin) => {
+    const db = new DbEngine(process.env.DB_FILE_NAME);
+
     try {
-        const answer = DB.select();
+        const answer = db.select();
         if (!answer.success) {
             return {...answer};
         }
@@ -28,4 +30,4 @@ export function getList(implemented, admin) {
     } catch (error) {
         return {success: false, message: 'DB is broken'};
     }
-}
+};
