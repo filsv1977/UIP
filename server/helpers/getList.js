@@ -1,34 +1,33 @@
-import * as R from 'ramda';
-import {DB} from '../index.js';
+import {omit} from 'ramda';
+import DbEngine from '../db/dbEngine.js';
 
-export function getList(implemented, admin) {
+export const getList = (implemented, admin) => {
+    const db = new DbEngine(process.env.DB_FILE_NAME);
+
     try {
-        const answer = DB.select();
+        const answer = db.select();
         if (!answer.success) {
             return {...answer};
         }
 
-        let filter = item => {
+        const filter = item => {
             if (implemented === undefined) return true;
 
-            let closed = item.performer.nickname !== '' || item.implemented;
+            const closed = item.performer.nickname !== '' || item.implemented;
             if (+implemented) return closed;
             return !closed;
         };
 
-        let filterData = answer.data.filter(filter);
+        const filterData = answer.data.filter(filter);
 
-        let data = filterData.map(item => {
-            let {performer} = item;
-            if (!admin) {
-                performer = R.omit(['walletAddress', 'hasImplementedByUbixTeam'], item.performer);
-            }
-
-            return {...item, performer: {...performer}};
-        });
+        const delField = ['walletAddress', 'hasImplementedByUbixTeam'];
+        const data = filterData.map(({performer, ...item}) => ({
+            ...item,
+            performer: admin ? performer : omit(delField, performer)
+        }));
 
         return {success: answer.success, data};
     } catch (error) {
         return {success: false, message: 'DB is broken'};
     }
-}
+};

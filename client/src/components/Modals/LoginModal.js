@@ -2,7 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import {Form} from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import React, {useState} from 'react';
-import {logIn} from '../../api/login';
+import logIn from '../../api/login';
 import {useTasks} from '../../сontext/reducer';
 import {useNavigate} from 'react-router-dom';
 import Error from '../Error';

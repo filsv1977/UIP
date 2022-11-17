@@ -1,12 +1,12 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import {actionTypes} from '../сontext/actionTypes';
-import {fetchData} from './fetchData';
+import fetchData from './fetchData';
 import {addAuthorizationKey} from '../utils/localStorage';
 
 axiosRetry(axios, {retries: 3});
 
-export const logIn = (body, dispatch) => {
+export default (body, dispatch) => {
     axios
         .post('/admin/auth/logon', body)
         .then(result => {

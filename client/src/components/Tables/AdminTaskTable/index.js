@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import {Table, Form} from 'react-bootstrap';
 import {useTasks} from '../../../сontext/reducer';
-import {editTask} from '../../../api/editTask';
-import Error from '../../Error';
+import editTask from '../../../api/editTask';
 import SpinnerBtn from '../../Spinner';
 import EditComponent from '../../EditComponent';
 
@@ -21,7 +20,7 @@ function AdminTasksTable() {
 
     const [teamBox, setTeam] = useState(false);
 
-    let spinnerTh = {
+    const spinnerTh = {
         fontSize: '1px',
         lineHeight: 0,
         padding: 0
@@ -31,7 +30,7 @@ function AdminTasksTable() {
 
     const onEditTask = editData => {
         if (estimationHours < 0) return;
-        let newData = {...editData};
+        const newData = {...editData};
         newData.estimationHours = Number(estimationHours);
         newData.ubxPrice = Number(ubxPrice);
         newData.usdtPrice = Number(usdtPrice);
@@ -47,7 +46,7 @@ function AdminTasksTable() {
             newData.usdtPrice = 0;
         }
 
-        editTask(newData, dispatch).then(_ => {
+        editTask(newData, dispatch).then(() => {
             setRowId(null);
             setEditRow(false);
             setHours(0);

@@ -6,9 +6,9 @@ import {authError} from '../constants';
 
 axiosRetry(axios, {retries: 3});
 
-export const editTask = async (body, dispatch) => {
+export default (body, dispatch) => {
     const token = getAuthorizationKey();
-    await axios
+    return axios
         .patch(
             `/admin/tasks/${body.id}`,
             body,
@@ -26,7 +26,7 @@ export const editTask = async (body, dispatch) => {
                 payload: result.data.data
             });
         })
-        .catch(e =>
+        .catch(() =>
             dispatch({
                 type: actionTypes.EDIT_TASK.REJECTED,
                 payload: authError

@@ -1,13 +1,9 @@
 import express from 'express';
-import restRoutes from './rest/index.js';
 import cors from 'cors';
+
+import restRoutes from './rest/index.js';
 import {getTaskListFromWeb} from './helpers/uipsPageParser.js';
 import {startSchedulerGetTasks} from './utils/shedullerGetTask.js';
-import DbEngine from './db/dbEngine.js';
-import ExchangeUbx from './helpers/exchangeUbx.js';
-
-export const exchangeUbx = new ExchangeUbx();
-export const DB = new DbEngine(process.env.DB_FILE_NAME);
 
 getTaskListFromWeb();
 startSchedulerGetTasks();
@@ -32,7 +28,7 @@ if (process.env.NODE_ENV === 'production') {
 const serverPort = process.env.PORT || 4000;
 
 app.listen(serverPort, () => {
-    console.log(`UIP listening on port ${serverPort}!`);
+    console.log(`Server listening on port: ${serverPort}!`);
 });
 
 export default app;

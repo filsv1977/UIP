@@ -2,24 +2,23 @@ import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import {actionTypes} from '../сontext/actionTypes';
 import {getAuthorizationKey, getUbiTimerKey} from '../utils/localStorage';
-import {fetchData} from './fetchData';
+import fetchData from './fetchData';
 
 axiosRetry(axios, {retries: 3});
 
-export const checkToken = async dispatch => {
+export default dispatch => {
     const url = `/admin/auth/checkToken`;
     const token = getAuthorizationKey();
     const timer = getUbiTimerKey();
 
     if (Date.now() > timer) {
-        dispatch({
+        return dispatch({
             type: actionTypes.SET_VISIBLE,
             payload: true
         });
-        return;
     }
 
-    await axios
+    axios
         .get(
             url,
             token
@@ -48,10 +47,10 @@ export const checkToken = async dispatch => {
                 payload: !result.data.success
             });
         })
-        .catch(e => {
+        .catch(error => {
             dispatch({
                 type: actionTypes.TOKEN_ERROR,
-                payload: e.message
+                payload: error.message
             });
         });
 };

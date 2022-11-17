@@ -1,4 +1,4 @@
-export const hexEncode = function (str) {
+export const hexEncode = str => {
     let hex, i;
     let result = '';
     for (i = 0; i < str.length; i++) {
@@ -8,7 +8,7 @@ export const hexEncode = function (str) {
     return result;
 };
 
-export const hexDecode = function (str) {
+export const hexDecode = str => {
     if (!str) return '';
 
     let j;

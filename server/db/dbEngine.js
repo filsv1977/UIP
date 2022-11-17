@@ -1,47 +1,53 @@
-import taskModel from './taskModel.js';
 import fs from 'fs';
+
+import taskModel from './taskModel.js';
+
+const WRITE_ERROR = 'Error writing database to the file';
+const READ_ERROR = 'Error loading database from the file';
 
 class DbEngine {
     constructor(path) {
-        try {
-            if (typeof DbEngine.instance === 'object') {
-                return DbEngine.instance;
-            }
-
-            DbEngine.instance = this;
-            this._dbPath = path;
-            this._error = '';
-            this._load();
-            return this;
-        } catch (error) {
-            this._error = error.message;
+        if (!this._error && typeof DbEngine.instance === 'object') {
+            return DbEngine.instance;
         }
+
+        DbEngine.instance = this;
+        this._dbPath = path;
+        this._error = '';
+        this._db = [];
+
+        this._load().catch(error => {
+            this._error = error.message;
+        });
+
+        return this;
     }
 
-    loadUips(tasksList) {
+    async loadUips(tasksList) {
+        const tasks = [...tasksList];
+
+        this._db.forEach((elem, i) => {
+            const index = tasks.findIndex(item => elem.name === item.name);
+            if (index > -1) {
+                this._db[i] = {...elem, ...tasks[index]};
+                tasks.splice(index, 1);
+            } else {
+                elem.deleted = true;
+            }
+        });
+
+        tasks.forEach(elem => {
+            this._db.push({...taskModel, ...elem, id: this._getNewId()});
+        });
+
+        this._sortBase();
+
+        this._error = '';
+
         try {
-            const tasks = [...tasksList];
-
-            this._db.forEach((elem, i) => {
-                const index = tasks.findIndex(item => elem.name === item.name);
-                if (index > -1) {
-                    this._db[i] = {...elem, ...tasks[index]};
-                    tasks.splice(index, 1);
-                } else {
-                    elem.deleted = true;
-                }
-            });
-
-            tasks.forEach(elem => {
-                this._db.push({...taskModel, ...elem, id: this._getNewId()});
-            });
-
-            this._sortBase();
-
-            this._error = '';
-            this._save();
+            await this._save();
         } catch (error) {
-            return {success: false, message: error.message};
+            this._error = WRITE_ERROR;
         }
     }
 
@@ -54,17 +60,19 @@ class DbEngine {
     }
 
     async update(id, data) {
-        try {
-            const index = this._getIndex(id);
-            if (index > -1) {
-                this._db[index] = {...this._db[index], ...data};
+        const index = this._getIndex(id);
+        if (index > -1) {
+            this._db[index] = {...this._db[index], ...data};
+
+            try {
                 await this._save();
-                return {success: true, data: this._db[index]};
+            } catch (error) {
+                return {success: false, message: error.message};
             }
-            return {success: false, message: `Task with id=${id} not found`};
-        } catch (error) {
-            return {success: false, message: error.message};
+
+            return {success: true, data: this._db[index]};
         }
+        return {success: false, message: `Task with id=${id} is not found`};
     }
 
     _getNewId() {
@@ -94,54 +102,55 @@ class DbEngine {
             this._save();
             return true;
         } catch (error) {
-            return {success: false, message: `Task not added`};
+            return {success: false, message: `Task was not added`};
         }
     }
 
     insertAll(data) {
+        this._db = data;
+        this._sortBase();
+
         try {
-            this._db = data;
-            this._sortBase();
             this._save();
-            return {success: true, data: this._db};
-        } catch (error) {
-            return {success: false, message: `Tasks not added`};
+        } catch {
+            return {success: false, message: `Tasks were not imported`};
         }
+
+        return {success: true, data: this._db};
     }
 
     _selectById(id) {
-        let index = this._getIndex(id);
+        const index = this._getIndex(id);
         if (index > -1) {
             return {success: true, data: this._db[index]};
         }
-        return {success: false, message: `Task with id=${id} not found`};
+        return {success: false, message: `Task with id=${id} is not found`};
     }
 
     _delete(id) {
-        let index = this._getIndex(id);
+        const index = this._getIndex(id);
         if (index > -1) {
             this._db.splice(index, 1);
             this._save();
             return {success: true};
         }
-        return {success: false, message: `Task with id=${id} not found`};
+        return {success: false, message: `Task with id=${id} is not found`};
     }
 
-    _save = () => {
+    _save() {
         return fs.promises.writeFile(this._dbPath, JSON.stringify(this._db, null, 4)).catch(() => {
-            throw new Error('Error writing database to file');
+            throw new Error(WRITE_ERROR);
         });
-    };
+    }
 
     _load() {
-        fs.promises
+        return fs.promises
             .readFile(this._dbPath, 'utf8')
             .then(result => {
                 this._db = JSON.parse(result);
             })
             .catch(() => {
-                this._db = [];
-                throw new Error('Error loading database from file');
+                throw new Error(READ_ERROR);
             });
     }
 }

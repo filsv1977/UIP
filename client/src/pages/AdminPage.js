@@ -4,7 +4,7 @@ import LoginModal from '../components/Modals/LoginModal';
 import {useTasks} from '../сontext/reducer';
 import {getAuthorizationKey} from '../utils/localStorage';
 import {actionTypes} from '../сontext/actionTypes';
-import {checkToken} from '../api/checkToken';
+import checkToken from '../api/checkToken';
 
 function AdminPage() {
     const {

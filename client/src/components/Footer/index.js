@@ -17,12 +17,12 @@ function Footer() {
                     </div>
                     <div className="col-md-6 pt-3">
                         To participate send an email to{' '}
-                        <a target="_blank" rel="noreferrer" href="mailto:uip@ubix.network">
-                            uip@ubix.network
+                        <a target="_blank" rel="noreferrer" href={`mailto:${process.env.REACT_APP_EMAIL}`}>
+                            {process.env.REACT_APP_EMAIL}
                         </a>{' '}
                         or send a message on telegram to{' '}
-                        <a target="_blank" rel="noreferrer" href="https://t.me/klowert">
-                            @klowert
+                        <a target="_blank" rel="noreferrer" href={`https://${process.env.REACT_APP_BOT_ID}`}>
+                            {process.env.REACT_APP_BOT_NAME}
                         </a>
                         <div className="footer-copyright text-center py-3">
                             Copyright © 2022 Ubix.network. All rights reserved.

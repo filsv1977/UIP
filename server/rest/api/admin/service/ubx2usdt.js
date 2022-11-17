@@ -1,7 +1,9 @@
-import {exchangeUbx} from '../../../../index.js';
+import ExchangeUbx from '../../../../helpers/exchangeUbx.js';
 
-const ubx2usdt = async (req, res) => {
-    let ubx2usdt = exchangeUbx.ubx2usdt;
+export default async (req, res) => {
+    const exchangeUbx = new ExchangeUbx();
+    const ubx2usdt = exchangeUbx.ubx2usdt;
+
     let result;
     if (ubx2usdt === null) {
         result = {success: false, message: exchangeUbx.error};
@@ -10,5 +12,3 @@ const ubx2usdt = async (req, res) => {
     }
     return res.json(result);
 };
-
-export default ubx2usdt;

@@ -1,7 +1,8 @@
 import {useState} from 'react';
-import {getCurrentExchange} from '../api/getCurrentExchange';
+import getCurrentExchange from '../api/getCurrentExchange';
 import {useTasks} from '../сontext/reducer';
 import {filterAction} from '../constants';
+import {setUbiTimerKey} from '../utils/localStorage';
 
 export default function useEditButtonActions() {
     const [isEdit, setEdit] = useState(false);
@@ -25,7 +26,7 @@ export default function useEditButtonActions() {
                 setUbxPrice,
                 setUsdtPrice
             ) => {
-                getCurrentExchange(dispatch).then(_ => {
+                getCurrentExchange(dispatch).then(() => {
                     setRowId(data.id);
                     setEdit(true);
                     setEditRow(true);
@@ -35,6 +36,7 @@ export default function useEditButtonActions() {
                     setNickname(data.performer?.nickname || '');
                     setWallet(data.performer?.walletAddress || '');
                     setTeam(data.performer?.hasImplementedByUbixTeam || false);
+                    setUbiTimerKey();
                 });
             },
             variant: 'outline-primary'

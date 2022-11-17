@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useReducer} from 'react';
 import {actionTypes} from './actionTypes';
-import {fetchData} from '../api/fetchData';
+import fetchData from '../api/fetchData';
 import {fetchError} from '../constants';
 
 export const initialState = {
@@ -11,8 +11,7 @@ export const initialState = {
     activeFilterBtn: 0,
     currentExchange: {rate: 0, ubx2usdt: 0},
     showLogin: false,
-    showError: false,
-    signedIn: false
+    showError: false
 };
 
 export const ContextApp = React.createContext();
@@ -84,7 +83,7 @@ export const taskReducer = (state, action) => {
             } = action.payload;
             const {activeFilterBtn, tasks} = state;
 
-            let newData =
+            const newData =
                 (activeFilterBtn === 0 && nickname) || (activeFilterBtn === 1 && !nickname && !implemented)
                     ? tasks.filter(task => +task.id !== +id)
                     : tasks.map(task => (+task.id === +id ? action.payload : task));
@@ -107,7 +106,8 @@ export const taskReducer = (state, action) => {
             return {
                 ...state,
                 isAdmin: true,
-                error: false
+                error: false,
+                showError: false
             };
         }
         case actionTypes.LOGIN_ADMIN.REJECTED: {
@@ -140,7 +140,7 @@ export const taskReducer = (state, action) => {
                 id,
                 data: {rate, ubx2usdt}
             } = action.payload;
-            let newData = (state.tasks || []).map(task =>
+            const newData = (state.tasks || []).map(task =>
                 task.id === id ? {...task, ubxPrice: rate, usdtPrice: ubx2usdt} : task
             );
             return {
@@ -175,7 +175,8 @@ export const taskReducer = (state, action) => {
         case actionTypes.IMPORT_DB.FULFILLED: {
             return {
                 ...state,
-                tasks: action.payload
+                tasks: action.payload,
+                activeFilterBtn: null
             };
         }
 

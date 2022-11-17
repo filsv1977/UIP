@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
 import Content from '../components/Content';
 import {useTasks} from '../сontext/reducer';
-import {fetchData} from '../api/fetchData';
-import {delAuthorizationKey} from '../utils/localStorage';
+import fetchData from '../api/fetchData';
 
 function HomePage({implemented}) {
     const {
@@ -11,7 +10,6 @@ function HomePage({implemented}) {
     } = useTasks();
 
     useEffect(() => {
-        delAuthorizationKey();
         fetchData(dispatch, implemented);
     }, []);
 

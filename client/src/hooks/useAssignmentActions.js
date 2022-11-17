@@ -1,12 +1,13 @@
 import {useNavigate} from 'react-router-dom';
-import {fetchData} from '../api/fetchData';
+import fetchData from '../api/fetchData';
 import {useTasks} from '../сontext/reducer';
-import {exportDB} from '../api/getDB';
-import {logOut} from '../api/logout';
+import exportDB from '../api/getDB';
+import logOut from '../api/logout';
 import {adminAction, implementedText, openText, userAction} from '../constants';
-import {importDB} from '../api/importDB';
+import importDB from '../api/importDB';
+import {setUbiTimerKey} from '../utils/localStorage';
 
-export default function useAssignmentActions(isAdmin = false) {
+export default (isAdmin = false) => {
     const {dispatch} = useTasks();
     const navigate = useNavigate();
 
@@ -18,7 +19,7 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +userAction.OPEN ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                fetchData(dispatch, 0, null, false).then(_ => {
+                fetchData(dispatch, 0, null, false).then(() => {
                     setActive(userAction.OPEN);
                     navigate('/open');
                 });
@@ -31,7 +32,7 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +userAction.IMPLEMENTED ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                fetchData(dispatch, 1, null, false).then(_ => {
+                fetchData(dispatch, 1, null, false).then(() => {
                     setActive(userAction.IMPLEMENTED);
                     navigate('/implemented');
                 });
@@ -47,8 +48,9 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +adminAction.ALL ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                fetchData(dispatch, null, null, true).then(_ => {
+                fetchData(dispatch, null, null, true).then(() => {
                     setActive(adminAction.ALL);
+                    setUbiTimerKey();
                 });
             }
         },
@@ -59,7 +61,10 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +adminAction.OPEN ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) => {
-                fetchData(dispatch, 0, null, true).then(_ => setActive(adminAction.OPEN));
+                fetchData(dispatch, 0, null, true).then(() => {
+                    setActive(adminAction.OPEN);
+                    setUbiTimerKey();
+                });
             }
         },
         {
@@ -69,23 +74,24 @@ export default function useAssignmentActions(isAdmin = false) {
                 variant: active => (+active === +adminAction.IMPLEMENTED ? 'outline-danger' : 'outline-primary')
             },
             onClick: (e, setActive) =>
-                fetchData(dispatch, 1, null, true).then(_ => {
+                fetchData(dispatch, 1, null, true).then(() => {
                     setActive(adminAction.IMPLEMENTED);
+                    setUbiTimerKey();
                 })
         },
         {
             id: adminAction.IMPORT,
             text: 'Import',
             button: {
-                variant: _ => 'btn btn-outline-secondary'
+                variant: () => 'btn btn-outline-secondary'
             },
-            onClick: () => importDB(dispatch)
+            onClick: (e, setActive) => importDB(dispatch, setActive)
         },
         {
             id: adminAction.EXPORT,
             text: 'Export',
             button: {
-                variant: _ => 'btn btn-outline-secondary'
+                variant: () => 'btn btn-outline-secondary'
             },
             onClick: () => exportDB(dispatch)
         },
@@ -93,11 +99,11 @@ export default function useAssignmentActions(isAdmin = false) {
             id: adminAction.LOGOUT,
             text: 'Logout',
             button: {
-                variant: _ => 'btn btn-outline-secondary'
+                variant: () => 'btn btn-outline-secondary'
             },
             onClick: () =>
                 logOut(dispatch).then(() => {
-                    navigate('/');
+                    navigate('/open');
                 })
         }
     ];
@@ -105,4 +111,4 @@ export default function useAssignmentActions(isAdmin = false) {
     return {
         assignmentFilterActions
     };
-}
+};
