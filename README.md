@@ -17,3 +17,9 @@ HOURLY_RATE=973236
 
 UBX_USDT_URL='https://ubix.exchange/api/v1/tickers/UBX-USDT'
 ```
+Create .env file in client folder.
+```
+REACT_APP_BOT_ID = "ubix_nw_bot"
+REACT_APP_BOT_NAME="ubix_nw_bot"
+REACT_APP_EMAIL="uip@ubix.network"
+```
