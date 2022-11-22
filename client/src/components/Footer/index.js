@@ -21,7 +21,7 @@ function Footer() {
                             {process.env.REACT_APP_EMAIL}
                         </a>{' '}
                         or send a message on telegram to{' '}
-                        <a target="_blank" rel="noreferrer" href={`https://${process.env.REACT_APP_BOT_ID}`}>
+                        <a target="_blank" rel="noreferrer" href={`https://t.me/${process.env.REACT_APP_BOT_ID}`}>
                             {process.env.REACT_APP_BOT_NAME}
                         </a>
                         <div className="footer-copyright text-center py-3">
