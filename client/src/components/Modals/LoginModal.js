@@ -8,7 +8,7 @@ import {useNavigate} from 'react-router-dom';
 import Error from '../Error';
 import {actionTypes} from '../../сontext/actionTypes';
 import './loginModal.css';
-import md5 from 'md5';
+import {Base64} from 'js-base64';
 
 function LoginModal() {
     const [login, setLogin] = useState('');
@@ -23,7 +23,7 @@ function LoginModal() {
     const handleSubmit = e => {
         e.preventDefault();
 
-        logIn({login, password: md5(password)}, dispatch);
+        logIn({login, password: Base64.encode(password)}, dispatch);
     };
 
     const onHandleClose = () => {
