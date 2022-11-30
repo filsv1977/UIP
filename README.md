@@ -10,7 +10,7 @@ For example: login - admin, password - admin
 
 ```
 LOGIN=admin
-PASSWORD=21232f297a57a5a743894a0e4a801fc3
+PASSWORD=YWRtaW4=
 
 DB_FILE_NAME='./db/db.json'
 HOURLY_RATE=973236
