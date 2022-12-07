@@ -1,10 +1,10 @@
 import {Router} from 'express';
-import patchTask from './patchTask.js';
+import update from './update.js';
 import list from './list.js';
 
 const router = Router();
 
 router.get('/', list);
-router.patch('/:id', patchTask);
+router.patch('/:id', update);
 
 export default router;
