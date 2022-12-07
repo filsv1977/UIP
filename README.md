@@ -8,6 +8,8 @@ to get hash for your password.
 Add login and password to .env file.
 For example: login - admin, password - admin
 
+also you can create password via cli md5sum 
+$ echo "admin" |md5sum
 ```
 LOGIN=admin
 PASSWORD=21232f297a57a5a743894a0e4a801fc3
@@ -26,8 +28,8 @@ REACT_APP_BOT_ID = "ubix_nw_bot"
 REACT_APP_BOT_NAME="UBIX Network Bot"
 REACT_APP_EMAIL="uip@ubix.network"
 
-REACT_APP_BASENAME=/uip-dev
-REACT_APP_API_BASE=https://uip-app.herokuapp.com/
+REACT_APP_BASENAME=/uip
+REACT_APP_API_BASE=https://ubix.network/uip
 ```
 
 ## client/package.json
