@@ -29,7 +29,8 @@ REACT_APP_BOT_NAME="UBIX Network Bot"
 REACT_APP_EMAIL="uip@ubix.network"
 
 REACT_APP_BASENAME=/uip
-REACT_APP_API_BASE=https://ubix.network/uip
+# REACT_APP_BASENAME=/  
+REACT_APP_API_BASE=https://api-uip.ubix.network/
 ```
 
 ## client/package.json
@@ -37,5 +38,6 @@ REACT_APP_API_BASE=https://ubix.network/uip
 set `"homepage"` to be the location of the app, example:
 
 ```
-"homepage": "https://ubix.network/uip-dev/"
+"homepage": "https://ubix.network/uip/"
+"homepage": "https://uip.ubix.network/"
 ```
