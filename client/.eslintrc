@@ -6,7 +6,7 @@
     "node": true,
     "mocha": true
   },
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": ["eslint:recommended", "prettier", "react-app"],
   "plugins": ["prettier"],
   "parserOptions": {
     "ecmaVersion": 13,
