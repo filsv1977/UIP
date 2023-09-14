@@ -47,8 +47,8 @@ export const getTaskStatuses = async tasks => {
                 const name = html.match(/Title:(.*?)?\\n/)[1];
                 
                 if (name !== null) {
-                    tasksList[i].uipId = +uipId[0].trim();
-                    tasksList[i].name = name[0].trim();
+                    tasksList[i].uipId = +uipId.trim();
+                    tasksList[i].name = name.trim();
                 }
             })
             .catch(error => {
