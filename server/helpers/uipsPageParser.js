@@ -42,10 +42,10 @@ export const getTaskStatuses = async tasks => {
                 const $ = load(result.data);
                 tasksList[i].implemented = $('#user-content-status').parent().next().text().trim() === 'Implemented';
 
-                const title = $('pre').text();
-                const uipId = title.match(/(?<=UIP:).*/);
-                const name = title.match(/(?<=Title:).*/);
-
+                const html = $('body').prop('innerHTML');
+                const uipId = html.match(/UIP:(.*?)?\\n/)[1];
+                const name = html.match(/Title:(.*?)?\\n/)[1];
+                
                 if (name !== null) {
                     tasksList[i].uipId = +uipId[0].trim();
                     tasksList[i].name = name[0].trim();
